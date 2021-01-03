@@ -10,8 +10,9 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="author" content="Francisco Javier González Sabariego">
         <link rel="stylesheet" href="css/style.css">
+        <link rel="icon" href="favicon.ico">
         <script src="js/main.js"></script>
-        <title>Document</title>
+        <title>Keys Bank</title>
     </head>
     <body>
         <noscript><h1>Estapágina requiere el uso de JavaScript</h1></noscript>
