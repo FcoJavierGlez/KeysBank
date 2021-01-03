@@ -1,0 +1,330 @@
+:root{
+    --primary_color: orange;
+}
+body {
+    margin: 0;
+}
+
+.anim {
+    height: 100vh;
+    width: 100%;
+    background-image: url(../img/matrix.gif);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    justify-content: center;
+}
+
+input {
+    height: 30px;
+    width: 250px;
+    padding: 0;
+    border: 3px solid black;
+    margin: 2px 0;
+}
+input:focus {
+    outline: none;
+}
+input[type="text"]:focus, input[type="password"]:focus {
+    border: 3px solid darkorange;
+    border-radius: 5px;
+}
+input[type="submit"] {
+    border: 2px solid white;
+    padding: 2px 0;
+    background-color: rgb(50,50,50);
+    color: white;
+    font-size: 1.2rem;
+    text-transform: uppercase;
+    text-align: center;
+}
+input[type="submit"]:hover {
+    background-color: black;
+    border: 2px solid orange;
+    color: orange;
+    cursor: pointer;
+}
+input[type="submit"]:active {
+    border: 2px solid yellowgreen;
+    color: yellowgreen;
+}
+::placeholder {
+    font-size: 1rem;
+    text-transform: uppercase;
+    text-align: center;
+}
+
+
+
+
+
+/* 
+header, footer {
+    height: 12vh;
+    background-color: black;
+    color: white;
+    text-align: center;
+    display: grid;
+    align-items: center;
+}
+h1 {
+    color: var(--primary_color);
+}
+h1, h2 {
+    margin: 0;
+}
+table a {
+    text-decoration: none;
+    color: black;
+    display: block;
+}
+table a:active {
+    text-decoration: none;
+    color: black;
+}
+p {
+    font-size: 1.2rem;
+    text-align: justify;
+}
+main {
+    *display: grid;
+    height: 76vh;
+}
+main h3 {
+    margin: 8px 0;
+    text-align: center;
+}
+.contenedor {
+    height: 100%;
+    *width: 85%;
+    margin: 0 auto;
+    *display: grid;
+}
+.scroll {
+    overflow-x: auto;
+    scrollbar-width: none;
+}
+.scroll::-webkit-scrollbar {
+    display: none;
+}
+table {
+    text-align: center;
+    border-spacing: 0;
+}
+th {
+    background-color: rgb(30, 30, 30);
+    color: whitesmoke;
+    font-size: 18px;
+    height: 50px;
+}
+td{
+    height: 50px;
+}
+th, td {
+    border-bottom: 1px solid rgb(95, 95, 95);
+}
+td a img {
+    width: 20px;
+}
+tr:nth-child(even) {
+    background-color: beige;
+}
+th:nth-child(odd) {
+    width: 100px;
+}
+th:nth-child(even) {
+    width: 500px;
+}
+td:nth-child(odd) {
+    width: 100px;
+}
+td:nth-child(even) {
+    width: 500px;
+}
+.table_index {
+    display: grid;
+    justify-content: center;
+    align-self: center;
+}
+input[type="text"] {
+    width: 300px;
+}
+input[type="submit"] {
+    background-color: dodgerblue;
+    width: 90px;
+    color: white;
+    font-weight: bold;
+}
+input[type="submit"]:hover {
+    background-color: greenyellow;
+    color: black;
+}
+#info {
+    border: thin solid silver; 
+    border-radius: 10px;
+    padding:.5em;
+}
+.error {
+    color: red;
+}
+.text-right {
+    text-align: right;
+}
+.text-center {
+    text-align: center;
+}
+footer img {
+    height: 35px;
+}
+footer h2 {
+    font-size: 0.5rem;
+}
+.pie {
+    justify-self: center;
+    width: 35%;
+}
+.linea {
+    display: grid;
+    justify-items: center;
+}
+hr {
+    border-color: var(--primary_color);
+    margin: 1px;
+    animation: load 2s ease-out forwards;
+}
+@keyframes load {
+    from {width: 0%}
+    to {width: 100%}
+}
+.rrss {
+    display: grid;
+    grid-template-columns: repeat(3,auto);
+    justify-content: space-evenly;
+    margin: 0 auto;
+    width: 50%;
+}
+.icono_rrss:hover {
+    animation: escalar_icono 1s forwards;
+    -webkit-animation: escalar_icono 1s forwards;
+    -moz-animation: escalar_icono 1s forwards;
+}
+@keyframes escalar_icono {
+    from {transform: scale(1)}
+    to {transform: scale(1.1)}
+}
+.icono_rrss:not(:hover){
+    animation: desescalar_icono 1s forwards;
+    -webkit-animation: desescalar_icono 1s forwards;
+    -moz-animation: desescalar_icono 1s forwards;
+}
+@keyframes desescalar_icono {
+    from {transform: scale(1.1)}
+    to {transform: scale(1)}
+}
+.text-error {
+    color: red;
+}
+.text-correct {
+    color: rgb(0, 200, 0);
+}
+.text-blue {
+    color: blue;
+}
+.grid {
+    display: grid;
+}
+.c2 {
+    grid-template-columns: repeat(2,1fr);
+    margin: 5px 0;
+    align-items: center;
+}
+.c2-no_margin {
+    grid-template-columns: repeat(2,1fr);
+    align-items: center;
+}
+.c2-25_75 {
+    grid-template-columns: 25% 75%;
+    margin: 5px 0;
+    align-items: center;
+}
+.c2-20_50 {
+    grid-template-columns: 20% 50%;
+    margin: 5px 0;
+    align-items: center;
+}
+.c3 {
+    grid-template-columns: repeat(3,1fr);
+    align-items: flex-start;
+}
+.r2 {
+    grid-template-rows: repeat(2,1fr);
+}
+.w90 {
+    width: 90%;
+}
+.cgap5 {
+    column-gap: 5%;
+}
+.justify-content-center {
+    justify-content: center;
+}
+.justify-self-center {
+    justify-self: center;
+}
+.justify-self-start {
+    justify-self: start;
+}
+.justify-items-end {
+    justify-items: end;
+}
+.justify-items-start {
+    justify-items: start;
+}
+input[type="text"] {
+    width: 90%;
+}
+.c2-25_75 input {
+    width: 95%;
+}
+.margin-left-10pc {
+    margin-left: 10%;
+}
+textarea {
+    resize: none;
+    width: 90%;
+}
+#button {
+    background-color: #26619c;
+    color: white;
+    padding: 5px 10px;
+    position: relative;
+    left: 55%;
+}
+#button:hover {
+    background-color: orange;
+    color: black;
+}
+@media only screen and (min-width: 500px) {
+    footer h2 {
+        font-size: 0.65rem;
+    }
+}
+@media only screen and (min-width: 700px) {
+    footer img {
+        height: 40px;
+    }
+    footer h2 {
+        font-size: 0.9rem;
+    }
+}
+@media only screen and (min-width: 1100px) {
+    footer img {
+        height: 50px;
+    }
+    footer h2 {
+        font-size: 24px;
+    }
+} */
