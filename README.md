@@ -10,3 +10,6 @@
 </div>
 
 ---
+
+## License
+Copyright (c) 2021 Francisco Javier González Sabariego. [Licensed under MIT license](https://github.com/FcoJavierGlez/keys_bank/blob/main/LICENSE).
