@@ -16,14 +16,26 @@
     </head>
     <body>
         <noscript><h1>Estapágina requiere el uso de JavaScript</h1></noscript>
-        <header></header>
-        <nav></nav>
+        <div class="anim">
+            <div class="logo"></div>
+            <input type="text" name="" id="" placeholder="username">
+            <input type="password" name="" id="" placeholder="password">
+            <input type="submit" name="" value="Enter">
+        </div>
+        <header>
+            <div></div>
+            <div class="logo"></div>
+            <div></div>
+        </header>
+        <nav>
+            <?php
+                //Dinamic nav
+            ?>
+        </nav>
         <main>
-            <div class="anim">
-                <input type="text" name="" id="" placeholder="username">
-                <input type="password" name="" id="" placeholder="password">
-                <input type="submit" name="" value="Enter">
-            </div>
+            <?php
+                //Controller
+            ?>
         </main>
         <footer></footer>
     </body>
