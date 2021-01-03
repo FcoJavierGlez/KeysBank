@@ -22,21 +22,24 @@
             <input type="password" name="" id="" placeholder="password">
             <input type="submit" name="" value="Enter">
         </div>
-        <header>
-            <div></div>
-            <div class="logo"></div>
-            <div></div>
-        </header>
-        <nav>
-            <?php
-                //Dinamic nav
-            ?>
-        </nav>
-        <main>
-            <?php
-                //Controller
-            ?>
-        </main>
-        <footer></footer>
+        <div class="hidden">
+            <header>
+                <div></div>
+                <div class="logo"></div>
+                <div></div>
+            </header>
+            <nav>
+                <?php
+                    //Dinamic nav
+                ?>
+            </nav>
+            <main>
+                <?php
+                    //Controller
+                ?>
+            </main>
+            <footer></footer>
+        </div>
+        
     </body>
 </html>

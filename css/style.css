@@ -73,6 +73,10 @@ input[type="submit"]:active {
     background-size: contain;
 }
 
+.hidden {
+    display: none;
+}
+
 @media only screen and (min-width: 1900px) {
     .logo {
         height: 300px;
