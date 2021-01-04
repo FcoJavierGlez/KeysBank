@@ -77,6 +77,30 @@ input[type="submit"]:active {
     display: none;
 }
 
+header {
+    height: 12vh;
+    background-color: black;
+    color: white;
+    text-align: center;
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    align-items: center;
+}
+
+header .logo {
+    height: 12vh;
+}
+
+nav {
+    height: 5vh;
+    background-color: rgb(75, 75, 75);
+}
+
+main {
+    background-color: rgb(200, 200, 200);
+    height: 88vh;
+}
+
 @media only screen and (min-width: 1900px) {
     .logo {
         height: 300px;
@@ -85,14 +109,7 @@ input[type="submit"]:active {
 }
 
 /* 
-header, footer {
-    height: 12vh;
-    background-color: black;
-    color: white;
-    text-align: center;
-    display: grid;
-    align-items: center;
-}
+
 h1 {
     color: var(--primary_color);
 }
