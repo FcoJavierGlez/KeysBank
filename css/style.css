@@ -25,7 +25,7 @@ body {
 }
 
 .logged {
-    animation: logged 3s 2.5s forwards;
+    animation: logged 1s 2s forwards;
 }
 
 @keyframes logged {
@@ -33,7 +33,17 @@ body {
     to {filter: opacity(0);}
 }
 
-input {
+form {
+    margin: 5px;
+    font-size: 0.6rem;
+}
+
+.form-login {
+    display: flex;
+    flex-flow: column;
+}
+
+#login_screen input {
     height: 34px;
     width: 244px;
     padding: 0;
@@ -41,16 +51,16 @@ input {
     margin: 5px 0;
     background-color: ghostwhite;
 }
-input:focus {
+#login_screen input:focus {
     outline: none;
 }
-input[type="text"]:hover, input[type="password"]:hover {
+#login_screen input[type="text"]:hover, input[type="password"]:hover {
     border: 3px solid darkorange;
 }
-input[type="text"]:focus, input[type="password"]:focus {
+#login_screen input[type="text"]:focus, input[type="password"]:focus {
     border: 3px solid rgb(122, 192, 17);
 }
-input[type="submit"] {
+#login_screen input[type="submit"] {
     height: 40px;
     width: 250px;
     border: 3px solid white;
@@ -62,13 +72,13 @@ input[type="submit"] {
     text-transform: uppercase;
     text-align: center;
 }
-input[type="submit"]:hover {
+#login_screen input[type="submit"]:hover {
     background-color: black;
     border: 3px solid orange;
     color: orange;
     cursor: pointer;
 }
-input[type="submit"]:active {
+#login_screen input[type="submit"]:active {
     border: 3px solid yellowgreen;
     color: yellowgreen;
 }
@@ -87,9 +97,12 @@ input[type="submit"]:active {
     background-repeat: no-repeat;
     background-size: contain;
 }
-
-.hidden {
-    display: none;
+.close-session {
+    align-items: flex-end;
+    display: flex;
+    height: 12vh;
+    justify-content: flex-end;
+    width: 100%;
 }
 
 header {
@@ -100,10 +113,16 @@ header {
     display: grid;
     grid-template-columns: repeat(3,1fr);
     align-items: center;
+    justify-items: center;
 }
 
 header .logo {
     height: 12vh;
+    width: 120px;
+}
+
+header form input[type="submit"] {
+    font-size: 0.7rem;
 }
 
 nav {
@@ -128,10 +147,25 @@ main {
 }
 
 @keyframes input_logged {
-    30% {background-color: rgb(0, 200, 0,0.9);}
-    60% {background-color: ghostwhite;}
-    90% {background-color: rgb(0, 200, 0,0.9);}
+    25% {background-color: rgb(0, 200, 0,0.9);}
+    50% {background-color: ghostwhite;}
+    75% {background-color: rgb(0, 200, 0,0.9);}
     100% {background-color: rgb(0, 200, 0,0.9);}
+}
+
+@media only screen and (min-width: 550px) {
+    header .logo {
+        width: 200px;
+    }
+    form {
+        font-size: 1rem;
+    }
+    header form input[type="submit"] {
+        font-size: 1rem;
+    }
+}
+@media only screen and (min-width: 1000px) {
+    
 }
 
 /* 

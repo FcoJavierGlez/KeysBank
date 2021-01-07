@@ -4,7 +4,7 @@
      */
 
     include "config/config_dev.php";
-    /* include "resource/funciones.php"; */
+    include "resource/functions.php";
     include "class/DBAbstractModel.php";
     /* include "class/Usuario.php";
     include "class/Clave.php";
@@ -26,9 +26,9 @@
         $_SESSION['clave']            = Clave::singleton();
         $_SESSION['documento']        = Documento::singleton();
 
-        $_SESSION['mailer']           = NULL;
+        $_SESSION['mailer']           = NULL; */
 
-        $_SESSION['user']             = array( 'perfil' => "invitado" ); */
+        $_SESSION['user']             = array( 'perfil' => "INVITED" );
     }
 
     if ( isset($_POST['login']) ) {
@@ -37,14 +37,16 @@
             $_SESSION['user'] = $usuario[0];
             $logged = TRUE;
         } */
+        $loggedNow = TRUE;
+        $_SESSION['user']['perfil'] = 'USER'; //prueba
+        $_SESSION['user']['nick']   = 'user1'; //prueba
     }
 
-    if ( isset($_POST['cerrar']) ) {
-        cerrarSesion();
+    if ( isset($_POST['exit']) ) {
+        closeSession();
     }
 
     /* include "include/procesa.php"; */
-
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -59,17 +61,28 @@
     </head>
     <body>
         <noscript><h1>Estapágina requiere el uso de JavaScript</h1></noscript>
-        <div class="login_screen logged"><!-- class="anim" -->
+        <div id="login_screen" class="<?php echo loginScreenVisibility($loggedNow); ?>"><!-- class="login_screen logged" -->
             <div class="logo"></div>
-            <input type="text" name="username" placeholder="username" class="input_logged"> <!-- class="input_logged" -->
-            <input type="password" name="pswd" placeholder="password" class="input_logged"> <!-- class="input_logged" -->
-            <input type="submit" name="login" value="Enter" class="">
+            <form action="" method="post" class="form-login">
+                <input type="text" name="username" placeholder="username" class="<?php echo $loggedNow ? 'input_logged' : ''; ?>"> <!-- class="input_logged" -->
+                <input type="password" name="pswd" placeholder="password" class="<?php echo $loggedNow ? 'input_logged' : ''; ?>"> <!-- class="input_logged" -->
+                <input type="submit" name="login" value="Enter" class="">
+            </form>
         </div>
         <div>
             <header>
                 <div></div>
                 <div class="logo"></div>
-                <div></div>
+                <div class="close-session">
+                    <?php
+                        if ($_SESSION['user']['perfil'] !== 'INVITED') {
+                            echo "<form action='' method='post'>";
+                                echo "Welcome ".$_SESSION['user']['nick'].". ";
+                                echo "<input type='submit' name='exit' value='Close' class=''>";
+                            echo "</form>";
+                        }
+                    ?>
+                </div>
             </header>
             <main>
                 <nav>
