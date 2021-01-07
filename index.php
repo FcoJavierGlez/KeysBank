@@ -12,17 +12,17 @@
         <link rel="stylesheet" href="css/style.css">
         <link rel="icon" href="favicon.ico">
         <script src="js/main.js"></script>
-        <title>Keys Bank</title>
+        <title>KeysBank</title>
     </head>
     <body>
         <noscript><h1>Estapágina requiere el uso de JavaScript</h1></noscript>
-        <div class="anim"><!-- class="anim" -->
+        <div class="login_screen logged"><!-- class="anim" -->
             <div class="logo"></div>
-            <input type="text" name="" id="" placeholder="username">
-            <input type="password" name="" id="" placeholder="password">
-            <input type="submit" name="" value="Enter">
+            <input type="text" name="" placeholder="username" class="input_logged"> <!-- class="input_logged" -->
+            <input type="password" name="" placeholder="password" class="input_logged"> <!-- class="input_logged" -->
+            <input type="submit" name="" value="Enter" class="">
         </div>
-        <div class="hidden"><!-- class="hidden" -->
+        <div class=""><!-- class="hidden" -->
             <header>
                 <div></div>
                 <div class="logo"></div>

@@ -5,7 +5,11 @@ body {
     margin: 0;
 }
 
-.anim {
+.hidden {
+    display: none;
+}
+
+.login_screen {
     height: 100vh;
     width: 100%;
     background-image: url(../img/matrix.gif);
@@ -16,6 +20,17 @@ body {
     flex-flow: column;
     align-items: center;
     justify-content: center;
+    position: absolute;
+    z-index: 2;
+}
+
+.logged {
+    animation: logged 3s 2.5s forwards;
+}
+
+@keyframes logged {
+    from {filter: opacity(1);}
+    to {filter: opacity(0);}
 }
 
 input {
@@ -106,6 +121,17 @@ main {
         height: 300px;
         width: 450px;
     }
+}
+
+.input_logged {
+    animation: input_logged 3s forwards;
+}
+
+@keyframes input_logged {
+    30% {background-color: rgb(0, 200, 0,0.9);}
+    60% {background-color: ghostwhite;}
+    90% {background-color: rgb(0, 200, 0,0.9);}
+    100% {background-color: rgb(0, 200, 0,0.9);}
 }
 
 /* 
