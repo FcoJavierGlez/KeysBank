@@ -22,13 +22,13 @@
     $logged = FALSE;
 
     if ( !isset($_SESSION['user']) ) { 
-        $_SESSION['usuario']          = Usuario::singleton();
+        /* $_SESSION['usuario']          = Usuario::singleton();
         $_SESSION['clave']            = Clave::singleton();
         $_SESSION['documento']        = Documento::singleton();
 
         $_SESSION['mailer']           = NULL;
 
-        $_SESSION['user']             = array( 'perfil' => "invitado" );
+        $_SESSION['user']             = array( 'perfil' => "invitado" ); */
     }
 
     if ( isset($_POST['login']) ) {
