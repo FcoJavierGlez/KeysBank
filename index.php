@@ -2,6 +2,49 @@
     /**
      * @author Francisco Javier González Sabariego
      */
+
+    include "config/config_dev.php";
+    /* include "resource/funciones.php"; */
+    include "class/DBAbstractModel.php";
+    /* include "class/Usuario.php";
+    include "class/Clave.php";
+    include "class/Documento.php";
+    include "class/error/UserExistException.php";
+    include "class/error/PassCheckException.php";
+    include "class/error/CheckOldPassException.php";
+    include "class/error/MailInvalidException.php";
+    include "class/error/MailExistException.php";
+    include "class/error/TimeLimitException.php";
+    require "phpmailer/class.phpmailer.php"; */
+
+    session_start();
+
+    $logged = FALSE;
+
+    if ( !isset($_SESSION['user']) ) { 
+        $_SESSION['usuario']          = Usuario::singleton();
+        $_SESSION['clave']            = Clave::singleton();
+        $_SESSION['documento']        = Documento::singleton();
+
+        $_SESSION['mailer']           = NULL;
+
+        $_SESSION['user']             = array( 'perfil' => "invitado" );
+    }
+
+    if ( isset($_POST['login']) ) {
+        /* $usuario = $_SESSION['usuario']->getUserByNick( limpiarDatos($_POST['user']) );
+        if ( sizeof($usuario) && $usuario[0]['pass'] == limpiarDatos($_POST['pswd']) ) {
+            $_SESSION['user'] = $usuario[0];
+            $logged = TRUE;
+        } */
+    }
+
+    if ( isset($_POST['cerrar']) ) {
+        cerrarSesion();
+    }
+
+    /* include "include/procesa.php"; */
+
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -18,11 +61,11 @@
         <noscript><h1>Estapágina requiere el uso de JavaScript</h1></noscript>
         <div class="login_screen logged"><!-- class="anim" -->
             <div class="logo"></div>
-            <input type="text" name="" placeholder="username" class="input_logged"> <!-- class="input_logged" -->
-            <input type="password" name="" placeholder="password" class="input_logged"> <!-- class="input_logged" -->
-            <input type="submit" name="" value="Enter" class="">
+            <input type="text" name="username" placeholder="username" class="input_logged"> <!-- class="input_logged" -->
+            <input type="password" name="pswd" placeholder="password" class="input_logged"> <!-- class="input_logged" -->
+            <input type="submit" name="login" value="Enter" class="">
         </div>
-        <div class=""><!-- class="hidden" -->
+        <div>
             <header>
                 <div></div>
                 <div class="logo"></div>
