@@ -38,7 +38,19 @@ form {
     font-size: 0.6rem;
 }
 
-.form-login {
+a.register {
+    color: orange;
+    font-size: 16px;
+    font-weight: bold;
+    margin: 3px 8px;
+    text-align: right;
+}
+
+a.register:active {
+    color: white;
+}
+
+.form_login {
     display: flex;
     flex-flow: column;
 }
@@ -50,14 +62,15 @@ form {
     border: 3px solid  rgb(150,150,150);
     margin: 5px 0;
     background-color: ghostwhite;
+    color: black;
 }
 #login_screen input:focus {
     outline: none;
 }
-#login_screen input[type="text"]:hover, input[type="password"]:hover {
+#login_screen input:hover {
     border: 3px solid darkorange;
 }
-#login_screen input[type="text"]:focus, input[type="password"]:focus {
+#login_screen input:focus {
     border: 3px solid rgb(122, 192, 17);
 }
 #login_screen input[type="submit"] {
@@ -65,7 +78,7 @@ form {
     width: 250px;
     border: 3px solid white;
     padding: 0;
-    margin: 25px 0;
+    margin-top: 25px;
     background-color: rgb(50,50,50);
     color: white;
     font-size: 1.2rem;
@@ -87,6 +100,16 @@ form {
     text-transform: uppercase;
     text-align: center;
     color: rgb(50,50,50);
+}
+
+#login_screen .error {
+    background-color: rgb(255, 0, 0,0.35);
+    border: 3px solid red;
+    color: white;
+}
+
+.text-error {
+    color: red;
 }
 
 .logo {
@@ -163,6 +186,11 @@ main {
     header form input[type="submit"] {
         font-size: 1rem;
     }
+}
+@media only screen and (min-width: 700px) {
+    /* a.register {
+        font-size: 20px;
+    } */
 }
 @media only screen and (min-width: 1000px) {
     
