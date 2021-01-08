@@ -33,10 +33,26 @@
         } */
 
         /**
+         * Devuelve el ID del usario buscado por nick
+         */
+        public function getIdUserByNick ( $id = 0 ) {
+            if ( $id !== 0 ) {
+                $this->query = "SELECT id FROM keysbank_users WHERE nick = lower( :nick )";
+
+                $this->parametros['nick'] = strtolower( $id );
+
+                $this->get_results_from_query();
+                $this->close_connection();
+            }
+
+            return $this->rows[0]['id'];
+        }
+
+        /**
          * Busca usuario por nick
          */
-        public function getUserByNick ( $busqueda = '' ) {
-            if ( $busqueda !== '' ) {
+        public function getUserByNick ( $nick = '' ) {
+            if ( $nick !== '' ) {
                 $this->query = "SELECT 
                 U.id,
                 U.nick,
@@ -49,7 +65,20 @@
                 FROM keysbank_users U, keysbank_keys K
                 WHERE U.id = K.idUser and K.idPlataform = 0 and U.id = (SELECT id FROM keysbank_users WHERE lower( nick ) = :nick)";
 
-                $this->parametros['nick'] = strtolower( $busqueda );
+                $this->parametros['nick'] = strtolower( $nick );
+
+                $this->get_results_from_query();
+                $this->close_connection();
+            }
+
+            return $this->rows;
+        }
+
+        public function getUserByEmail( $email = '' ) {
+            if ( $email !== '' ) {
+                $this->query = "SELECT * FROM keysbank_users WHERE email = lower( :email )";
+
+                $this->parametros['email'] = strtolower( $email );
 
                 $this->get_results_from_query();
                 $this->close_connection();
@@ -82,7 +111,15 @@
                                     keysbank_users.perfil,
                                     keysbank_users.current_state
                                 ) 
-                                VALUES (:nick,:pass,:username,:surname,:email,:perfil,:current_state)";
+                                VALUES (
+                                    :nick,
+                                    HEX(AES_ENCRYPT(:pass,:keypass)),
+                                    HEX(AES_ENCRYPT(:username,:keypass)),
+                                    HEX(AES_ENCRYPT(:surname,:keypass)),
+                                    :email,
+                                    :perfil,
+                                    :current_state
+                                )";
 
                 $this->parametros['nick']          = $user_data['nick'];
                 $this->parametros['pass']          = $user_data['pass'];
@@ -91,10 +128,26 @@
                 $this->parametros['perfil']        = "USER";
                 $this->parametros['current_state'] = "PENDING";
                 $this->parametros['email']         = $user_data['email'];
+                $this->parametros['keypass']       = $user_data['keypass'];
 
                 $this->get_results_from_query();
                 $this->close_connection();
             }
+        }
+
+        /**
+         * Inserta las llaves del usuario par alas distintas plataformas
+         */
+        public function setUserKeys( $idUser,$idPlataform,$keypass ) {
+            $this->query = "INSERT INTO keysbank_keys (keysbank_keys.idUser, keysbank_keys.idPlataform, keysbank_keys.password) 
+                                VALUES (:idUser, :idPlataform, :keypass)";
+
+            $this->parametros['idUser']      = $idUser;
+            $this->parametros['idPlataform'] = $idPlataform;
+            $this->parametros['keypass']     = $keypass;
+
+            $this->get_results_from_query();
+            $this->close_connection();
         }
         
         /**
