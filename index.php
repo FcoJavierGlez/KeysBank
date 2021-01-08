@@ -33,7 +33,7 @@
     }
 
     if ( isset($_POST['login']) ) {
-        $usuario = $_SESSION['instance_users']->getUserByNick( dataClean($_POST['username']) );
+        $usuario = $_SESSION['instance_users']->getUserByNick( dataClean($_POST['nick']) );
         if ( sizeof($usuario) && $usuario[0]['AES_DECRYPT(UNHEX(U.pass),K.password)'] == dataClean($_POST['pswd']) ) {
             $_SESSION['user']['id']            = $usuario[0]['id'];
             $_SESSION['user']['nick']          = $usuario[0]['nick'];
@@ -70,8 +70,17 @@
     <body>
         <noscript><h1>Estapágina requiere el uso de JavaScript</h1></noscript>
         <div id="login_screen" class="<?php echo loginScreenVisibility($loggedNow); ?>">
-            <div class="logo"></div>
-            <?php include "include/login_form.php"; ?>
+            <a href="index.php"><div class="logo"></div></a>
+            <?php 
+                if ( isset($_GET['register']) ) {
+                    if ($_SESSION['user']['perfil'] !== 'INVITED')
+                        header('Location:index.php');
+                    else
+                        include "include/register_form.php"; 
+                }
+                else
+                    include "include/login_form.php"; 
+            ?>
         </div>
         <div>
             <header>
