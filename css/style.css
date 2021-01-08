@@ -38,15 +38,23 @@ form {
     font-size: 0.6rem;
 }
 
-a.register {
-    color: orange;
-    font-size: 16px;
+a.register, a.back-login {
+    font-size: 0.85rem;
     font-weight: bold;
     margin: 3px 8px;
+}
+
+a.register {
+    color: orange;
     text-align: right;
 }
 
-a.register:active {
+a.back-login {
+    text-align: left;
+    color: orange;
+}
+
+a.register:active, a.back-login:active {
     color: white;
 }
 
@@ -56,8 +64,8 @@ a.register:active {
 }
 
 #login_screen input {
-    height: 34px;
-    width: 244px;
+    height: 29px;
+    width: 224px;
     padding: 0;
     border: 3px solid  rgb(150,150,150);
     margin: 5px 0;
@@ -74,8 +82,8 @@ a.register:active {
     border: 3px solid rgb(122, 192, 17);
 }
 #login_screen input[type="submit"] {
-    height: 40px;
-    width: 250px;
+    height: 35px;
+    width: 230px;
     border: 3px solid white;
     padding: 0;
     margin-top: 25px;
@@ -96,15 +104,18 @@ a.register:active {
     color: yellowgreen;
 }
 ::placeholder {
-    font-size: 1rem;
+    font-size: 0.7rem;
     text-transform: uppercase;
     text-align: center;
     color: rgb(50,50,50);
 }
 
 #login_screen .error {
-    background-color: rgb(255, 0, 0,0.35);
+    background-color: rgb(255, 0, 0,0.7);
     border: 3px solid red;
+    color: white;
+}
+.error::placeholder {
     color: white;
 }
 
@@ -112,9 +123,14 @@ a.register:active {
     color: red;
 }
 
+span.text-error {
+    font-size: 1rem;
+    text-align: center;
+}
+
 .logo {
     height: 200px;
-    width: 300px;
+    width: 200px;
     background-image: url(../img/logo.png);
     background-position: center;
     background-repeat: no-repeat;
@@ -158,12 +174,7 @@ main {
     height: 88vh;
 }
 
-@media only screen and (min-width: 1900px) {
-    .logo {
-        height: 300px;
-        width: 450px;
-    }
-}
+
 
 .input_logged {
     animation: input_logged 3s forwards;
@@ -180,20 +191,44 @@ main {
     header .logo {
         width: 200px;
     }
+    .logo {
+        width: 250px;
+    }
     form {
+        font-size: 1rem;
+    }
+    a.register, a.back-login {
         font-size: 1rem;
     }
     header form input[type="submit"] {
         font-size: 1rem;
     }
+    ::placeholder {
+        font-size: 1rem;
+    }
 }
 @media only screen and (min-width: 700px) {
-    /* a.register {
-        font-size: 20px;
-    } */
+    .logo {
+        width: 300px;
+    }
+    #login_screen input {
+        height: 34px;
+        width: 244px;
+    }
+    #login_screen input[type="submit"] {
+        height: 40px;
+        width: 250px;
+    }
 }
 @media only screen and (min-width: 1000px) {
     
+}
+
+@media only screen and (min-width: 1900px) {
+    .logo {
+        height: 300px;
+        width: 450px;
+    }
 }
 
 /* 
