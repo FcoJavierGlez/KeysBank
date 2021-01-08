@@ -7,13 +7,14 @@
     include "resource/functions.php";
     include "class/DBAbstractModel.php";
     include "class/Users.php";
-    /* include "class/Clave.php";
-    include "class/Documento.php";
+    include "class/Plataforms.php";
     include "class/error/UserExistException.php";
     include "class/error/PassCheckException.php";
-    include "class/error/CheckOldPassException.php";
-    include "class/error/MailInvalidException.php";
+    include "class/error/MailFormatException.php";
     include "class/error/MailExistException.php";
+    /* include "class/Clave.php";
+    include "class/Documento.php";
+    include "class/error/CheckOldPassException.php";
     include "class/error/TimeLimitException.php";
     require "phpmailer/class.phpmailer.php"; */
 
@@ -23,7 +24,8 @@
     $errorLogin = FALSE;
 
     if ( !isset($_SESSION['user']) ) { 
-        $_SESSION['instance_users'] = Users::singleton();
+        $_SESSION['instance_users']      = Users::singleton();
+        $_SESSION['instance_plataforms'] = Plataforms::singleton();
         /* $_SESSION['clave']            = Clave::singleton();
         $_SESSION['documento']        = Documento::singleton();
 
@@ -70,7 +72,7 @@
     <body>
         <noscript><h1>Estapágina requiere el uso de JavaScript</h1></noscript>
         <div id="login_screen" class="<?php echo loginScreenVisibility($loggedNow); ?>">
-            <a href="index.php"><div class="logo"></div></a>
+            <div><a href="index.php"><div class="logo"></div></a></div>
             <?php 
                 if ( isset($_GET['register']) ) {
                     if ($_SESSION['user']['perfil'] !== 'INVITED')

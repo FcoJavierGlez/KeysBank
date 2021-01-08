@@ -54,4 +54,26 @@
         $letters = array("a","e","i","o","u","a","e","i","o","u","n","n");
         return strtolower(str_replace( $tildes, $letters, $string ));
     }
+    /**
+     * Genera una clave hexadecimal de 255 caracteres
+     */
+    function genKey() {
+        $CHARACTERES = ['a','b','c','d','e','f','1','2','3','4','5','6','7','8','9','0'];
+        $LENGTH_PASS = 255;
+        $keyGenerated = "";
+        for ($i = 0; $i < $LENGTH_PASS; $i++) 
+            $keyGenerated .= strtoupper($CHARACTERES[ intval( rand(0,sizeof($CHARACTERES) - 1) ) ]);
+        return $keyGenerated;
+    }
+
+    /**
+     * Devuelve un array con claves hexadecimales de 255 caracteres de longitud. 
+     * El número de claves creadas será pasado por parámetro.
+     */
+    function genUserKeys($nKeys) {
+        $keys = array();
+        for ($i = 0; $i < $nKeys; $i++) 
+            array_push($keys,genKey());
+        return $keys;
+    }
 ?>
