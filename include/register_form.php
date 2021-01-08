@@ -50,18 +50,18 @@
     else {
         echo "<form action=".$_SERVER['PHP_SELF'].'?register'." method='POST' class='form_login'>";
 
-            echo "<input type='text' name='nick' placeholder='nick' class='".($userExistException ? 'error' : "")."'
+            echo "<input type='text' name='nick' placeholder='nick (*)' class='".($userExistException ? 'error' : 'required')."'
                 value='".(isset($_POST['add_user']) ? $_POST['nick'] : '')."' required>";
             echo "<span class='text-error'>".($userExistException ? 'Username is not available.' : '')."</span>";
 
-            echo "<input type='password' name='pswd' placeholder='password' class='".($passCheckException ? 'error' : '')."' value='' required>";
-            echo "<input type='password' name='pswd2' placeholder='repeat password' class='".($passCheckException ? 'error' : '')."' value='' required>";
+            echo "<input type='password' name='pswd' placeholder='password (*)' class='".($passCheckException ? 'error' : 'required')."' value='' required>";
+            echo "<input type='password' name='pswd2' placeholder='repeat password (*)' class='".($passCheckException ? 'error' : 'required')."' value='' required>";
             echo "<span class='text-error'>".($passCheckException ? 'Passwords must match.' : '')."</span>";
 
             echo "<input type='text' name='name' placeholder='name' value='".(isset($_POST['add_user']) ? $_POST['name'] : '')."'>";
             echo "<input type='text' name='surname' placeholder='surname' value='".(isset($_POST['add_user']) ? $_POST['surname'] : '')."'>";
 
-            echo "<input type='email' name='email' placeholder='email' class='".($mailFormatException || $mailExistException ? 'error' : '')."' 
+            echo "<input type='email' name='email' placeholder='email (*)' class='".($mailFormatException || $mailExistException ? 'error' : 'required')."' 
                 value='".(isset($_POST['add_user']) ? $_POST['email'] : '')."' required>";
             echo "<span class='text-error'>".($mailFormatException ? 'Email format error.' : '')."</span>";
             echo "<span class='text-error'>".($mailExistException ? 'This email has already been registered.' : '')."</span>";

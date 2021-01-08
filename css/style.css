@@ -24,9 +24,6 @@ body {
     z-index: 2;
 }
 
-/* #login_screen a {
-    flex-grow: 1;
-} */
 #login_screen > div {
     flex-grow: 1;
 }
@@ -128,6 +125,9 @@ a.register:active, a.back-login:active {
     background-color: rgb(255, 0, 0,0.7);
     border: 3px solid red;
     color: white;
+}
+#login_screen .required {
+    background-color: lightgoldenrodyellow;
 }
 .error::placeholder {
     color: white;
