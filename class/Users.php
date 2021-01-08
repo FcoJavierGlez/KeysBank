@@ -61,7 +61,7 @@
         /**
          * Inserta un nuevo usuario en el sistema
          */
-        /* public function setUser ( $user_data = array() ) {
+        public function setUser ( $user_data = array() ) {
             if ( sizeof( $this->getUserByNick( $user_data['nick'] ) ) )         //Si existe ese nick invalidamos el registro
                 throw new UserExistException();
             elseif ( !preg_match('/^([^-_@()<>[\]\"\'\.,;:])\w+([^-_@()<>[\]\"\'\.,;:])@([^-_@()<>[\]\"\'\.,;:])+\.(com|es)$/', 
@@ -72,24 +72,30 @@
             elseif ( $user_data['pass'] !== $user_data['pass2'])                //Si la contraseña y su verificación no coinciden
                 throw new PassCheckException();
             else {
-                $this->query = "INSERT INTO sevi_usuarios (nick,pass,perfil,estado,nombre,apellidos,email) 
-                                VALUES (:nick,:pass,:perfil,:estado,:nombre,:apellidos,:email)";
+                $this->query = "INSERT INTO keysbank_users 
+                                (
+                                    keysbank_users.nick,
+                                    keysbank_users.pass,
+                                    keysbank_users.name,
+                                    keysbank_users.surname,
+                                    keysbank_users.email,
+                                    keysbank_users.perfil,
+                                    keysbank_users.current_state
+                                ) 
+                                VALUES (:nick,:pass,:username,:surname,:email,:perfil,:current_state)";
 
-                $this->parametros['nick'] = $user_data['nick'];
-                $this->parametros['pass'] = $user_data['pass'];
-                $this->parametros['perfil'] = "user";
-                $this->parametros['estado'] = "pendiente";
-                $this->parametros['nombre'] = $user_data['nombre'];
-                $this->parametros['apellidos'] = $user_data['apellidos'];
-                $this->parametros['email'] = $user_data['email'];
-                //$this->parametros['dni'] = strtoupper( preg_replace('/(-|\s)/',"",$user_data['dni']) );
-                //$this->parametros['telefono'] = $user_data['telefono'];
-                //$this->parametros['img'] = $user_data['img'];
+                $this->parametros['nick']          = $user_data['nick'];
+                $this->parametros['pass']          = $user_data['pass'];
+                $this->parametros['username']      = $user_data['name'];
+                $this->parametros['surname']       = $user_data['surname'];
+                $this->parametros['perfil']        = "USER";
+                $this->parametros['current_state'] = "PENDING";
+                $this->parametros['email']         = $user_data['email'];
 
                 $this->get_results_from_query();
                 $this->close_connection();
             }
-        } */
+        }
         
         /**
          * Edita el estado del usuario
