@@ -66,7 +66,7 @@
                 throw new UserExistException();
             elseif ( !preg_match('/^([^-_@()<>[\]\"\'\.,;:])\w+([^-_@()<>[\]\"\'\.,;:])@([^-_@()<>[\]\"\'\.,;:])+\.(com|es)$/', 
             $user_data['email']) )                                              //Si el email no cumple con el formato válido
-                throw new MailInvalidException();
+                throw new MailFormatException();
             elseif ( sizeof( $this->getUserByEmail( $user_data['email'] ) ) )   //Si ya existe este email registrado
                 throw new MailExistException();
             elseif ( $user_data['pass'] !== $user_data['pass2'])                //Si la contraseña y su verificación no coinciden
