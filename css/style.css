@@ -24,13 +24,16 @@ body {
     z-index: 2;
 }
 
-.login_screen a {
+/* #login_screen a {
+    flex-grow: 1;
+} */
+#login_screen > div {
     flex-grow: 1;
 }
-.login_screen .form_login {
+#login_screen .form_login {
     flex-grow: 2;
 }
-.login_screen .container-box {
+#login_screen .container-box {
     flex-grow: 2;
 }
 
@@ -49,13 +52,14 @@ form {
 }
 
 a.register, a.back-login {
+    display: block;
+    color: orange;
     font-size: 0.85rem;
     font-weight: bold;
     margin: 3px 8px;
 }
 
 a.register {
-    color: orange;
     text-align: right;
 }
 
@@ -204,7 +208,6 @@ main {
     font-weight: bold;
     padding: 15px;
     text-align: center;
-    *height: max-content;
 }
 
 button {
@@ -263,39 +266,3 @@ button:focus {
         width: 450px;
     }
 }
-
-
-
-/* 
-
-h1 {
-    color: var(--primary_color);
-}
-h1, h2 {
-    margin: 0;
-}
-.icono_rrss:hover {
-    animation: escalar_icono 1s forwards;
-    -webkit-animation: escalar_icono 1s forwards;
-    -moz-animation: escalar_icono 1s forwards;
-}
-@keyframes escalar_icono {
-    from {transform: scale(1)}
-    to {transform: scale(1.1)}
-}
-.icono_rrss:not(:hover){
-    animation: desescalar_icono 1s forwards;
-    -webkit-animation: desescalar_icono 1s forwards;
-    -moz-animation: desescalar_icono 1s forwards;
-}
-@keyframes desescalar_icono {
-    from {transform: scale(1.1)}
-    to {transform: scale(1)}
-}
-.text-error {
-    color: red;
-}
-.text-correct {
-    color: rgb(0, 200, 0);
-}
-*/
