@@ -5,6 +5,6 @@
         echo "<input type='password' name='pswd' placeholder='password' class=".inputStyle($errorLogin,$loggedNow).">";
         echo "<span class='text-error'>".($errorLogin ? 'Usuario y/o contraseña incorrectos' : '')."</span>";
         echo "<input type='submit' name='login' value='Enter' class=''>";
-        echo "<a href=".$_SERVER['PHP_SELF'].'?register'." class='register'>Register now</a>";
+        echo "<div><a href=".$_SERVER['PHP_SELF'].'?register'." class='register'>Register now</a></div>";
     echo "</form>";
 ?>
