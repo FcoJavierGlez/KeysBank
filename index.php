@@ -6,8 +6,8 @@
     include "config/config_dev.php";
     include "resource/functions.php";
     include "class/DBAbstractModel.php";
-    /* include "class/Usuario.php";
-    include "class/Clave.php";
+    include "class/Users.php";
+    /* include "class/Clave.php";
     include "class/Documento.php";
     include "class/error/UserExistException.php";
     include "class/error/PassCheckException.php";
@@ -19,11 +19,12 @@
 
     session_start();
 
-    $logged = FALSE;
+    $loggedNow  = FALSE;
+    $errorLogin = FALSE;
 
     if ( !isset($_SESSION['user']) ) { 
-        /* $_SESSION['usuario']          = Usuario::singleton();
-        $_SESSION['clave']            = Clave::singleton();
+        $_SESSION['instance_users'] = Users::singleton();
+        /* $_SESSION['clave']            = Clave::singleton();
         $_SESSION['documento']        = Documento::singleton();
 
         $_SESSION['mailer']           = NULL; */
@@ -32,21 +33,28 @@
     }
 
     if ( isset($_POST['login']) ) {
-        /* $usuario = $_SESSION['usuario']->getUserByNick( limpiarDatos($_POST['user']) );
-        if ( sizeof($usuario) && $usuario[0]['pass'] == limpiarDatos($_POST['pswd']) ) {
-            $_SESSION['user'] = $usuario[0];
-            $logged = TRUE;
-        } */
-        $loggedNow = TRUE;
-        $_SESSION['user']['perfil'] = 'USER'; //prueba
-        $_SESSION['user']['nick']   = 'user1'; //prueba
+        $usuario = $_SESSION['instance_users']->getUserByNick( dataClean($_POST['username']) );
+        if ( sizeof($usuario) && $usuario[0]['AES_DECRYPT(UNHEX(U.pass),K.password)'] == dataClean($_POST['pswd']) ) {
+            $_SESSION['user']['id']            = $usuario[0]['id'];
+            $_SESSION['user']['nick']          = $usuario[0]['nick'];
+            $_SESSION['user']['pass']          = $usuario[0]['AES_DECRYPT(UNHEX(U.pass),K.password)'];
+            $_SESSION['user']['name']          = $usuario[0]['AES_DECRYPT(UNHEX(U.name),K.password)'];
+            $_SESSION['user']['surname']       = $usuario[0]['AES_DECRYPT(UNHEX(U.surname),K.password)'];
+            $_SESSION['user']['email']         = $usuario[0]['email'];
+            $_SESSION['user']['perfil']        = $usuario[0]['perfil'];
+            $_SESSION['user']['current_state'] = $usuario[0]['current_state'];
+            /* echo "<pre>";
+                print_r($_SESSION['user']);
+            echo "</pre>"; */
+            $loggedNow = TRUE;
+        }
+        else
+            $errorLogin = TRUE;
     }
 
     if ( isset($_POST['exit']) ) {
         closeSession();
     }
-
-    /* include "include/procesa.php"; */
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -61,13 +69,9 @@
     </head>
     <body>
         <noscript><h1>Estapágina requiere el uso de JavaScript</h1></noscript>
-        <div id="login_screen" class="<?php echo loginScreenVisibility($loggedNow); ?>"><!-- class="login_screen logged" -->
+        <div id="login_screen" class="<?php echo loginScreenVisibility($loggedNow); ?>">
             <div class="logo"></div>
-            <form action="" method="post" class="form-login">
-                <input type="text" name="username" placeholder="username" class="<?php echo $loggedNow ? 'input_logged' : ''; ?>"> <!-- class="input_logged" -->
-                <input type="password" name="pswd" placeholder="password" class="<?php echo $loggedNow ? 'input_logged' : ''; ?>"> <!-- class="input_logged" -->
-                <input type="submit" name="login" value="Enter" class="">
-            </form>
+            <?php include "include/login_form.php"; ?>
         </div>
         <div>
             <header>
@@ -76,7 +80,7 @@
                 <div class="close-session">
                     <?php
                         if ($_SESSION['user']['perfil'] !== 'INVITED') {
-                            echo "<form action='' method='post'>";
+                            echo "<form action='index.php' method='post'>";
                                 echo "Welcome ".$_SESSION['user']['nick'].". ";
                                 echo "<input type='submit' name='exit' value='Close' class=''>";
                             echo "</form>";
