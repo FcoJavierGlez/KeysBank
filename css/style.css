@@ -10,17 +10,17 @@ body {
 }
 
 .login_screen {
-    height: 100vh;
-    width: 100%;
+    align-items: center;
     background-image: url(../img/matrix.gif);
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
     display: flex;
     flex-flow: column;
-    align-items: center;
+    height: 100vh;
     justify-content: center;
     position: absolute;
+    width: 100%;
     z-index: 2;
 }
 
@@ -44,8 +44,8 @@ body {
 }
 
 form {
-    margin: 5px;
     font-size: 0.6rem;
+    margin: 5px;
 }
 
 a.register, a.back-login {
@@ -61,8 +61,8 @@ a.register {
 }
 
 a.back-login {
-    text-align: left;
     color: orange;
+    text-align: left;
 }
 
 a.register:active, a.back-login:active {
@@ -75,13 +75,13 @@ a.register:active, a.back-login:active {
 }
 
 #login_screen input {
-    height: 29px;
-    width: 224px;
-    padding: 0;
-    border: 3px solid  rgb(150,150,150);
-    margin: 5px 0;
     background-color: ghostwhite;
+    border: 3px solid  rgb(150,150,150);
     color: black;
+    height: 29px;
+    margin: 5px 0;
+    padding: 0;
+    width: 224px;
 }
 #login_screen input:focus {
     outline: none;
@@ -93,16 +93,16 @@ a.register:active, a.back-login:active {
     border: 3px solid rgb(122, 192, 17);
 }
 #login_screen input[type="submit"] {
-    height: 35px;
-    width: 230px;
-    border: 3px solid white;
-    padding: 0;
-    margin-top: 25px;
     background-color: rgb(50,50,50);
+    border: 3px solid white;
     color: white;
     font-size: 1.2rem;
+    height: 35px;
+    margin-top: 25px;
+    padding: 0;
     text-transform: uppercase;
     text-align: center;
+    width: 230px;
 }
 #login_screen input[type="submit"]:hover {
     background-color: black;
@@ -115,10 +115,10 @@ a.register:active, a.back-login:active {
     color: yellowgreen;
 }
 ::placeholder {
+    color: rgb(50,50,50);
     font-size: 0.7rem;
     text-transform: uppercase;
     text-align: center;
-    color: rgb(50,50,50);
 }
 
 #login_screen .error {
@@ -144,12 +144,12 @@ span.text-error {
 }
 
 .logo {
-    height: 200px;
-    width: 200px;
     background-image: url(../img/logo.png);
     background-position: center;
     background-repeat: no-repeat;
     background-size: contain;
+    height: 200px;
+    width: 200px;
 }
 .close-session {
     align-items: flex-end;
@@ -160,14 +160,14 @@ span.text-error {
 }
 
 header {
-    height: 12vh;
+    align-items: center;
     background-color: black;
     color: white;
-    text-align: center;
     display: grid;
     grid-template-columns: repeat(3,1fr);
-    align-items: center;
+    height: 12vh;
     justify-items: center;
+    text-align: center;
 }
 
 header .logo {
@@ -177,15 +177,57 @@ header .logo {
 
 header form input[type="submit"] {
     background-color: red;
-    border: 0;
+    border: 2px solid white;
+    border-radius: 20px;
     color: white;
     font-size: 0.6rem;
     padding: 2px 4px;
 }
+header form input[type="submit"]:hover {
+    background-color: black;
+    border: 2px solid red;
+    color: red;
+    cursor: pointer;
+}
 
 nav {
-    height: 5vh;
+    align-items: center;
     background-color: rgb(75, 75, 75);
+    display: flex;
+    height: 5vh;
+}
+
+nav ul {
+    display: flex;
+    justify-content: space-evenly;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+
+nav ul li {
+    margin: 0 5px;
+}
+
+nav a {
+    align-items: center;
+    background-color: rgba(0, 127, 255);
+    border: 1px solid white;
+    border-radius: 15px;
+    color: white;
+    display: flex;
+    font-size: 0.6rem;
+    justify-content: center;
+    padding: 4px 5px;
+    text-decoration: none;
+    width: 50px;
+    height: 2vh;
+}
+nav a:hover {
+    background-color: black;
+    border: 1px solid gold;
+    color: gold;
 }
 
 main {
@@ -237,12 +279,28 @@ button:focus {
 
 /* RESPONSIVE */
 
+@media only screen and (min-width: 360px) {
+    nav a {
+        border: 2px solid black;
+        font-size: 0.7rem;
+        width: 65px;
+    }
+    nav a:hover {
+        border: 2px solid gold;
+    }
+}
+
 @media only screen and (min-width: 550px) {
     header .logo {
         width: 200px;
     }
     .logo {
         width: 250px;
+    }
+    nav a {
+        font-size: 1rem;
+        padding: 2px 4px;
+        width: 80px;
     }
     form, a.register, a.back-login, span.text-error, header form input[type="submit"], ::placeholder, .registered-box,button {
         font-size: 1rem;
@@ -251,6 +309,13 @@ button:focus {
 @media only screen and (min-width: 700px) {
     .logo {
         width: 300px;
+    }
+    nav a {
+        height: 2.5vh;
+        width: 100px;
+    }
+    header form input[type="submit"] {
+        width: 100px;
     }
     #login_screen input {
         height: 34px;
@@ -262,12 +327,20 @@ button:focus {
     }
 }
 @media only screen and (min-width: 1000px) {
-    
+    header form input[type="submit"] {
+        width: 150px;
+    }
+    nav a {
+        width: 123px;
+    }
 }
 
-@media only screen and (min-width: 1900px) {
+@media only screen and (min-width: 1500px) {
     .logo {
         height: 300px;
         width: 450px;
+    }
+    nav a {
+        width: 150px;
     }
 }
