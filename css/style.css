@@ -48,6 +48,17 @@ form {
     margin: 5px;
 }
 
+select {
+    font-weight: bold;
+    height: 30px;
+}
+select:focus {
+    outline: none;
+}
+option {
+    font-weight: bold;
+}
+
 a.register, a.back-login {
     display: block;
     color: orange;
