@@ -43,6 +43,34 @@
 
             return $this->rows;
         }
+
+        private function selectQuerySubcategories($id) {
+            switch ($id) {
+                case 1:
+                    return "";
+                case 2:
+                    return "SELECT DPT.type, DPL.name FROM keysbank_digital_plataforms_list DPL, keysbank_digital_plataforms_type DPT WHERE DPL.idType = DPT.id ORDER BY DPT.type, DPL.name";
+                case 3:
+                    return "";
+                case 4:
+                    return "";
+                case 5:
+                    return "";
+                case 6:
+                    return "";
+                /* default:
+                    return ""; */
+            }
+        }
+
+        public function getSubcategoriesList($id) {
+            $this->query = $this->selectQuerySubcategories($id);
+
+            $this->get_results_from_query();
+            $this->close_connection();
+
+            return $this->rows;
+        }
     }
     
 ?>
