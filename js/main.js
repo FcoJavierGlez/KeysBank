@@ -1,3 +1,6 @@
+/**
+ * @author Francisco Javier González Sabariego
+ */
 {
     const init = () => {
         const LOGIN_SCREEN = document.getElementById("login_screen");
