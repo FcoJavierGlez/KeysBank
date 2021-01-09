@@ -20,8 +20,10 @@
 
     session_start();
 
-    $loggedNow  = FALSE;
-    $errorLogin = FALSE;
+    $loggedNow   = FALSE;
+    $errorLogin  = FALSE;
+    $userPending = FALSE;
+    $userBanned  = FALSE;
 
     if ( !isset($_SESSION['user']) ) { 
         $_SESSION['instance_users']      = Users::singleton();
@@ -37,18 +39,26 @@
     if ( isset($_POST['login']) ) {
         $usuario = $_SESSION['instance_users']->getUserByNick( dataClean($_POST['nick']) );
         if ( sizeof($usuario) && $usuario[0]['AES_DECRYPT(UNHEX(U.pass),K.password)'] == dataClean($_POST['pswd']) ) {
-            $_SESSION['user']['id']            = $usuario[0]['id'];
-            $_SESSION['user']['nick']          = $usuario[0]['nick'];
-            $_SESSION['user']['pass']          = $usuario[0]['AES_DECRYPT(UNHEX(U.pass),K.password)'];
-            $_SESSION['user']['name']          = $usuario[0]['AES_DECRYPT(UNHEX(U.name),K.password)'];
-            $_SESSION['user']['surname']       = $usuario[0]['AES_DECRYPT(UNHEX(U.surname),K.password)'];
-            $_SESSION['user']['email']         = $usuario[0]['email'];
-            $_SESSION['user']['perfil']        = $usuario[0]['perfil'];
-            $_SESSION['user']['current_state'] = $usuario[0]['current_state'];
-            /* echo "<pre>";
-                print_r($_SESSION['user']);
-            echo "</pre>"; */
-            $loggedNow = TRUE;
+            if ($usuario[0]['current_state'] == 'PENDING') {
+                $userPending = TRUE;
+                $errorLogin = TRUE;
+            }
+            elseif($usuario[0]['current_state'] == 'BANNED') {
+                $userBanned = TRUE;
+                $errorLogin = TRUE;
+            }
+            else {
+                $_SESSION['user']['id']            = $usuario[0]['id'];
+                $_SESSION['user']['nick']          = $usuario[0]['nick'];
+                $_SESSION['user']['pass']          = $usuario[0]['AES_DECRYPT(UNHEX(U.pass),K.password)'];
+                $_SESSION['user']['name']          = $usuario[0]['AES_DECRYPT(UNHEX(U.name),K.password)'];
+                $_SESSION['user']['surname']       = $usuario[0]['AES_DECRYPT(UNHEX(U.surname),K.password)'];
+                $_SESSION['user']['email']         = $usuario[0]['email'];
+                $_SESSION['user']['perfil']        = $usuario[0]['perfil'];
+                $_SESSION['user']['current_state'] = $usuario[0]['current_state'];
+                $loggedNow = TRUE;
+            }
+            
         }
         else
             $errorLogin = TRUE;
@@ -93,7 +103,7 @@
                         if ($_SESSION['user']['perfil'] !== 'INVITED') {
                             echo "<form action='index.php' method='post'>";
                                 echo "Welcome ".$_SESSION['user']['nick'].". ";
-                                echo "<input type='submit' name='exit' value='Close' class=''>";
+                                echo "<input type='submit' name='exit' value='Logout' class=''>";
                             echo "</form>";
                         }
                     ?>

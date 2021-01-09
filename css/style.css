@@ -139,6 +139,7 @@ a.register:active, a.back-login:active {
 
 span.text-error {
     font-size: 0.8rem;
+    font-weight: bold;
     text-align: center;
 }
 
@@ -175,7 +176,11 @@ header .logo {
 }
 
 header form input[type="submit"] {
-    font-size: 0.7rem;
+    background-color: red;
+    border: 0;
+    color: white;
+    font-size: 0.6rem;
+    padding: 2px 4px;
 }
 
 nav {
