@@ -112,15 +112,16 @@
             <main>
                 <nav>
                     <?php
-                        //Dinamic nav
+                        include "include/nav.php";
                     ?>
                 </nav>
                 <?php
+                    /* echo preg_match('/\/pages\//', $_SERVER['PHP_SELF']) ? 'Ruta /pages/'."<br/>" : 'index'."<br/>";
+                    echo $_SERVER['PHP_SELF']."<br/>"; */
                     //Controller
                 ?>
             </main>
             <footer></footer>
         </div>
-        
     </body>
 </html>
