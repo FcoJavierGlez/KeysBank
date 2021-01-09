@@ -31,6 +31,18 @@
 
             return sizeof($this->rows);
         }
+
+        /**
+         * Devuelve el conjunto de plataformas registradas en la BBDD
+         */
+        public function getPlataforms() {
+            $this->query = "SELECT * FROM keysbank_plataforms";
+
+            $this->get_results_from_query();
+            $this->close_connection();
+
+            return $this->rows;
+        }
     }
     
 ?>
