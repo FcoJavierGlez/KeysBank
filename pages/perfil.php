@@ -19,7 +19,7 @@
 
     session_start();
 
-    if ($_SESSION['user']['perfil'] !== "USER" || $_SESSION['user']['current_state'] !== "ACTIVE") {
+    if ($_SESSION['user']['perfil'] == "INVITED" || $_SESSION['user']['current_state'] !== "ACTIVE") {
         header('Location:../index.php');
     }
 ?>
@@ -54,10 +54,10 @@
             <main>
                 <nav>
                     <?php
-                        //Dinamic nav
+                        include "../include/nav.php";
                     ?>
                 </nav>
-                <h2>Welcome to accounts</h2>
+                <h2>Welcome to edit perfil</h2>
                 <?php
                     //Controller
                 ?>

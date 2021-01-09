@@ -54,7 +54,7 @@
             <main>
                 <nav>
                     <?php
-                        //Dinamic nav
+                        include "../include/nav.php";
                     ?>
                 </nav>
                 <h2>Welcome to accounts</h2>
