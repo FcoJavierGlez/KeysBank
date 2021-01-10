@@ -2,6 +2,6 @@ index.html
 
 [hc]*.php
 
-api/sub*
+api/[ps]*
 
 js/pruebas*.js
