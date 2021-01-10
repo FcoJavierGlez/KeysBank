@@ -57,10 +57,12 @@
                         include "../include/nav.php";
                     ?>
                 </nav>
-                <h2>Welcome to edit perfil</h2>
-                <?php
-                    //Controller
-                ?>
+                <div class="container">
+                    <h2>Welcome to edit perfil</h2>
+                    <?php
+                        //Controller
+                    ?>
+                </div>
             </main>
             <footer></footer>
         </div>
