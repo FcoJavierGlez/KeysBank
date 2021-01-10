@@ -5,9 +5,11 @@
     const normalizeOption = input => input.replace(/_/g, " ").replace( /\b([\w])/g, e => e.toUpperCase() ).replace(/\//g, " / ");
 
     async function getPlataformsList(selectElement) {
+        const PATH = `${location.origin}/${location.pathname.match(/^\/(\w+)\/(\/pages\/|index(\.html|\.php)?)?/)?.[1]}`;
+        //`${PATH}/api/plataform_categories_list.php` //PHP Version
         const fragment = new DocumentFragment();
 
-        const connect = await fetch('http://localhost/keys_bank_dev/api/plataforms_list.php',{
+        const connect = await fetch('http://localhost/keys_bank_dev/api/plataform_categories_list.php',{
             type: "GET",
             contentType: "text/plain; charset=UTF-8"
         });
@@ -26,15 +28,15 @@
 
     }
 
-    async function createSubcategoriesOptions(plataformsList){
+    async function createSubcategoriesOptions(categoriesList){
         const fragment = new DocumentFragment();
 
-        const typeList = [...new Set(await plataformsList.map( e => e.type))]
+        const subcategoryList = [...new Set(await categoriesList.map( e => e.subcategory))]
 
-        typeList.forEach( type => {
+        subcategoryList.forEach( subcategory => {
             const optgroup = document.createElement("optgroup");
-            optgroup.label = `${type}`;
-            plataformsList.filter( e => e.type == type )
+            optgroup.label = `${subcategory}`;
+            categoriesList.filter( e => e.subcategory == subcategory )
             .forEach( e => {
                 const option = document.createElement("option");
                 option.value = `${e.name}`;
@@ -47,48 +49,36 @@
         return fragment;
     }
 
-    async function getSubcategoriesList(id,selectElement) {
-        if (id == "") return;
+    async function getSubcategoriesList(formDOM,selectElement) {
         const PATH = `${location.origin}/${location.pathname.match(/^\/(\w+)\/(\/pages\/|index(\.html|\.php)?)?/)?.[1]}`;
-        /* const PATH2 = location.pathname.match(/^.+\/(\w+)\/(\/pages\/|index(\.html|\.php)?)?/)?.[1];  //pruebas con html
-        console.log(`PATH2: ${PATH2}`); */
-        //location.pathname.match(/^\/(\w+)\/(\/pages\/|index(\.html|\.php)?)?/)?.[1]
+        //`${PATH}/api/plataforms_list.php`
 
-        const URL = {   //OPCiÓN FINAL PARA PHP
-            '1': `${PATH}/api/social_media_list.php`,
-            '2': `${PATH}/api/digital_plataforms_list.php`,
-            '3': `${PATH}/api/webs_apps_list.php`,
-            '4': `${PATH}/api/mails_list.php`,
-            '5': `${PATH}/api/operating_systems_list.php`,
-            '6': `${PATH}/api/credit_cards_bank_accounts_list.php`
-        }
+        const data = new FormData(formDOM);
 
-        /* const URL = {    //pruebas html
-            '1': `http://localhost/keys_bank_dev/api/social_media_list.php`,
-            '2': `http://localhost/keys_bank_dev/api/digital_plataforms_list.php`,
-            '3': `http://localhost/keys_bank_dev/api/webs_apps_list.php`,
-            '4': `http://localhost/keys_bank_dev/api/mails_list.php`,
-            '5': `http://localhost/keys_bank_dev/api/operating_systems_list.php`,
-            '6': `http://localhost/keys_bank_dev/api/credit_cards_bank_accounts_list.php`
-        } */
-
-        const connect = await fetch(URL[id],{
-            type: "GET",
-            contentType: "text/plain; charset=UTF-8"
+        const connect = await fetch('http://localhost/keys_bank_dev/api/plataforms_list.php',{
+            method: 'POST',
+            body: data
         });
 
-        const plataformsList = await connect.json();
+        const subCategoriesList = await connect.json();
 
         selectElement.innerHTML = `<option value="">-- Choice an option --</option>`;
-        selectElement.appendChild( await createSubcategoriesOptions(plataformsList) );
+        selectElement.appendChild( await createSubcategoriesOptions(subCategoriesList) );
     }
 
     const init = () => {
-        const PLATAFORMS = document.getElementById("plataforms");
+        const FORM = document.getElementById("categories-subcategories")
+        const CATEGORIES = document.getElementById("categories");
         const SUBCATEGORIES = document.getElementById("subcategories");
 
-        getPlataformsList(PLATAFORMS);
-        PLATAFORMS.addEventListener("click", () => getSubcategoriesList( PLATAFORMS.value, SUBCATEGORIES ));
+        getPlataformsList(CATEGORIES);
+        CATEGORIES.addEventListener("click", () => {
+            if (CATEGORIES.value == "") {
+                SUBCATEGORIES.innerHTML = `<option value="">-- Choice an option --</option>`;
+                return;
+            }
+            getSubcategoriesList( FORM, SUBCATEGORIES );
+        });
     }
 
     document.addEventListener("DOMContentLoaded", init);
