@@ -7,10 +7,7 @@
     include "../class/Plataforms.php";
 
     $plataforms = Plataforms::singleton();
-    $plataformsList = $plataforms->getPlataforms();
+    $plataformsList = $plataforms->getPlataformCategories();
 
-    /* echo "<pre>";
-        print_r($plataformsList);
-    echo "</pre>"; */
     print_r(json_encode($plataformsList));
 ?>
