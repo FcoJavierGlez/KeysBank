@@ -7,7 +7,7 @@
     include "../class/Plataforms.php";
 
     $plataforms = Plataforms::singleton();
-    $subcategoriesList = $plataforms->getSubcategoriesList(1);
+    $subcategoriesList = $plataforms->getPlataformsByCategory(1);
     
     print_r(json_encode($subcategoriesList));
 ?>
