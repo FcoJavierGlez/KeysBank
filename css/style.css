@@ -45,7 +45,6 @@ body {
 
 form {
     font-size: 0.6rem;
-    margin: 5px;
 }
 
 select {
@@ -186,6 +185,10 @@ header .logo {
     width: 120px;
 }
 
+header form {
+    margin: 5px;
+}
+
 header form input[type="submit"] {
     background-color: red;
     border: 2px solid white;
@@ -245,7 +248,12 @@ main {
     background-color: rgb(200, 200, 200);
     height: 88vh;
 }
-
+.container {
+    height: 83vh;
+}
+.container h2 {
+    margin: 0;
+}
 .input_logged {
     animation: input_logged 3s forwards;
 }
