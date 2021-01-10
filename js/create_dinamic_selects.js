@@ -5,8 +5,8 @@
     const normalizeOption = input => input.replace(/_/g, " ").replace( /\b([\w])/g, e => e.toUpperCase() ).replace(/\//g, " / ");
 
     async function getPlataformsList(selectElement) {
-        const PATH = `${location.origin}/${location.pathname.match(/^\/(\w+)\/(\/pages\/|index(\.html|\.php)?)?/)?.[1]}`;
-        //`${PATH}/api/plataform_categories_list.php` //PHP Version
+        const ROUTE = `${location.origin}/${(path = location.pathname.match(/^\/(\w+)(\/pages\/)?(\w+\.(html|php))?$/)?.[1]) == undefined ? "" : path}`;
+        //`${ROUTE}/api/plataform_categories_list.php` //PHP Version
         const fragment = new DocumentFragment();
 
         const connect = await fetch('http://localhost/keys_bank_dev/api/plataform_categories_list.php',{
@@ -50,8 +50,9 @@
     }
 
     async function getSubcategoriesList(formDOM,selectElement) {
-        const PATH = `${location.origin}/${location.pathname.match(/^\/(\w+)\/(\/pages\/|index(\.html|\.php)?)?/)?.[1]}`;
-        //`${PATH}/api/plataforms_list.php`
+        let path = "";
+        const ROUTE = `${location.origin}/${(path = location.pathname.match(/^\/(\w+)(\/pages\/)?(\w+\.(html|php))?$/)?.[1]) == undefined ? "" : path}`;
+        //`${ROUTE}/api/plataforms_list.php`
 
         const data = new FormData(formDOM);
 
