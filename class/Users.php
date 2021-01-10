@@ -91,12 +91,12 @@
          * Inserta un nuevo usuario en el sistema
          */
         public function setUser ( $user_data = array() ) {
-            if ( sizeof( $this->getUserByNick( $user_data['nick'] ) ) )         //Si existe ese nick invalidamos el registro
+            if ( sizeof( $this->getUserByNick( strtolower($user_data['nick']) ) ) )         //Si existe ese nick invalidamos el registro
                 throw new UserExistException();
             elseif ( !preg_match('/^([^-_@()<>[\]\"\'\.,;:])\w+([^-_@()<>[\]\"\'\.,;:])@([^-_@()<>[\]\"\'\.,;:])+\.(com|es)$/', 
             $user_data['email']) )                                              //Si el email no cumple con el formato válido
                 throw new MailFormatException();
-            elseif ( sizeof( $this->getUserByEmail( $user_data['email'] ) ) )   //Si ya existe este email registrado
+            elseif ( sizeof( $this->getUserByEmail( strtolower($user_data['email']) ) ) )   //Si ya existe este email registrado
                 throw new MailExistException();
             elseif ( $user_data['pass'] !== $user_data['pass2'])                //Si la contraseña y su verificación no coinciden
                 throw new PassCheckException();
@@ -121,13 +121,13 @@
                                     :current_state
                                 )";
 
-                $this->parametros['nick']          = $user_data['nick'];
+                $this->parametros['nick']          = strtolower($user_data['nick']);
                 $this->parametros['pass']          = $user_data['pass'];
                 $this->parametros['username']      = $user_data['name'];
                 $this->parametros['surname']       = $user_data['surname'];
                 $this->parametros['perfil']        = "USER";
                 $this->parametros['current_state'] = "PENDING";
-                $this->parametros['email']         = $user_data['email'];
+                $this->parametros['email']         = strtolower($user_data['email']);
                 $this->parametros['keypass']       = $user_data['keypass'];
 
                 $this->get_results_from_query();
