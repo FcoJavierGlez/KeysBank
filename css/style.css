@@ -1,6 +1,11 @@
 :root{
     --primary_color: orange;
 }
+/* @-moz-document {
+    body {
+        scrollbar-width: none;
+    }
+} */
 body {
     margin: 0;
 }
@@ -245,7 +250,11 @@ nav a:hover {
 }
 
 main {
-    background-color: rgb(200, 200, 200);
+    *background-color: rgb(200, 200, 200);
+    background-image: url(../img/matrix.gif);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
     height: 88vh;
 }
 .container {
@@ -254,6 +263,91 @@ main {
 .container h2 {
     margin: 0;
 }
+.container h3 {
+    margin: 2px;
+}
+.name-page {
+    align-items: center;
+    background-color: ghostwhite;
+    color: black;
+    display: flex;
+    font-weight: bold;
+    height: 5vh;
+    justify-content: center;
+}
+
+section {
+    background-color: rgb(200, 200, 200);
+    border: 2px solid rgba(0, 127, 255);
+    border-radius: 15px;
+    height: 71vh;
+    margin: 3vh auto;
+    padding: 3px;
+    width: 85%;
+}
+.panel-title {
+    text-align: center;
+}
+.search {
+    display: flex;
+    justify-content: center;
+}
+.search input[type="text"] {
+    height: 22px;
+}
+.search input[type="submit"] {
+    background-color:rgba(0, 127, 255);
+    border: 1px solid black;
+    color: white;
+    height: 30px;
+    margin: 0 4px;
+}
+.result {
+    width: 100%;
+    height: 62vh;
+    margin: 1vh 0;
+}
+.result a {
+    text-decoration: none;
+    color: black;
+}
+.scroll {
+    overflow-x: auto;
+    scrollbar-width: none;
+}
+.scroll::-webkit-scrollbar {
+    display: none;
+}
+article {
+    background-color: ghostwhite;
+    border: 1px solid black;
+    padding: 5px;
+    margin: 5px auto;
+    width: 95%;
+}
+.plataform {
+    display: flex;
+    align-items: center;
+    margin-left: 5px;
+}
+.plataform img {
+    height: 30px;
+    width: 30px;
+}
+.plataform h3 {
+    margin: 0 5px;
+    font-size: 24px;
+}
+.basic-info {
+    margin: 10px 0;
+}
+.basic-info div {
+    margin: 5px 0;
+}
+.basic-info div span {
+    margin-left: 10px;
+}
+
 .input_logged {
     animation: input_logged 3s forwards;
 }
