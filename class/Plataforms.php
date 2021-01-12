@@ -44,6 +44,10 @@
             return $this->rows;
         }
 
+        /**
+         * Devuelve una lista de plataformas y su correspondiente subcategoría para la categoría
+         * seleccionada por su id.
+         */
         public function getPlataformsByCategory($id) {
             $this->query = "SELECT S.subcategory, P.name 
                             FROM keysbank_plataform_categories C, keysbank_plataform_subcategories S, keysbank_plataforms_list P
@@ -61,6 +65,9 @@
             return $this->rows;
         }
 
+        /**
+         * Devuelve una lista de subcategorías para la categoría seleccionada por su id.
+         */
         public function getSubcategoriesList($id) {
             $this->query = "SELECT subcategory FROM keysbank_plataform_subcategories WHERE idCategory = :id";
 
