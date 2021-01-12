@@ -1,50 +1,29 @@
 <?php
+    $result_search = array();
+    $emptyList = FALSE;
+    
+    if (isset($_POST['search_account'])) 
+        $result_search = $_SESSION['instance_accounts']->getUserAccounts( $_SESSION['user']['id'],strtolower( dataClean($_POST['input_search']) ) );
+    else {
+        $result_search = $_SESSION['instance_accounts']->getUserAccounts($_SESSION['user']['id'],'');
+        $emptyList = !sizeof($result_search);
+    }
 
     echo "<section>";
     echo "<div class='panel-title'><h3>LIST</h3></div>";
     echo "<div class='search'>";
-        echo "<form action='#'>";
-            echo "<input type='text' name='' id='' placeholder='Account or plataform'>";
-            echo "<input type='submit' value='Search'>";
+        echo "<form action='".$_SERVER['PHP_SELF']."' method='POST'>";
+            echo "<input type='text' name='input_search' id='' placeholder='Search plataform'>";
+            echo "<input type='submit' name='search_account' value='Search'>";
         echo "</form>";
     echo "</div>";
     echo "<div class='result scroll'>";
-        echo "<a href='".$_SERVER['PHP_SELF'].'?view=1'."'>";
-            echo "<article>";
-                echo "<div class='plataform'>";
-                    echo "<img src='../img/plataform/twitter.png' alt='Logo Twitter'>";
-                    echo "<h3>Twitter:</h3>";
-                echo "</div>";
-                echo "<div class='basic-info'>";
-                    echo "<div><b>Account:</b></div>";
-                    echo "<div><span>mi_cuenta_de_twitter</span></div>";
-                echo "</div>";
-            echo "</article>";
-        echo "</a>";
-        echo "<a href='".$_SERVER['PHP_SELF'].'?view=2'."'>";
-            echo "<article>";
-                echo "<div class='plataform'>";
-                    echo "<img src='../img/plataform/paypal.png' alt='Logo PayPal'>";
-                    echo "<h3>PayPal:</h3>";
-                echo "</div>";
-                echo "<div class='basic-info'>";
-                    echo "<div><b>Account:</b></div>";
-                    echo "<div><span>mi_cuenta_de_paypal</span></div>";
-                echo "</div>";
-            echo "</article>";
-        echo "</a>";
-        echo "<a href='".$_SERVER['PHP_SELF'].'?view=2'."'>";
-            echo "<article>";
-                echo "<div class='plataform'>";
-                    echo "<img src='../img/plataform/steam.png' alt='Logo Steam'>";
-                    echo "<h3>Steam:</h3>";
-                echo "</div>";
-                echo "<div class='basic-info'>";
-                    echo "<div><b>Account:</b></div>";
-                    echo "<div><span>mi_cuenta_de_steam</span></div>";
-                echo "</div>";
-            echo "</article>";
-        echo "</a>";
+        if ($emptyList)
+            echo "<span><b>-- Your accounts list is empty --</b></span>";
+        elseif (!sizeof($result_search))
+            echo "<span><b>-- Not found --</b></span>";
+        else 
+            renderUserAccountList($result_search);
     echo "</div>";
     echo "</section>";
 
