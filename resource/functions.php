@@ -67,6 +67,17 @@
     }
 
     /**
+     * Reemplaza todos los caracteres de un String por el caracter
+     * pasado como parámetro.
+     */
+    function replaceByCharacter($string,$character) {
+        $stringReturned = "";
+        for ($i = 0; $i < strlen($string); $i++) 
+            $stringReturned .= $character;
+        return $stringReturned;
+    }
+
+    /**
      * Devuelve un array con claves hexadecimales de 255 caracteres de longitud. 
      * El número de claves creadas será pasado por parámetro.
      */
