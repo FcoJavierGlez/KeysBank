@@ -5,10 +5,11 @@
 
     include "../config/config_dev.php";
     include "../resource/functions.php";
-    /* include "../class/DBAbstractModel.php";
+    include "../class/DBAbstractModel.php";
     include "../class/Users.php";
     include "../class/Plataforms.php";
-    include "../class/error/UserExistException.php";
+    include "../class/Accounts.php";
+    /* include "../class/error/UserExistException.php";
     include "../class/error/PassCheckException.php";
     include "../class/error/MailFormatException.php";
     include "../class/error/MailExistException.php"; */
@@ -35,7 +36,7 @@
         <title>KeysBank</title>
     </head>
     <body>
-        <noscript><h1>Estapágina requiere el uso de JavaScript</h1></noscript>
+        <noscript><h1>Esta página requiere el uso de JavaScript</h1></noscript>
         <div>
             <header>
                 <div></div>
@@ -59,29 +60,6 @@
                 </nav>
                 <div class="container">
                     <div class="name-page"><h2>ACCOUNTS</h2></div>
-                    <!-- <section>
-                        <div class="panel-title"><h3>LIST</h3></div>
-                        <div class="search">
-                            <form action="#">
-                                <input type="text" name="" id="" placeholder="Account or plataform">
-                                <input type="submit" value="Search">
-                            </form>
-                        </div>
-                        <div class="result scroll">
-                            <a href="#">
-                                <article>
-                                    <div class="plataform">
-                                        <img src="../img/plataform/twitter.png" alt="Logo Twitter">
-                                        <h3>Twitter:</h3>
-                                    </div>
-                                    <div class="basic-info">
-                                        <div><b>Account:</b></div>
-                                        <div><span>mi_cuenta_de_twitter</span></div>
-                                    </div>
-                                </article>
-                            </a>
-                        </div>
-                    </section> -->
                     <?php
                         include "../controller/accounts_controller.php";
                     ?>
