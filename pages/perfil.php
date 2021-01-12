@@ -58,7 +58,7 @@
                     ?>
                 </nav>
                 <div class="container">
-                    <h2>Welcome to edit perfil</h2>
+                    <div class="name-page"><h2>PERFIL</h2></div>
                     <?php
                         //Controller
                     ?>

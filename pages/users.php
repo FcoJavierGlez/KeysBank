@@ -58,7 +58,7 @@
                     ?>
                 </nav>
                 <div class="container">
-                    <h2>Welcome to users</h2>
+                    <div class="name-page"><h2>USERS</h2></div>
                     <?php
                         //Controller
                     ?>

@@ -58,9 +58,32 @@
                     ?>
                 </nav>
                 <div class="container">
-                    <h2>Welcome to accounts</h2>
+                    <div class="name-page"><h2>ACCOUNTS</h2></div>
+                    <!-- <section>
+                        <div class="panel-title"><h3>LIST</h3></div>
+                        <div class="search">
+                            <form action="#">
+                                <input type="text" name="" id="" placeholder="Account or plataform">
+                                <input type="submit" value="Search">
+                            </form>
+                        </div>
+                        <div class="result scroll">
+                            <a href="#">
+                                <article>
+                                    <div class="plataform">
+                                        <img src="../img/plataform/twitter.png" alt="Logo Twitter">
+                                        <h3>Twitter:</h3>
+                                    </div>
+                                    <div class="basic-info">
+                                        <div><b>Account:</b></div>
+                                        <div><span>mi_cuenta_de_twitter</span></div>
+                                    </div>
+                                </article>
+                            </a>
+                        </div>
+                    </section> -->
                     <?php
-                        //Controller
+                        include "../controller/accounts_controller.php";
                     ?>
                 </div>
             </main>

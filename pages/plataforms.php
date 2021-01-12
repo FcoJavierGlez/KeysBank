@@ -58,7 +58,7 @@
                     ?>
                 </nav>
                 <div class="container">
-                    <h2>Welcome to plataforms</h2>
+                    <div class="name-page"><h2>PLATAFORMS</h2></div>
                     <?php
                         //Controller
                     ?>
