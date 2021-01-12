@@ -116,7 +116,7 @@
                     ?>
                 </nav>
                 <div class="container">
-                    <h2>Index</h2>
+                    <div class="name-page"><h2>INDEX</h2></div>
                     <?php
                         //Controller
                     ?>
