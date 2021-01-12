@@ -1,0 +1,51 @@
+<?php
+
+    echo "<section>";
+    echo "<div class='panel-title'><h3>LIST</h3></div>";
+    echo "<div class='search'>";
+        echo "<form action='#'>";
+            echo "<input type='text' name='' id='' placeholder='Account or plataform'>";
+            echo "<input type='submit' value='Search'>";
+        echo "</form>";
+    echo "</div>";
+    echo "<div class='result scroll'>";
+        echo "<a href='".$_SERVER['PHP_SELF'].'?view=1'."'>";
+            echo "<article>";
+                echo "<div class='plataform'>";
+                    echo "<img src='../img/plataform/twitter.png' alt='Logo Twitter'>";
+                    echo "<h3>Twitter:</h3>";
+                echo "</div>";
+                echo "<div class='basic-info'>";
+                    echo "<div><b>Account:</b></div>";
+                    echo "<div><span>mi_cuenta_de_twitter</span></div>";
+                echo "</div>";
+            echo "</article>";
+        echo "</a>";
+        echo "<a href='".$_SERVER['PHP_SELF'].'?view=2'."'>";
+            echo "<article>";
+                echo "<div class='plataform'>";
+                    echo "<img src='../img/plataform/paypal.png' alt='Logo PayPal'>";
+                    echo "<h3>PayPal:</h3>";
+                echo "</div>";
+                echo "<div class='basic-info'>";
+                    echo "<div><b>Account:</b></div>";
+                    echo "<div><span>mi_cuenta_de_paypal</span></div>";
+                echo "</div>";
+            echo "</article>";
+        echo "</a>";
+        echo "<a href='".$_SERVER['PHP_SELF'].'?view=2'."'>";
+            echo "<article>";
+                echo "<div class='plataform'>";
+                    echo "<img src='../img/plataform/steam.png' alt='Logo Steam'>";
+                    echo "<h3>Steam:</h3>";
+                echo "</div>";
+                echo "<div class='basic-info'>";
+                    echo "<div><b>Account:</b></div>";
+                    echo "<div><span>mi_cuenta_de_steam</span></div>";
+                echo "</div>";
+            echo "</article>";
+        echo "</a>";
+    echo "</div>";
+    echo "</section>";
+
+?>
