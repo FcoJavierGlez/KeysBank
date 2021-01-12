@@ -13,12 +13,12 @@
             contentType: "text/plain; charset=UTF-8"
         });
 
-        const plataformsList = await connect.json();
+        const categoriesList = await connect.json();
 
-        plataformsList.forEach( e => {
+        categoriesList.forEach( e => {
             const option = document.createElement("option");
             option.value = `${e.id}`;
-            option.innerText = normalizeOption(`${e.plataform}`);
+            option.innerText = normalizeOption(`${e.category}`);
             fragment.appendChild(option);
         });
         
