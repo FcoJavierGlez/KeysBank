@@ -250,7 +250,7 @@ nav a:hover {
 }
 
 main {
-    *background-color: rgb(200, 200, 200);
+    *background-color: white;
     background-image: url(../img/matrix.gif);
     background-position: center;
     background-repeat: no-repeat;
@@ -262,9 +262,11 @@ main {
 }
 .container h2 {
     margin: 0;
+    font-size: 1.2rem;
 }
 .container h3 {
     margin: 2px;
+    color: white;
 }
 .name-page {
     align-items: center;
@@ -277,7 +279,8 @@ main {
 }
 
 section {
-    background-color: rgb(200, 200, 200);
+    *background-color: rgba(200, 200, 200, 0.85);
+    background-color: rgba(50, 50, 50, 0.85);
     border: 2px solid rgba(0, 127, 255);
     border-radius: 15px;
     height: 71vh;
@@ -306,6 +309,12 @@ section {
     width: 100%;
     height: 62vh;
     margin: 1vh 0;
+    display: flex;
+    flex-flow: column;
+}
+.result span {
+    color: white;
+    text-align: center;
 }
 .result a {
     text-decoration: none;
@@ -321,31 +330,34 @@ section {
 article {
     background-color: ghostwhite;
     border: 1px solid black;
-    padding: 5px;
+    *padding: 5px;
     margin: 5px auto;
     width: 95%;
 }
 .plataform {
+    *background-color: rgb(100,100,200);
+    background-color: rgba(0, 127, 255);
     display: flex;
     align-items: center;
-    margin-left: 5px;
+    padding: 3px;
+    /* margin-left: 5px; */
 }
 .plataform img {
-    height: 30px;
-    width: 30px;
+    height: 28px;
+    width: 28px;
 }
 .plataform h3 {
     margin: 0 5px;
-    font-size: 24px;
+    font-size: 1rem;
 }
 .basic-info {
-    margin: 10px 0;
-}
-.basic-info div {
-    margin: 5px 0;
+    margin: 10px 10px;
+    padding: 5px 0;
+    font-size: 0.8rem;
 }
 .basic-info div span {
-    margin-left: 10px;
+    margin-left: 15px;
+    color: black;
 }
 
 .input_logged {
@@ -395,7 +407,7 @@ button:focus {
 @media only screen and (min-width: 360px) {
     nav a {
         border: 2px solid black;
-        font-size: 0.7rem;
+        font-size: 0.8rem;
         width: 65px;
     }
     nav a:hover {
