@@ -63,7 +63,7 @@
                 U.perfil,
                 U.current_state
                 FROM keysbank_users U, keysbank_keys K
-                WHERE U.id = K.idUser and K.idPlataform = 0 and U.id = (SELECT id FROM keysbank_users WHERE lower( nick ) = :nick)";
+                WHERE U.id = K.idUser and K.idCategory = 0 and U.id = (SELECT id FROM keysbank_users WHERE lower( nick ) = :nick)";
 
                 $this->parametros['nick'] = strtolower( $nick );
 
@@ -138,12 +138,12 @@
         /**
          * Inserta las llaves del usuario par alas distintas plataformas
          */
-        public function setUserKeys( $idUser,$idPlataform,$keypass ) {
-            $this->query = "INSERT INTO keysbank_keys (keysbank_keys.idUser, keysbank_keys.idPlataform, keysbank_keys.password) 
-                                VALUES (:idUser, :idPlataform, :keypass)";
+        public function setUserKeys( $idUser,$idCategory,$keypass ) {
+            $this->query = "INSERT INTO keysbank_keys (keysbank_keys.idUser, keysbank_keys.idCategory, keysbank_keys.password) 
+                                VALUES (:idUser, :idCategory, :keypass)";
 
             $this->parametros['idUser']      = $idUser;
-            $this->parametros['idPlataform'] = $idPlataform;
+            $this->parametros['idCategory'] = $idCategory;
             $this->parametros['keypass']     = $keypass;
 
             $this->get_results_from_query();
