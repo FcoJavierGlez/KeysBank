@@ -50,8 +50,8 @@
      * Elimina tildes y eñes de la cadena insertada
      */
     function normalizeString( $string ) {
-        $tildes  = array("á","é","í","ó","ú","Á","É","Í","Ó","Ú","Ñ","ñ");
-        $letters = array("a","e","i","o","u","a","e","i","o","u","n","n");
+        $tildes  = array(" ","á","é","í","ó","ú","Á","É","Í","Ó","Ú","Ñ","ñ","!");
+        $letters = array("_","a","e","i","o","u","a","e","i","o","u","n","n","");
         return strtolower(str_replace( $tildes, $letters, $string ));
     }
     /**
@@ -86,5 +86,25 @@
         for ($i = 0; $i < $nKeys; $i++) 
             array_push($keys,genKey());
         return $keys;
+    }
+
+    /**
+     * Renderiza la lista de cuentas del usuario (o la búsqueda realizada en la misma)
+     */
+    function renderUserAccountList($list) {
+        foreach ($list as $value) {
+            echo "<a href='".$_SERVER['PHP_SELF']."?view=".$value['id'].""."'>";
+                echo "<article>";
+                    echo "<div class='plataform'>";
+                        echo "<img src='../img/plataform/".normalizeString($value['name_plataform']).".png' alt='Logo Twitter'>";
+                        echo "<h3>".$value['name_plataform'].":</h3>";
+                    echo "</div>";
+                    echo "<div class='basic-info'>";
+                        echo "<div><b><u>Account</u>:</b></div>";
+                        echo "<div><span>".$value['AES_DECRYPT(UNHEX(A.name_account),K.password)']."</span></div>";
+                    echo "</div>";
+                echo "</article>";
+            echo "</a>";
+        }
     }
 ?>
