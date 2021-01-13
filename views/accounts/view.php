@@ -42,8 +42,8 @@
             </div>
             <div class='basic-info'>
                 <form id="form-view">
-                    <input type="hidden" name="us" value="<?php echo $_SESSION['user']['id']; ?>">
-                    <input type="hidden" name="ac" value="<?php echo $_GET['view']; ?>">
+                    <input type="hidden" name="search" value="<?php echo '?'.$_SESSION['user']['id'].'!'.$_GET['view']; ?>">
+                    <!-- <input type="hidden" name="ac" value="<?php echo $_GET['view']; ?>"> -->
                     <div>
                         <b><u>Account</u>:</b>
                     </div>

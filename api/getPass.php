@@ -12,7 +12,17 @@
     include "../class/Accounts.php";
 
     $account = Accounts::singleton();
-    $pass = $account->getPassAccountById($_POST['us'],$_POST['ac']);
 
-    print_r(json_encode($pass));
+    preg_match('/^\?(\d+)\!(\d+)$/', $_POST['search'], $matches);
+
+    if (sizeof($matches)) {
+        $pass = $account->getPassAccountById($matches[1],$matches[2]);
+
+        print_r(json_encode($pass));
+    }
+
+    print_r(json_encode(array('AES_DECRYPT(UNHEX(A.name_account),K.password)' => 'Error 404. Not found.')));
+
+
+    
 ?>
