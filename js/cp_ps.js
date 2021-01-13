@@ -24,7 +24,7 @@
         
         const pass = await connect.json();
         
-        copyValue(await pass[0]['AES_DECRYPT(UNHEX(A.pass_account),K.password)']);
+        copyValue( pass.length ? pass[0]['AES_DECRYPT(UNHEX(A.pass_account),K.password)'] : 'Error 404. Not found.');
     }
 
     const init = () => {
