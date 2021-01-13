@@ -239,10 +239,10 @@ nav a {
     display: flex;
     font-size: 0.6rem;
     justify-content: center;
+    height: 2vh;
     padding: 4px 5px;
     text-decoration: none;
     width: 50px;
-    height: 2vh;
 }
 nav a:hover {
     background-color: black;
@@ -280,7 +280,6 @@ main {
 }
 
 section {
-    *background-color: rgba(200, 200, 200, 0.85);
     background-color: rgba(50, 50, 50, 0.85);
     border: 2px solid rgba(0, 127, 255);
     border-radius: 15px;
@@ -294,6 +293,7 @@ section {
     grid-template-columns: repeat(3,1fr);
     height: 4vh;
     text-align: center;
+    align-items: center;
 }
 .panel-title button {
     height: 25px;
@@ -340,16 +340,18 @@ section {
 }
 article {
     background-color: ghostwhite;
-    border: 1px solid black;
-    *padding: 5px;
+    border: 3px solid black;
     margin: 5px auto;
     width: 95%;
 }
+article form {
+    font-size: 0.85rem;
+}
 .platform {
-    /* background-color: rgb(100,100,200); */
-    background-color: rgba(0, 127, 255);
-    display: flex;
     align-items: center;
+    background-color: rgba(0, 127, 255);
+    border-bottom: 2px solid black;
+    display: flex;
     padding: 5px;
 }
 .platform img {
