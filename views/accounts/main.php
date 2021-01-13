@@ -1,14 +1,4 @@
 <?php
-    $result_search = array();
-    $emptyList = FALSE;
-    
-    if (isset($_POST['search_account'])) 
-        $result_search = $_SESSION['instance_accounts']->getUserAccounts( $_SESSION['user']['id'],strtolower( dataClean($_POST['input_search']) ) );
-    else {
-        $result_search = $_SESSION['instance_accounts']->getUserAccounts($_SESSION['user']['id'],'');
-        $emptyList = !sizeof($result_search);
-    }
-
     echo "<section>";
     echo "<div class='panel-title'><h3>LIST</h3></div>";
     echo "<div class='search'>";
@@ -26,5 +16,4 @@
             renderUserAccountList($result_search);
     echo "</div>";
     echo "</section>";
-
 ?>
