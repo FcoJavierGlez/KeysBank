@@ -1,6 +1,6 @@
 <?php
 
-    class Plataforms extends DBAbstractModel {
+    class Platforms extends DBAbstractModel {
 
         private static $_instancia;
 
