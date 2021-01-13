@@ -23,8 +23,8 @@
         /**
          * Devuelve el número de plataformas
          */
-        public function getTotalPlataformCategories() {
-            $this->query = "SELECT id FROM keysbank_plataform_categories";
+        public function getTotalPlatformCategories() {
+            $this->query = "SELECT id FROM keysbank_platform_categories";
 
             $this->get_results_from_query();
             $this->close_connection();
@@ -35,8 +35,8 @@
         /**
          * Devuelve el conjunto de plataformas registradas en la BBDD
          */
-        public function getPlataformCategories() {
-            $this->query = "SELECT * FROM keysbank_plataform_categories";
+        public function getPlatformCategories() {
+            $this->query = "SELECT * FROM keysbank_platform_categories";
 
             $this->get_results_from_query();
             $this->close_connection();
@@ -48,9 +48,9 @@
          * Devuelve una lista de plataformas y su correspondiente subcategoría para la categoría
          * seleccionada por su id.
          */
-        public function getPlataformsByCategory($id) {
+        public function getPlatformsByCategory($id) {
             $this->query = "SELECT S.subcategory, P.name 
-                            FROM keysbank_plataform_categories C, keysbank_plataform_subcategories S, keysbank_plataforms_list P
+                            FROM keysbank_platform_categories C, keysbank_platform_subcategories S, keysbank_platforms_list P
                             WHERE C.id = P.idCategory
                             AND S.idCategory = P.idCategory
                             AND S.id = P.idSubcategory
@@ -69,7 +69,7 @@
          * Devuelve una lista de subcategorías para la categoría seleccionada por su id.
          */
         public function getSubcategoriesList($id) {
-            $this->query = "SELECT subcategory FROM keysbank_plataform_subcategories WHERE idCategory = :id";
+            $this->query = "SELECT subcategory FROM keysbank_platform_subcategories WHERE idCategory = :id";
 
             $this->parametros['id'] = $id;
 

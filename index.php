@@ -7,7 +7,7 @@
     include "resource/functions.php";
     include "class/DBAbstractModel.php";
     include "class/Users.php";
-    include "class/Plataforms.php";
+    include "class/Platforms.php";
     include "class/Accounts.php";
     include "class/error/UserExistException.php";
     include "class/error/PassCheckException.php";
@@ -28,7 +28,7 @@
 
     if ( !isset($_SESSION['user']) ) { 
         $_SESSION['instance_users']      = Users::singleton();
-        $_SESSION['instance_plataforms'] = Plataforms::singleton();
+        $_SESSION['instance_platforms']  = Platforms::singleton();
         $_SESSION['instance_accounts']   = Accounts::singleton();
         /* $_SESSION['clave']            = Clave::singleton();
         $_SESSION['documento']        = Documento::singleton();

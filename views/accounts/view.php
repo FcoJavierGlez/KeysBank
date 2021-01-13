@@ -26,8 +26,8 @@
     <div class='result scroll'>
         <form>
             <article>
-                <div class='plataform'>
-                    <img src='../img/plataform/steam.png' alt='Logo Twitter'>
+                <div class='platform'>
+                    <img src='../img/platform/steam.png' alt='Logo Twitter'>
                     <h3>Steam:</h3>
                 </div>
                 <div class='basic-info'>

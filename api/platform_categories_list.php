@@ -12,7 +12,7 @@
     include "../class/Platforms.php";
 
     $platforms = Platforms::singleton();
-    $categoriesList = $platforms->getPlataformCategories();
+    $categoriesList = $platforms->getPlatformCategories();
 
     print_r(json_encode($categoriesList));
 ?>

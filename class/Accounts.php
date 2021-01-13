@@ -25,19 +25,19 @@
          */
         public function getUserAccounts($idUser, $search = '') {
             if ($search == '' || $search == '*') {
-                $this->query = "SELECT A.id,A.idCategory,A.name_plataform,AES_DECRYPT(UNHEX(A.name_account),K.password) 
+                $this->query = "SELECT A.id,A.idCategory,A.name_platform,AES_DECRYPT(UNHEX(A.name_account),K.password) 
                 FROM keysbank_accounts A, keysbank_keys K 
                 WHERE K.idUser = A.idUser
                 AND K.idCategory = A.idCategory
                 AND A.idUser = :idUser";
             }
             else {
-                $this->query = "SELECT A.id,A.name_plataform,AES_DECRYPT(UNHEX(A.name_account),K.password) 
+                $this->query = "SELECT A.id,A.name_platform,AES_DECRYPT(UNHEX(A.name_account),K.password) 
                 FROM keysbank_accounts A, keysbank_keys K 
                 WHERE K.idUser = A.idUser
                 AND K.idCategory = A.idCategory
                 AND A.idUser = :idUser
-                AND lower(A.name_plataform) LIKE :search";
+                AND lower(A.name_platform) LIKE :search";
             }
 
             $this->parametros['idUser'] = $idUser;

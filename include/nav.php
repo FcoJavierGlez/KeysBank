@@ -15,8 +15,8 @@
             'url' => 'users.php'
         ),
         array(
-            'name' => 'Plataforms',
-            'url' => 'plataforms.php'
+            'name' => 'Platforms',
+            'url' => 'platforms.php'
         ),
         array(
             'name' => 'Perfil',

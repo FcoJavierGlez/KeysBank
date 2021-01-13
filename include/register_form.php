@@ -8,7 +8,7 @@
     if (isset($_POST['add_user'])) {
         try {
             $idUser   = 0;
-            $userKeys = genUserKeys($_SESSION['instance_plataforms']->getTotalPlataformCategories() + 1);
+            $userKeys = genUserKeys($_SESSION['instance_platforms']->getTotalPlatformCategories() + 1);
 
             $user_data = array(
                 'nick' => strtolower( dataClean($_POST['nick']) ),

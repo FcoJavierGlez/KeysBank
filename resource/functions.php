@@ -95,9 +95,9 @@
         foreach ($list as $value) {
             echo "<a href='".$_SERVER['PHP_SELF']."?view=".$value['id'].""."'>";
                 echo "<article>";
-                    echo "<div class='plataform'>";
-                        echo "<img src='../img/plataform/".normalizeString($value['name_plataform']).".png' alt='Logo Twitter'>";
-                        echo "<h3>".$value['name_plataform'].":</h3>";
+                    echo "<div class='platform'>";
+                        echo "<img src='../img/platform/".normalizeString($value['name_platform']).".png' alt='Logo Twitter'>";
+                        echo "<h3>".$value['name_platform'].":</h3>";
                     echo "</div>";
                     echo "<div class='basic-info'>";
                         echo "<div><b><u>Account</u>:</b></div>";
