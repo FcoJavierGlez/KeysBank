@@ -20,8 +20,8 @@
 
         print_r(json_encode($pass));
     }
-
-    print_r(json_encode(array('AES_DECRYPT(UNHEX(A.name_account),K.password)' => 'Error 404. Not found.')));
+    else
+        print_r(json_encode(array('AES_DECRYPT(UNHEX(A.name_account),K.password)' => 'Error 404. Not found.')));
 
 
     
