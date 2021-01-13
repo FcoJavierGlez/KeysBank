@@ -48,6 +48,47 @@
 
             return $this->rows;
         }
+
+        /**
+         * Devuelve el total de cuentas del usuario
+         */
+        public function getAccountById($idUser, $idAccount) {
+            $this->query = "SELECT A.id,A.name_platform,AES_DECRYPT(UNHEX(A.name_account),K.password),
+            AES_DECRYPT(UNHEX(A.pass_account),K.password),A.url,A.info 
+            FROM keysbank_accounts A, keysbank_keys K 
+            WHERE K.idUser = A.idUser
+            AND K.idCategory = A.idCategory
+            AND A.id = :idAccount
+            AND A.idUser = :idUser";
+
+            $this->parametros['idUser']    = $idUser;
+            $this->parametros['idAccount'] = $idAccount;
+
+            $this->get_results_from_query();
+            $this->close_connection();
+
+            return $this->rows;
+        }
+
+        /**
+         * Devuelve el total de cuentas del usuario
+         */
+        public function getPassAccountById($idUser, $idAccount) {
+            $this->query = "SELECT AES_DECRYPT(UNHEX(A.pass_account),K.password)
+            FROM keysbank_accounts A, keysbank_keys K 
+            WHERE K.idUser = A.idUser
+            AND K.idCategory = A.idCategory
+            AND A.id = :idAccount
+            AND A.idUser = :idUser";
+
+            $this->parametros['idUser']    = $idUser;
+            $this->parametros['idAccount'] = $idAccount;
+
+            $this->get_results_from_query();
+            $this->close_connection();
+
+            return $this->rows;
+        }
     }
     
 ?>
