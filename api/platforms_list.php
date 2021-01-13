@@ -9,10 +9,10 @@
     include "../config/config_dev.php";
     include "../resource/functions.php";
     include "../class/DBAbstractModel.php";
-    include "../class/Plataforms.php";
+    include "../class/Platforms.php";
 
-    $plataforms = Plataforms::singleton();
-    $plataformsList = $plataforms->getPlataformsByCategory($_POST['categories']);
+    $platforms = Platforms::singleton();
+    $platformsList = $platforms->getPlataformsByCategory($_POST['categories']);
 
-    print_r(json_encode($plataformsList));
+    print_r(json_encode($platformsList));
 ?>
