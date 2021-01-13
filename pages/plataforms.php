@@ -7,7 +7,7 @@
     include "../resource/functions.php";
     /* include "../class/DBAbstractModel.php";
     include "../class/Users.php";
-    include "../class/Plataforms.php";
+    include "../class/Platforms.php";
     include "../class/error/UserExistException.php";
     include "../class/error/PassCheckException.php";
     include "../class/error/MailFormatException.php";
@@ -58,7 +58,7 @@
                     ?>
                 </nav>
                 <div class="container">
-                    <div class="name-page"><h2>PLATAFORMS</h2></div>
+                    <div class="name-page"><h2>PLATFORMS</h2></div>
                     <?php
                         //Controller
                     ?>

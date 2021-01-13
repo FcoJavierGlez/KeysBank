@@ -7,7 +7,7 @@
     include "../resource/functions.php";
     include "../class/DBAbstractModel.php";
     include "../class/Users.php";
-    include "../class/Plataforms.php";
+    include "../class/Platforms.php";
     include "../class/Accounts.php";
     /* include "../class/error/UserExistException.php";
     include "../class/error/PassCheckException.php";
