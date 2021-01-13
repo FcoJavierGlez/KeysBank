@@ -26,11 +26,10 @@
     async function getPlataformsList(formDOM,selectElement) {
         let path = "";
         const ROUTE = `${location.origin}/${(path = location.pathname.match(/^\/(\w+)(\/pages\/)?(\w+\.(html|php))?$/)?.[1]) == undefined ? "" : path}`;
-        //`${ROUTE}/api/platforms_list.php`
 
         const data = new FormData(formDOM);
 
-        const connect = await fetch('http://localhost/keys_bank_dev/api/platforms_list.php',{
+        const connect = await fetch(`${ROUTE}/api/platforms_list.php`,{
             method: 'POST',
             body: data
         });
@@ -42,9 +41,11 @@
     }
 
     const init = () => {
-        const FORM = document.getElementById("categories-subcategories")
+        const FORM = document.getElementById("categories-subcategories");
         const CATEGORIES = document.getElementById("categories");
         const SUBCATEGORIES = document.getElementById("subcategories");
+
+        console.log(FORM);
         
         CATEGORIES.addEventListener("click", () => {
             if (CATEGORIES.value == "") {

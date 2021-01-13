@@ -5,10 +5,10 @@
     async function createPlataformCategoriesOptions(selectElement) {
         let path = "";
         const ROUTE = `${location.origin}/${(path = location.pathname.match(/^\/(\w+)(\/pages\/)?(\w+\.(html|php))?$/)?.[1]) == undefined ? "" : path}`;
-        //`${ROUTE}/api/platform_categories_list.php` //PHP Version
+
         const fragment = new DocumentFragment();
 
-        const connect = await fetch('http://localhost/keys_bank_dev/api/platform_categories_list.php',{
+        const connect = await fetch(`${ROUTE}/api/platform_categories_list.php`,{
             type: "GET",
             contentType: "text/plain; charset=UTF-8"
         });
