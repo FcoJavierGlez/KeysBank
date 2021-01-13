@@ -17,7 +17,7 @@
 
         const data = new FormData(formDOM);
 
-        const connect = await fetch(`${ROUTE}/api/getPass.php`,{ 
+        const connect = await fetch(`${ROUTE}/api/get_pass.php`,{ 
             method: 'POST',
             body: data
         });
