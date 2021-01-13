@@ -1,5 +1,6 @@
 :root{
-    --primary_color: orange;
+    --primary_blue: #007FFF;
+    --secundary_blue: #69aeff;
 }
 /* @-moz-document {
     body {
@@ -186,7 +187,7 @@ header {
 }
 
 header .logo {
-    height: 12vh;
+    height: 10vh;
     width: 120px;
 }
 
@@ -335,18 +336,18 @@ article {
     width: 95%;
 }
 .plataform {
-    *background-color: rgb(100,100,200);
+    /* background-color: rgb(100,100,200); */
     background-color: rgba(0, 127, 255);
     display: flex;
     align-items: center;
-    padding: 3px;
-    /* margin-left: 5px; */
+    padding: 5px;
 }
 .plataform img {
     height: 28px;
     width: 28px;
 }
 .plataform h3 {
+    color: black;
     margin: 0 5px;
     font-size: 1rem;
 }
