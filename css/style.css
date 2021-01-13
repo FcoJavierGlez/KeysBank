@@ -290,7 +290,17 @@ section {
     width: 85%;
 }
 .panel-title {
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    height: 4vh;
     text-align: center;
+}
+.panel-title button {
+    height: 25px;
+    padding: 2px 8px;
+}
+.accept {
+    background-color: rgb(0, 200, 0);
 }
 .search {
     display: flex;
@@ -335,18 +345,18 @@ article {
     margin: 5px auto;
     width: 95%;
 }
-.plataform {
+.platform {
     /* background-color: rgb(100,100,200); */
     background-color: rgba(0, 127, 255);
     display: flex;
     align-items: center;
     padding: 5px;
 }
-.plataform img {
+.platform img {
     height: 28px;
     width: 28px;
 }
-.plataform h3 {
+.platform h3 {
     color: black;
     margin: 0 5px;
     font-size: 1rem;
