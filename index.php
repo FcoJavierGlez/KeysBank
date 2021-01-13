@@ -99,7 +99,7 @@
         <div>
             <header>
                 <div></div>
-                <div class="logo"></div>
+                <a href="index.php"><div class="logo"></div></a>
                 <div class="close-session">
                     <?php
                         if ($_SESSION['user']['perfil'] !== 'INVITED') {
