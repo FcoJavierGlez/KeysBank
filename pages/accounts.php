@@ -32,8 +32,10 @@
         <meta name="author" content="Francisco Javier González Sabariego">
         <link rel="stylesheet" href="../css/style.css">
         <link rel="icon" href="../favicon.ico">
+        <script src="../js/functions.js"></script>
         <script src="../js/cp_ps.js"></script>
-        <!-- <script src="../js/cp_ps2.js"></script> -->
+        <script src="../js/select_categories.js"></script>
+        <script src="../js/select_platforms.js"></script>
         <title>KeysBank</title>
     </head>
     <body>
