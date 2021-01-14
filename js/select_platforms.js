@@ -41,19 +41,22 @@
     }
 
     const init = () => {
-        const FORM = document.getElementById("categories-subcategories");
-        const CATEGORIES = document.getElementById("categories");
-        const SUBCATEGORIES = document.getElementById("subcategories");
+        if (location.href.match(/accounts\?add$/)?.input !== undefined) {
+            const FORM = document.getElementById("categories-subcategories");
+            const CATEGORIES = document.getElementById("categories");
+            const SUBCATEGORIES = document.getElementById("subcategories");
 
-        console.log(FORM);
+            console.log(FORM);
+            
+            CATEGORIES.addEventListener("click", () => {
+                if (CATEGORIES.value == "") {
+                    SUBCATEGORIES.innerHTML = `<option value="">-- Choice an option --</option>`;
+                    return;
+                }
+                getPlataformsList( FORM, SUBCATEGORIES );
+            });
+        }
         
-        CATEGORIES.addEventListener("click", () => {
-            if (CATEGORIES.value == "") {
-                SUBCATEGORIES.innerHTML = `<option value="">-- Choice an option --</option>`;
-                return;
-            }
-            getPlataformsList( FORM, SUBCATEGORIES );
-        });
     }
 
     document.addEventListener("DOMContentLoaded", init);

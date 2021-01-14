@@ -28,17 +28,19 @@
     }
 
     const init = () => {
-        const FORM = document.getElementById("categories-subcategories");
-        const CATEGORIES = document.getElementById("categories");
-        const SUBCATEGORIES = document.getElementById("subcategories");
-        
-        CATEGORIES.addEventListener("click", () => {
-            if (CATEGORIES.value == "") {
-                SUBCATEGORIES.innerHTML = `<option value="">-- Choice an option --</option>`;
-                return;
-            }
-            createSubcategoriesOptions( FORM, SUBCATEGORIES );
-        });
+        if (location.href.match(/platforms\?add$/)?.input !== undefined) {
+            const FORM = document.getElementById("categories-subcategories");
+            const CATEGORIES = document.getElementById("categories");
+            const SUBCATEGORIES = document.getElementById("subcategories");
+            
+            CATEGORIES.addEventListener("click", () => {
+                if (CATEGORIES.value == "") {
+                    SUBCATEGORIES.innerHTML = `<option value="">-- Choice an option --</option>`;
+                    return;
+                }
+                createSubcategoriesOptions( FORM, SUBCATEGORIES );
+            });
+        }
     }
 
     document.addEventListener("DOMContentLoaded", init);

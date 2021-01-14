@@ -28,9 +28,11 @@
     }
 
     const init = () => {
-        const CATEGORIES = document.getElementById("categories");
-
-        createPlataformCategoriesOptions(CATEGORIES);
+        if (location.href.match(/(accounts|platforms)\?add$/)?.input !== undefined) {
+            const CATEGORIES = document.getElementById("categories");
+    
+            createPlataformCategoriesOptions(CATEGORIES);
+        }
     }
 
     document.addEventListener("DOMContentLoaded", init);
