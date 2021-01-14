@@ -339,7 +339,6 @@ section {
     display: none;
 }
 article {
-    background-color: ghostwhite;
     border: 3px solid black;
     margin: 5px auto;
     width: 95%;
@@ -364,8 +363,8 @@ article form {
     font-size: 1rem;
 }
 .basic-info {
-    margin: 10px 10px;
-    padding: 5px 0;
+    background-color: ghostwhite;
+    padding: 15px 10px;
     font-size: 0.8rem;
 }
 .basic-info div span {
