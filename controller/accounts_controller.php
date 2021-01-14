@@ -16,9 +16,8 @@
     }
 
     //  VIEWS  \\
-    if (isset($_GET['add'])) {
-        
-    }
+    if (isset($_GET['add'])) 
+        include "../views/accounts/add.php";
     elseif (isset($_GET['view'])) 
         include "../views/accounts/view.php";
     elseif (isset($_GET['edit'])) {
