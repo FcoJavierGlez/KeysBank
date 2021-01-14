@@ -29,7 +29,7 @@
 
         const data = new FormData(formDOM);
 
-        const connect = await fetch(`${ROUTE}/api/platforms_list.php`,{
+        const connect = await fetch(`${ROUTE}/api/platforms_list.php`, {
             method: 'POST',
             body: data
         });
@@ -41,14 +41,14 @@
     }
 
     const init = () => {
-        if (location.href.match(/accounts\?add$/)?.input !== undefined) {
-            const FORM = document.getElementById("categories-subcategories");
+        if (location.href.match(/accounts\.php\?add$/)?.input !== undefined) {
+            const FORM = document.getElementById("form-add");
             const CATEGORIES = document.getElementById("categories");
             const SUBCATEGORIES = document.getElementById("subcategories");
 
             console.log(FORM);
             
-            CATEGORIES.addEventListener("click", () => {
+            CATEGORIES.addEventListener("change", () => {
                 if (CATEGORIES.value == "") {
                     SUBCATEGORIES.innerHTML = `<option value="">-- Choice an option --</option>`;
                     return;

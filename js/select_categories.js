@@ -8,11 +8,11 @@
 
         const fragment = new DocumentFragment();
 
-        const connect = await fetch(`${ROUTE}/api/platform_categories_list.php`,{
+        const connect = await fetch(`${ROUTE}/api/platform_categories_list.php`,{ 
             type: "GET",
             contentType: "text/plain; charset=UTF-8"
         });
-
+        
         const categoriesList = await connect.json();
 
         categoriesList.forEach( e => {
@@ -28,7 +28,7 @@
     }
 
     const init = () => {
-        if (location.href.match(/(accounts|platforms)\?add$/)?.input !== undefined) {
+        if (location.href.match(/(accounts|platforms)\.php\?add$/)?.input !== undefined) {
             const CATEGORIES = document.getElementById("categories");
     
             createPlataformCategoriesOptions(CATEGORIES);
