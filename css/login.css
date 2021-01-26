@@ -1,0 +1,109 @@
+.login_screen {
+    align-items: center;
+    background-image: url(../img/matrix.gif);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+    flex-flow: column;
+    height: 100vh;
+    justify-content: center;
+    position: absolute;
+    width: 100%;
+    z-index: 2;
+}
+
+#login_screen > div {
+    flex-grow: 1;
+}
+#login_screen .form_login {
+    flex-grow: 2;
+}
+#login_screen .container-box {
+    flex-grow: 2;
+}
+
+.logged {
+    animation: logged 1s 2s forwards;
+}
+
+@keyframes logged {
+    from {filter: opacity(1);}
+    to {filter: opacity(0);}
+}
+
+a.register, a.back-login {
+    display: block;
+    color: orange;
+    font-size: 0.85rem;
+    font-weight: bold;
+    margin: 3px 8px;
+}
+
+a.register {
+    text-align: right;
+}
+
+a.back-login {
+    color: orange;
+    text-align: left;
+}
+
+a.register:active, a.back-login:active {
+    color: white;
+}
+
+.form_login {
+    display: flex;
+    flex-flow: column;
+}
+
+#login_screen input {
+    background-color: ghostwhite;
+    border: 3px solid  rgb(150,150,150);
+    color: black;
+    height: 29px;
+    margin: 5px 0;
+    padding: 0;
+    width: 224px;
+}
+#login_screen input:focus {
+    outline: none;
+}
+#login_screen input:hover {
+    border: 3px solid darkorange;
+}
+#login_screen input:focus {
+    border: 3px solid rgb(122, 192, 17);
+}
+#login_screen input[type="submit"] {
+    background-color: rgb(50,50,50);
+    border: 3px solid white;
+    color: white;
+    font-size: 1.2rem;
+    height: 35px;
+    margin-top: 25px;
+    padding: 0;
+    text-transform: uppercase;
+    text-align: center;
+    width: 230px;
+}
+#login_screen input[type="submit"]:hover {
+    background-color: black;
+    border: 3px solid orange;
+    color: orange;
+    cursor: pointer;
+}
+#login_screen input[type="submit"]:active {
+    border: 3px solid yellowgreen;
+    color: yellowgreen;
+}
+
+#login_screen .error {
+    background-color: rgb(255, 0, 0,0.7);
+    border: 3px solid red;
+    color: white;
+}
+#login_screen .required {
+    background-color: lightgoldenrodyellow;
+}
