@@ -22,7 +22,7 @@ select:focus {
     outline: none;
 }
 option {
-    font-weight: bold;
+    *font-weight: bold;
 }
 
 ::placeholder {
