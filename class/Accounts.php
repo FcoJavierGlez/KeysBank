@@ -50,7 +50,7 @@
         }
 
         /**
-         * Devuelve el total de cuentas del usuario
+         * Devuelve la cuenta del usuario buscada por id de cuenta e id de usuario
          */
         public function getAccountById($idUser, $idAccount) {
             $this->query = "SELECT A.id,A.name_platform,AES_DECRYPT(UNHEX(A.name_account),K.password),
@@ -71,7 +71,7 @@
         }
 
         /**
-         * Devuelve el total de cuentas del usuario
+         * Devuelve la información de una cuenta del usuario
          */
         public function getPassAccountById($idUser, $idAccount) {
             $this->query = "SELECT AES_DECRYPT(UNHEX(A.pass_account),K.password)
