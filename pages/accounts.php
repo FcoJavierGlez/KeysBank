@@ -31,10 +31,13 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="author" content="Francisco Javier González Sabariego">
         <link rel="stylesheet" href="../css/normalize.css">
+        <link rel="stylesheet" href="../css/form.css">
+        <link rel="stylesheet" href="../css/login.css">
         <link rel="stylesheet" href="../css/style.css">
         <link rel="icon" href="../favicon.ico">
         <script src="../js/functions.js"></script>
-        <script src="../js/cp_ps.js"></script>
+        <!-- <script src="../js/cp_ps.js"></script> -->
+        <script src="../js/view_account.js"></script>
         <script src="../js/select_categories.js"></script>
         <script src="../js/select_platforms.js"></script>
         <title>KeysBank</title>
