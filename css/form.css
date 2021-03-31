@@ -1,0 +1,90 @@
+/* GENERIC FORM */
+form {
+    font-size: 0.6rem;
+}
+
+select {
+    font-weight: bold;
+    height: 30px;
+}
+select:focus {
+    outline: none;
+}
+option {
+    *font-weight: bold;
+}
+
+::placeholder {
+    color: rgb(50,50,50);
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    text-align: center;
+}
+
+.error::placeholder {
+    color: white;
+}
+
+.text-error {
+    color: red;
+}
+
+span.text-error {
+    font-size: 0.8rem;
+    font-weight: bold;
+    text-align: center;
+}
+
+/* EYE FORM CHECKBOX */
+.info {
+    margin-left: 15px;
+    align-items: center;
+    *column-gap: 10px;
+    display: flex;
+}
+
+.eye input[type='checkbox'] {
+    display: none;
+}
+
+.eye_slash input[type='checkbox'] {
+    display: none;
+}
+
+.eye, .eye_slash {
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    height: 25px;
+    width: 25px;
+}
+
+.eye {
+    background-image: url(../img/icon/eye.svg);
+}
+
+.eye_slash {
+    background-image: url(../img/icon/eye_slash.svg);
+}
+
+.eye, .eye_slash {
+    cursor: pointer;
+}
+
+
+@media only screen and (min-width: 550px) {
+    header .logo {
+        width: 200px;
+    }
+    .logo {
+        width: 250px;
+    }
+    nav a {
+        font-size: 1rem;
+        padding: 2px 4px;
+        width: 80px;
+    }
+    form, span.text-error, ::placeholder {
+        font-size: 1rem;
+    }
+}
