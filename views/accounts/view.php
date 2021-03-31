@@ -30,7 +30,7 @@
 ?>
 <section>
     <div class='panel-title'>
-        <div><a href='accounts.php'><button>Back</button></a></div>
+        <div><a href='accounts.php'><button class="back">Back</button></a></div>
         <h3>ACCOUNT</h3>
         <div</div>
     </div>
@@ -52,7 +52,10 @@
                     <div>
                         <b><u>Pass</u>:</b>
                     </div>
-                    <div>
+                    <div class="info">
+                        <div id="shps" class="eye">
+                            <input type="checkbox" name="shps">
+                        </div>
                         <span><?php echo replaceByCharacter($result_search[0]['AES_DECRYPT(UNHEX(A.pass_account),K.password)'],'*'); ?></span>
                         <input type="submit" id="cp_pss" value="Copy">
                     </div>
