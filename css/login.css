@@ -1,3 +1,24 @@
+/* HEADER FORM */
+header form {
+    margin: 5px;
+}
+
+/* LOGOUT BUTTON */
+header form input[type="submit"] {
+    background-color: red;
+    border: 2px solid white;
+    border-radius: 20px;
+    color: white;
+    font-size: 0.6rem;
+    padding: 2px 4px;
+}
+header form input[type="submit"]:hover {
+    background-color: black;
+    border: 2px solid red;
+    color: red;
+}
+
+/* LOGIN SCREEN (BACKGROUND MATRIX) */
 .login_screen {
     align-items: center;
     background-image: url(../img/matrix.gif);
@@ -32,6 +53,7 @@
     to {filter: opacity(0);}
 }
 
+/* REGISTER-LOGIN FORM */
 a.register, a.back-login {
     display: block;
     color: orange;
@@ -92,7 +114,6 @@ a.register:active, a.back-login:active {
     background-color: black;
     border: 3px solid orange;
     color: orange;
-    cursor: pointer;
 }
 #login_screen input[type="submit"]:active {
     border: 3px solid yellowgreen;
@@ -107,3 +128,42 @@ a.register:active, a.back-login:active {
 #login_screen .required {
     background-color: lightgoldenrodyellow;
 }
+
+@media only screen and (min-width: 550px) {
+    header .logo {
+        width: 200px;
+    }
+    .logo {
+        width: 250px;
+    }
+    nav a {
+        font-size: 1rem;
+        padding: 2px 4px;
+        width: 80px;
+    }
+    a.register, a.back-login, header form input[type="submit"] {
+        font-size: 1rem;
+    }
+}
+@media only screen and (min-width: 700px) {
+    header form input[type="submit"] { /* Logout button */
+        width: 100px;
+    }
+    #login_screen input {
+        height: 34px;
+        width: 244px;
+    }
+    #login_screen input[type="submit"] {
+        height: 40px;
+        width: 250px;
+    }
+}
+@media only screen and (min-width: 1000px) {
+    header form input[type="submit"] { /* Logout button */
+        width: 150px;
+    }
+}
+
+/* @media only screen and (min-width: 1500px) {
+    
+} */

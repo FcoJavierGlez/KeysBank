@@ -1,6 +1,12 @@
 :root{
     --primary_blue: #007FFF;
     --secundary_blue: #69aeff;
+    --color_focus: rgb(122, 192, 17);
+}
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+* {
+    font-family: 'Roboto', sans-serif;
 }
 body {
     margin: 0;
@@ -10,40 +16,12 @@ body {
     display: none;
 }
 
-form {
-    font-size: 0.6rem;
+button:hover, input[type="submit"]:hover, input[type="button"]:hover {
+    cursor: pointer;
 }
 
-select {
-    font-weight: bold;
-    height: 30px;
-}
-select:focus {
+button:focus, input[type="submit"]:focus, input[type="button"]:focus, input[type="text"]:focus {
     outline: none;
-}
-option {
-    *font-weight: bold;
-}
-
-::placeholder {
-    color: rgb(50,50,50);
-    font-size: 0.7rem;
-    text-transform: uppercase;
-    text-align: center;
-}
-
-.error::placeholder {
-    color: white;
-}
-
-.text-error {
-    color: red;
-}
-
-span.text-error {
-    font-size: 0.8rem;
-    font-weight: bold;
-    text-align: center;
 }
 
 .logo {
@@ -78,25 +56,6 @@ header .logo {
     width: 120px;
 }
 
-header form {
-    margin: 5px;
-}
-
-header form input[type="submit"] {
-    background-color: red;
-    border: 2px solid white;
-    border-radius: 20px;
-    color: white;
-    font-size: 0.6rem;
-    padding: 2px 4px;
-}
-header form input[type="submit"]:hover {
-    background-color: black;
-    border: 2px solid red;
-    color: red;
-    cursor: pointer;
-}
-
 nav {
     align-items: center;
     background-color: rgb(75, 75, 75);
@@ -119,7 +78,7 @@ nav ul li {
 
 nav a {
     align-items: center;
-    background-color: rgba(0, 127, 255);
+    background-color: var(--primary_blue);
     border: 1px solid white;
     border-radius: 15px;
     color: white;
@@ -168,7 +127,7 @@ main {
 
 section {
     background-color: rgba(50, 50, 50, 0.85);
-    border: 2px solid rgba(0, 127, 255);
+    border: 2px solid var(--primary_blue);
     border-radius: 15px;
     height: 71vh;
     margin: 3vh auto;
@@ -181,32 +140,82 @@ section {
     height: 4vh;
     text-align: center;
     align-items: center;
+    margin: 4px 0;
 }
 .panel-title button {
-    height: 25px;
+    height: 28px;
     padding: 2px 8px;
+    width: 100px;
+}
+
+/* ACCEPT, CANCEL, BACK BUTTONS */
+.accept, .back, .cancel, .search input[type="submit"] {
+    border: 2px solid black;
 }
 .accept {
-    background-color: rgb(0, 200, 0);
+    background-color: rgb(0, 180, 0);
 }
+.accept:hover {
+    background-color: rgb(0, 230, 0);
+    color: black;
+}
+.accept:active {
+    background-color: black;
+    border: 2px solid rgb(0, 230, 0);
+    color: rgb(0, 230, 0);
+}
+.back {
+    background-color: var(--primary_blue);
+}
+.back:hover, .search input[type="submit"]:hover {
+    background-color: var(--secundary_blue);
+    color: black;
+}
+.back:active, .search input[type="submit"]:active {
+    background-color: black;
+    border: 2px solid var(--secundary_blue);
+    color: var(--secundary_blue);
+}
+.cancel {
+    background-color: rgb(200, 0, 0);
+    color: white;
+}
+.cancel:hover {
+    background-color: red;
+}
+.cancel:active {
+    background-color: black;
+    border: 2px solid red;
+    color: red;
+}
+
 .search {
     display: flex;
     justify-content: center;
+    margin: 2px 0;
 }
 .search input[type="text"] {
+    border: 2px solid rgb(150, 150, 150);
     height: 22px;
 }
+.search input[type="text"]:hover {
+    border: 2px solid orange;
+}
+.search input[type="text"]:focus {
+    border: 2px solid var(--color_focus);
+}
 .search input[type="submit"] {
-    background-color:rgba(0, 127, 255);
-    border: 1px solid black;
+    background-color:var(--primary_blue);
+    border: 2px solid black;
     color: white;
     height: 30px;
+    width: 50px;
     margin: 0 4px;
 }
+
 .result {
     width: 100%;
     height: 62vh;
-    margin: 1vh 0;
     display: flex;
     flex-flow: column;
 }
@@ -255,7 +264,7 @@ article form {
     font-size: 0.8rem;
 }
 .basic-info div span {
-    margin-left: 15px;
+    margin: 0 10px;
     color: black;
 }
 
@@ -289,7 +298,7 @@ button {
     padding: 8px;
 }
 
-button:hover {
+/* button:hover {
     background-color:  rgb(122, 192, 17);
 }
 
@@ -297,8 +306,7 @@ button:focus {
     background-color: black;
     border: 2px solid rgb(122, 192, 17);
     color: rgb(122, 192, 17);
-    outline: none;
-}
+} */
 
 
 /* RESPONSIVE */
@@ -326,8 +334,17 @@ button:focus {
         padding: 2px 4px;
         width: 80px;
     }
-    form, a.register, a.back-login, span.text-error, header form input[type="submit"], ::placeholder, .registered-box,button {
+    .registered-box, button {
         font-size: 1rem;
+    }
+    .panel-title button {
+        width: 130px;
+    }
+    .search input[type="submit"] {
+        width: 65px;
+    }
+    .search input[type="text"] {
+        width: 250px;
     }
 }
 @media only screen and (min-width: 700px) {
@@ -338,24 +355,20 @@ button:focus {
         height: 2.5vh;
         width: 100px;
     }
-    header form input[type="submit"] {
-        width: 100px;
-    }
-    #login_screen input {
-        height: 34px;
-        width: 244px;
-    }
-    #login_screen input[type="submit"] {
-        height: 40px;
-        width: 250px;
-    }
 }
 @media only screen and (min-width: 1000px) {
-    header form input[type="submit"] {
-        width: 150px;
-    }
     nav a {
         width: 123px;
+    }
+    .panel-title button {
+        height: 34px;
+    }
+    .search input[type="submit"] {
+        height: 34px;
+    }
+    .search input[type="text"] {
+        height: 25px;
+        width: 350px;
     }
 }
 
