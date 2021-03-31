@@ -11,7 +11,7 @@
         document.body.removeChild(passBox);
     }
 
-    async function getPass(formDOM,action) {
+    async function getPass(formDOM) {
         let path = "";
         const ROUTE = `${location.origin}/${(path = location.pathname.match(/^\/(\w+)(\/pages\/)?(\w+\.(html|php))?$/)?.[1]) == undefined ? "" : path}`;
 
@@ -23,8 +23,8 @@
         });
         
         const pass = await connect.json();
-        if (action.toUpperCase() == 'COPY')
-            copyValue( pass.length ? pass[0]['AES_DECRYPT(UNHEX(A.pass_account),K.password)'] : 'Error 404. Not found.');
+        
+        copyValue( pass.length ? pass[0]['AES_DECRYPT(UNHEX(A.pass_account),K.password)'] : 'Error 404. Not found.');
     }
 
     const validateAccountId = elementDom => {
