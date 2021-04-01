@@ -3,6 +3,28 @@ form {
     font-size: 0.6rem;
 }
 
+fieldset {
+    background-color: var(--secundary_blue);
+}
+
+fieldset fieldset {
+    background-color: ghostwhite;
+}
+
+legend {
+    background-color: ghostwhite;
+    border: 1px solid black;
+    padding: 2px 5px;
+}
+
+#form-add fieldset {
+    margin: 5px 0;
+}
+
+#form-add input {
+    height: 24px;
+}
+
 select {
     font-weight: bold;
     height: 30px;
@@ -33,6 +55,64 @@ span.text-error {
     font-size: 0.8rem;
     font-weight: bold;
     text-align: center;
+}
+
+/*  */
+.div_select {
+    display: flex;
+    flex-flow: column;
+    font-weight: bold;
+    margin: 6px 0;
+    row-gap: 2px;
+}
+.div_select select, .div_select input {
+    margin: 0 auto;
+}
+
+.div_select select {
+    width: 90%;
+}
+
+.div_select input {
+    width: 86%;
+}
+
+.div_pass {
+    column-gap: 5px;
+    display: flex;
+}
+
+.spacial_message {
+    align-items: center;
+    display: flex;
+}
+
+/* STRONG PASSWORD */
+.dangerus, .weak, .normal, .strong, .strongest {
+    font-size: 1rem;
+    text-align: center;
+    width: 100%;
+}
+.dangerus, .strongest {
+    text-transform: uppercase;
+}
+.weak, .normal, .strong {
+    text-transform: capitalize;
+}
+.dangerus {
+    color: red;
+}
+.weak {
+    color: orangered;
+}
+.normal {
+    color: orange;
+}
+.strong {
+    color: yellowgreen;
+}
+.strongest {
+    color: limegreen;
 }
 
 /* EYE FORM CHECKBOX */
@@ -79,12 +159,39 @@ span.text-error {
     .logo {
         width: 250px;
     }
-    nav a {
-        font-size: 1rem;
-        padding: 2px 4px;
-        width: 80px;
-    }
     form, span.text-error, ::placeholder {
         font-size: 1rem;
+    }
+    
+}
+
+@media only screen and (min-width: 700px) {
+    .div_select {
+        align-items: center;
+        column-gap: 15px;
+        display: grid;
+        grid-template-columns: 130px auto auto;
+        justify-content: start;
+    }
+    .div_select select {
+        width: 200px;
+    }
+    .div_select input {
+        width: 192px;
+    }
+    .div_pass {
+        column-gap: 10px;
+    }
+}
+
+@media only screen and (min-width: 1000px) {
+    fieldset.password input {
+        width: 400px;
+    }
+}
+
+@media only screen and (min-width: 1500px) {
+    fieldset.password input {
+        width: 750px;
     }
 }
