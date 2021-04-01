@@ -46,7 +46,7 @@
             const CATEGORIES = document.getElementById("categories");
             const SUBCATEGORIES = document.getElementById("subcategories");
 
-            console.log(FORM);
+            //console.log(FORM);
             
             CATEGORIES.addEventListener("change", () => {
                 if (CATEGORIES.value == "") {
