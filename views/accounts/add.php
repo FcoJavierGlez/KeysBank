@@ -1,6 +1,6 @@
 <section>
     <div class='panel-title'>
-        <div><a href='accounts.php'><button>Back</button></a></div>
+        <div><a href='accounts.php'><button class="back">Back</button></a></div>
         <h3>ADD</h3>
         <div</div>
     </div>
@@ -12,14 +12,22 @@
             </div> -->
             <div class='basic-info'>
                 <form id="form-add">
-                <fieldset>
+                <fieldset class="select_platform">
                     <legend>Category - subcategory</legend>
-                    Categories:
-                    <select name="categories" id="categories"></select>
-                    Subcategories: 
-                    <select name="subcategories" id="subcategories">
-                        <option value="">-- Choice an option --</option>
-                    </select>
+                    <div class="div_select">
+                        <div>
+                            Categories:
+                        </div>
+                        <select name="categories" id="categories"></select>
+                    </div>
+                    <div class="div_select">
+                        <div>
+                            Subcategories: 
+                        </div>
+                        <select name="subcategories" id="subcategories">
+                            <option value="">-- Choice an option --</option>
+                        </select>
+                    </div>
                 </fieldset>
                     <!-- <input type="hidden" name="search" value="<?php echo '?'.$_SESSION['user']['id'].'!'.$_GET['view']; ?>">
                     <div>
