@@ -331,6 +331,7 @@ button:focus {
     }
     nav a {
         font-size: 1rem;
+        height: 2.5vh;
         padding: 2px 4px;
         width: 80px;
     }
@@ -352,7 +353,7 @@ button:focus {
         width: 300px;
     }
     nav a {
-        height: 2.5vh;
+        *height: 2.5vh;
         width: 100px;
     }
 }
