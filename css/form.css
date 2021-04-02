@@ -90,6 +90,7 @@ span.text-error {
 /* STRONG PASSWORD */
 .dangerus, .weak, .normal, .strong, .strongest {
     font-size: 1rem;
+    font-weight: bold;
     text-align: center;
     width: 100%;
 }
