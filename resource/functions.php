@@ -100,8 +100,13 @@
                         echo "<h3>".$value['name_platform'].":</h3>";
                     echo "</div>";
                     echo "<div class='basic-info'>";
+                        /* echo "<pre>";
+                            print_r($list);
+                        echo "</pre>"; */
                         echo "<div><b><u>Account</u>:</b></div>";
                         echo "<div><span>".$value['AES_DECRYPT(UNHEX(A.name_account),K.password)']."</span></div>";
+                        echo "<div><b><u>Notes</u>:</b></div>";
+                        echo "<div><textarea class='".($value['AES_DECRYPT(UNHEX(A.notes),K.password)'] == "" ? 'text-center' : '')."' disabled>".($value['AES_DECRYPT(UNHEX(A.notes),K.password)'] == "" ? 'Not available' : $value['AES_DECRYPT(UNHEX(A.notes),K.password)'])."</textarea></div>";
                     echo "</div>";
                 echo "</article>";
             echo "</a>";

@@ -38,6 +38,7 @@
                             <input type="text" name="name" id="name">
                             <span></span>
                         </div>
+                        <!-- PASSWORD -->
                         <fieldset class="password">
                             <legend>Password</legend>
                             <div class="div_select">
@@ -51,9 +52,7 @@
                                     <input type="password" name="pass" id="pass">
                                 </div>
                                 <div class="spacial_message">
-                                    <span id="strong_password" class="strongest">
-                                        Strongest
-                                    </span>
+                                    <span id="strong_password"></span>
                                 </div>
                             </div>
                             <div class="div_select">
@@ -65,6 +64,62 @@
                                         <input type="checkbox" name="shpsr">
                                     </div>
                                     <input type="password" name="pass_rep" id="pass_rep">
+                                </div>
+                                <span></span>
+                            </div>
+                            <!-- GEN PASS -->
+                            <div class="div_gen_pass">
+                                <label class="text-error div_pass"><input type="checkbox" id="use_generate"><div>Use generate password system</div></label>
+                            </div>
+                            <fieldset id="gen_panel" class="hidden">
+                                <legend>Generate password system</legend>
+                                <div>
+                                    <label class="text-error"><input type="checkbox" id="special_char">Use special characters: [?-_*]</label>
+                                </div>
+                                <div>
+                                    <label><input type="number" min="8" max="64" value="8" id="number_char">Password length (Recommended: 20)</label>
+                                </div>
+                                <div class="button-center">
+                                    <button id="gen_pass" class="accept">Accept</button>
+                                </div>
+                            </fieldset>
+                        </fieldset>
+                        <!-- END PASSWORD -->
+                        <fieldset>
+                            <legend>Aditional info</legend>
+                            <div class="div_select">
+                                <div>
+                                    URL:
+                                </div>
+                                <div class="div_pass">
+                                    <div id="shpsr" class="eye">
+                                        <input type="checkbox" name="shpsr">
+                                    </div>
+                                    <input type="password" name="pass_rep" id="pass_rep">
+                                </div>
+                                <span></span>
+                            </div>
+                            <div class="div_select">
+                                <div>
+                                    Notes (Visible info):
+                                </div>
+                                <div class="div_pass">
+                                    <div id="shpsr" class="eye">
+                                        <input type="checkbox" name="shpsr">
+                                    </div>
+                                    <input type="password" name="pass_rep" id="pass_rep">
+                                </div>
+                                <span></span>
+                            </div>
+                            <div class="div_select">
+                                <div>
+                                    Sensible info (Hidden info):
+                                </div>
+                                <div class="div_pass">
+                                    <div id="shinfo" class="eye">
+                                        <input type="checkbox" name="shinfo">
+                                    </div>
+                                    <input name="info" id="pass_rep">
                                 </div>
                                 <span></span>
                             </div>
@@ -84,6 +139,7 @@
                         <span><?php echo replaceByCharacter($result_search[0]['AES_DECRYPT(UNHEX(A.pass_account),K.password)'],'*'); ?></span>
                         <input type="submit" id="cp_pss" value="Copy">
                     </div> -->
+                    <input type="submit" id="cp_pss" value="Copy">
                 </form>
             </div>
         </article>

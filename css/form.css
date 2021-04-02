@@ -3,6 +3,14 @@ form {
     font-size: 0.6rem;
 }
 
+label:hover {
+    cursor: pointer;
+}
+
+.button-center {
+    margin: 0 auto;
+}
+
 fieldset {
     background-color: var(--secundary_blue);
 }
@@ -15,6 +23,12 @@ legend {
     background-color: ghostwhite;
     border: 1px solid black;
     padding: 2px 5px;
+}
+
+.div_gen_pass {
+    align-items: center;
+    display: flex;
+    justify-content: center;
 }
 
 #form-add fieldset {
@@ -50,11 +64,25 @@ option {
 .text-error {
     color: red;
 }
+.text-green {
+    color: rgba(0, 200, 0);
+}
 
 span.text-error {
     font-size: 0.8rem;
     font-weight: bold;
     text-align: center;
+}
+
+.input-error {
+    background-color: rgba(255, 0, 0, 0.4);
+    border: 2px solid red;
+    color: white;
+}
+.input-correct {
+    background-color: rgba(0, 200, 0, 0.4);
+    border: 2px solid yellowgreen;
+    color: white;
 }
 
 /*  */
@@ -78,41 +106,59 @@ span.text-error {
 }
 
 .div_pass {
+    align-items: center;
     column-gap: 5px;
     display: flex;
 }
 
+/* FIELDSET GEN_PASS */
+fieldset.gen_pass {
+    background-color: lightgray;
+    display: flex;
+    flex-flow: column;
+    row-gap: 10px;
+}
+fieldset.gen_pass label {
+    display: flex;
+    align-items: center;
+    column-gap: 10px;
+}
+fieldset input[type="number"] {
+    width: 50px;
+}
+
+
+/* STRONG PASSWORD */
 .spacial_message {
     align-items: center;
     display: flex;
+    height: 18px;
 }
-
-/* STRONG PASSWORD */
-.dangerus, .weak, .normal, .strong, .strongest {
+div.spacial_message span.dangerous, div.spacial_message span.weak, div.spacial_message span.normal, div.spacial_message span.strong, div.spacial_message span.strongest {
     font-size: 1rem;
     font-weight: bold;
     text-align: center;
     width: 100%;
 }
-.dangerus, .strongest {
+div.spacial_message span.dangerous, div.spacial_message span.strongest {
     text-transform: uppercase;
 }
-.weak, .normal, .strong {
+div.spacial_message span.weak, div.spacial_message span.normal, div.spacial_message span.strong {
     text-transform: capitalize;
 }
-.dangerus {
+div.spacial_message span.dangerous {
     color: red;
 }
-.weak {
+div.spacial_message span.weak {
     color: orangered;
 }
-.normal {
+div.spacial_message span.normal {
     color: orange;
 }
-.strong {
+div.spacial_message span.strong {
     color: yellowgreen;
 }
-.strongest {
+div.spacial_message span.strongest {
     color: limegreen;
 }
 
@@ -183,16 +229,19 @@ span.text-error {
     .div_pass {
         column-gap: 10px;
     }
+    .div_gen_pass {
+        justify-content: start;
+    }
 }
 
 @media only screen and (min-width: 1000px) {
-    fieldset.password input {
+    fieldset.password input[type="text"], fieldset.password input[type="password"] {
         width: 400px;
     }
 }
 
 @media only screen and (min-width: 1500px) {
-    fieldset.password input {
+    fieldset.password input[type="text"], fieldset.password input[type="password"] {
         width: 750px;
     }
 }
