@@ -11,7 +11,7 @@
             echo "<input type='submit' name='search_account' value='Search'>";
         echo "</form>";
     echo "</div>";
-    echo "<div class='result scroll'>";
+    echo "<div class='result scroll cards-view'>";
         if ($emptyList)
             echo "<span><b>-- Your accounts list is empty --</b></span>";
         elseif (!sizeof($result_search))

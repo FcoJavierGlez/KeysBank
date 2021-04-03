@@ -296,7 +296,19 @@ article form {
     width: 95%;
 }
 
-.card div {
+.basic-info textarea:hover {
+    cursor: pointer;
+}
+
+.cards-view {
+
+}
+
+.card:hover {
+    box-shadow: ghostwhite 0px 0px 6px 1px;
+}
+
+.info-card div {
     margin: 3px 0;
 }
 
@@ -389,6 +401,12 @@ button:focus {
         width: 100px;
     }
 }
+@media only screen and (min-width: 750px) {
+    .cards-view {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
 @media only screen and (min-width: 1000px) {
     nav a {
         width: 123px;
@@ -404,7 +422,11 @@ button:focus {
         width: 350px;
     }
 }
-
+@media only screen and (min-width: 1200px) {
+    .cards-view {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
 @media only screen and (min-width: 1500px) {
     .logo {
         height: 300px;
@@ -412,5 +434,10 @@ button:focus {
     }
     nav a {
         width: 150px;
+    }
+}
+@media only screen and (min-width: 1800px) {
+    .cards-view {
+        grid-template-columns: repeat(4, 1fr);
     }
 }
