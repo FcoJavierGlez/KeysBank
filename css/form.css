@@ -7,7 +7,7 @@ label:hover {
     cursor: pointer;
 }
 
-.button-center {
+.div_gen-pass_button {
     margin: 0 auto;
 }
 
@@ -37,6 +37,11 @@ legend {
 
 #form-add input {
     height: 24px;
+}
+
+form#form-add .accept {
+    height: 35px;
+    width: 85px;
 }
 
 select {

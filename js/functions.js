@@ -7,6 +7,19 @@
 const normalizeOption = input => input.replace(/_/g, " ").replace( /\b([\w])/g, e => e.toUpperCase() ).replace(/\//g, " / ");
 
 /**
+ * Comprueba si la contraseña pasada por parámetro contiene un mínimo de caracteres especiales,
+ * siendo el mínimo la décima parte de la longitud de la contraseña + 1
+ * 
+ * @param {String} password Contraseña a comprobar
+ * @returns {Boolean} True si tiene el mínimo de caracteres especiales
+ */
+const checkMinSpecialCharacters = password => {
+    const SPECIAL_CHARS = /[\?\*\.\-\_\@](?=\w)/g;
+    let numSpecialChars = 0;
+    return ((numSpecialChars = password.match(SPECIAL_CHARS)?.length) == undefined ? 0 : numSpecialChars) >= Math.floor(password.length / 10) + 1;
+}
+
+/**
  * Genera una contraseña de x caracteres de longitud y con caracteres especiales o no
  * según indique el booleano pasado como segundo parámetro.
  * 
@@ -15,11 +28,14 @@ const normalizeOption = input => input.replace(/_/g, " ").replace( /\b([\w])/g, 
  * @returns {String} Contraseña generada.
  */
 const genPass = (lengthPass,specialCharacters = false) => {
-	const CHARACTERS = specialCharacters ? 'abcdefghijklmnopqrstuvwxyz1234567890?*.-_' : 'abcdefghijklmnopqrstuvwxyz1234567890';
+	const CHARACTERS = specialCharacters ? 'abcdefghijklmnopqrstuvwxyz1234567890?*.-_@' : 'abcdefghijklmnopqrstuvwxyz1234567890';
 	const LENGTH_PASS = lengthPass < 6 ? 6 : lengthPass > 64 ? 64 : lengthPass;
 	let passGenerated = "";
-	for (let i = 0; i < LENGTH_PASS; i++) 
-		passGenerated += parseInt(Math.random() * 2) ? CHARACTERS[parseInt( Math.random() * CHARACTERS.length )].toUpperCase() : CHARACTERS[parseInt( Math.random() * CHARACTERS.length )];
+	do {
+        passGenerated = "";
+        for (let i = 0; i < LENGTH_PASS; i++) 
+            passGenerated += parseInt(Math.random() * 2) ? CHARACTERS[parseInt( Math.random() * CHARACTERS.length )].toUpperCase() : CHARACTERS[parseInt( Math.random() * CHARACTERS.length )];
+    } while ( (valuePassword(passGenerated) < 3 && !specialCharacters ) || ( specialCharacters && !(checkMinSpecialCharacters(passGenerated) && valuePassword(passGenerated) == 5 && !checkDangerousPassword(passGenerated)) ) );
 	return passGenerated;
 }
 
@@ -103,4 +119,9 @@ const validatePasswordStrength = password => {
  * @param {String} input String a limpiar
  * @returns {String} String limpio
  */
-const cleanInput = input => input.replace(/[\s\'\"\<\>\\\/\&\|]/g,"");
+const cleanInput = input => input.replace(/[\s\'\"\<\>\\\/\&\|\´\`\^\(\)\[\]\{\}]/g,"")
+                                    .replace(/[aáàâ]/gi, e => e == e.toUpperCase() ? "A" : "a")
+                                    .replace(/[eéèê]/gi, e => e == e.toUpperCase() ? "E" : "e")
+                                    .replace(/[iíìî]/gi, e => e == e.toUpperCase() ? "I" : "i")
+                                    .replace(/[oóòô]/gi, e => e == e.toUpperCase() ? "O" : "o")
+                                    .replace(/[uúùû]/gi, e => e == e.toUpperCase() ? "U" : "u");

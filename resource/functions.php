@@ -99,7 +99,7 @@
                         echo "<img src='../img/platform/".normalizeString($value['name_platform']).".png' alt='Logo ".$value['name_platform']."'>";
                         echo "<h3>".$value['name_platform'].":</h3>";
                     echo "</div>";
-                    echo "<div class='basic-info'>";
+                    echo "<div class='basic-info card'>";
                         /* echo "<pre>";
                             print_r($list);
                         echo "</pre>"; */

@@ -12,8 +12,9 @@
         eye.classList.toggle("eye_slash");
     }
 
-    const adjustNumberChar = () => {
-        
+    const toggleColorCheckbox = (checkbox) => {
+        checkbox.parentElement.classList.toggle("text-error");
+        checkbox.parentElement.classList.toggle("text-green");
     }
 
     const init = () => {
@@ -31,6 +32,7 @@
             const SPECIAL_CHAR   = document.getElementById("special_char");
             const NUMBER_CHAR    = document.getElementById("number_char");
             const GEN_PASSWORD   = document.getElementById("gen_pass");
+            const SAVE_BUTTON    = document.getElementById("save");
 
             EYE_BUTTONS.forEach( e => {
                 e.addEventListener("click", function() {
@@ -43,6 +45,7 @@
                 PASSWORD.value = cleanInput(PASSWORD.value);
                 PASS_STR.innerText = PASSWORD.value !== "" ? `${validatePasswordStrength(PASSWORD.value)}` : "";
                 PASS_STR.className = `${validatePasswordStrength(PASSWORD.value)}`;
+                PASS_REP.dispatchEvent(new Event("keyup"));
             });
             PASSWORD.addEventListener("copy", e => {
                 e.preventDefault();
@@ -59,22 +62,20 @@
             });
 
             USE_GENERATE.addEventListener("click", () => {
-                USE_GENERATE.parentElement.classList.toggle("text-error");
-                USE_GENERATE.parentElement.classList.toggle("text-green");
+                toggleColorCheckbox(USE_GENERATE);
                 GEN_PASS_PANEL.classList.toggle("hidden");
                 GEN_PASS_PANEL.classList.toggle("gen_pass");
+                PASSWORD.toggleAttribute("disabled");
+                PASS_REP.toggleAttribute("disabled");
             });
 
-            SPECIAL_CHAR.addEventListener("click", () => {
-                SPECIAL_CHAR.parentElement.classList.toggle("text-error");
-                SPECIAL_CHAR.parentElement.classList.toggle("text-green");
-            });
+            SPECIAL_CHAR.addEventListener("click", () => toggleColorCheckbox(SPECIAL_CHAR) );
 
             NUMBER_CHAR.addEventListener("blur", () => {
-                NUMBER_CHAR.min = 8;
+                NUMBER_CHAR.min = 6;
                 NUMBER_CHAR.max = 64;
-                NUMBER_CHAR.value = isNaN(NUMBER_CHAR.value) || NUMBER_CHAR.value == "" ? 8 : NUMBER_CHAR.value;
-                NUMBER_CHAR.value = NUMBER_CHAR.value < 8 ? 8 : NUMBER_CHAR.value > 64 ? 64 : NUMBER_CHAR.value;
+                NUMBER_CHAR.value = isNaN(NUMBER_CHAR.value) || NUMBER_CHAR.value == "" ? 6 : NUMBER_CHAR.value;
+                NUMBER_CHAR.value = NUMBER_CHAR.value < 6 ? 6 : NUMBER_CHAR.value > 64 ? 64 : NUMBER_CHAR.value;
             });
 
             GEN_PASSWORD.addEventListener("click", e => {
@@ -85,6 +86,10 @@
                 EYE_BUTTONS.forEach( e => {
                     e.children[0].checked ? e.dispatchEvent(new Event("click")) : false;
                 });
+            });
+
+            SAVE_BUTTON.addEventListener("click", e => {
+                e.preventDefault();
             });
 
         }

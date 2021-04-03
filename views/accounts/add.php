@@ -11,7 +11,7 @@
                 <h3><?php echo $result_search[0]['name_platform']; ?>:</h3>
             </div> -->
             <div class='basic-info'>
-                <form id="form-add">
+                <form id="form-add" action="accounts.php?add" method="POST">
                     <fieldset class="select_platform">
                         <legend>Platform</legend>
                         <div class="div_select">
@@ -69,17 +69,17 @@
                             </div>
                             <!-- GEN PASS -->
                             <div class="div_gen_pass">
-                                <label class="text-error div_pass"><input type="checkbox" id="use_generate"><div>Use generate password system</div></label>
+                                <label class="bold text-error div_pass"><input type="checkbox" id="use_generate"><div>Use generate password system</div></label>
                             </div>
                             <fieldset id="gen_panel" class="hidden">
                                 <legend>Generate password system</legend>
                                 <div>
-                                    <label class="text-error"><input type="checkbox" id="special_char">Use special characters: [?-_*]</label>
+                                    <label class="bold text-green"><input type="checkbox" id="special_char" checked>Special characters</label>
                                 </div>
                                 <div>
-                                    <label><input type="number" min="8" max="64" value="8" id="number_char">Password length (Recommended: 20)</label>
+                                    <label><input type="number" min="6" max="64" value="20" id="number_char">Password length (Recommended: 20)</label>
                                 </div>
-                                <div class="button-center">
+                                <div class="div_gen-pass_button">
                                     <button id="gen_pass" class="accept">Accept</button>
                                 </div>
                             </fieldset>
@@ -95,7 +95,7 @@
                                     <div id="shpsr" class="eye">
                                         <input type="checkbox" name="shpsr">
                                     </div>
-                                    <input type="password" name="pass_rep" id="pass_rep">
+                                    <input type="password" name="url" id="url">
                                 </div>
                                 <span></span>
                             </div>
@@ -107,7 +107,7 @@
                                     <div id="shpsr" class="eye">
                                         <input type="checkbox" name="shpsr">
                                     </div>
-                                    <input type="password" name="pass_rep" id="pass_rep">
+                                    <input type="password" name="notes" id="notes">
                                 </div>
                                 <span></span>
                             </div>
@@ -119,7 +119,7 @@
                                     <div id="shinfo" class="eye">
                                         <input type="checkbox" name="shinfo">
                                     </div>
-                                    <input name="info" id="pass_rep">
+                                    <input type="password" name="info" id="info">
                                 </div>
                                 <span></span>
                             </div>
@@ -139,7 +139,7 @@
                         <span><?php echo replaceByCharacter($result_search[0]['AES_DECRYPT(UNHEX(A.pass_account),K.password)'],'*'); ?></span>
                         <input type="submit" id="cp_pss" value="Copy">
                     </div> -->
-                    <input type="submit" id="cp_pss" value="Copy">
+                    <input type="submit" name ="" id="save" value="Save" class="accept">
                 </form>
             </div>
         </article>
