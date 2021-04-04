@@ -5,17 +5,6 @@
     $emptyList = FALSE;
     $addedAcount = FALSE;
     
-    
-    if (isset($_GET['view'])) 
-        $result_search = $_SESSION['instance_accounts']->getAccountById($_SESSION['user']['id'],$_GET['view']);
-    else {
-        if (isset($_POST['search_account'])) 
-            $result_search = $_SESSION['instance_accounts']->getUserAccounts( $_SESSION['user']['id'],strtolower( dataClean($_POST['input_search']) ) );
-        else {
-            $result_search = $_SESSION['instance_accounts']->getUserAccounts($_SESSION['user']['id'],'');
-            $emptyList = !sizeof($result_search);
-        }
-    }
     if (isset($_POST['add_account'])) {
         $dataAccount = array(
             'idUser' => $_SESSION['user']['id'],
@@ -30,6 +19,19 @@
         $_SESSION['instance_accounts']->setPassAccount($dataAccount);
         $addedAcount = TRUE;
     }
+    if (isset($_GET['view'])) {
+        $result_search = $_SESSION['instance_accounts']->getAccountById($_SESSION['user']['id'],$_GET['view']);
+        if(!sizeof($result_search)) header('Location:./accounts.php');
+    }
+    else {
+        if (isset($_POST['search_account'])) 
+            $result_search = $_SESSION['instance_accounts']->getUserAccounts( $_SESSION['user']['id'],strtolower( dataClean($_POST['input_search']) ) );
+        else {
+            $result_search = $_SESSION['instance_accounts']->getUserAccounts($_SESSION['user']['id'],'');
+            $emptyList = !sizeof($result_search);
+        }
+    }
+    
 
     //  VIEWS  \\
     if (isset($_GET['add'])) 
