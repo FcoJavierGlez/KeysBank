@@ -36,7 +36,8 @@ legend {
 }
 
 #form-add input {
-    height: 24px;
+    border: 1px solid black;
+    height: 26px;
 }
 
 form#form-add .accept {
@@ -45,14 +46,22 @@ form#form-add .accept {
 }
 
 select {
+    border: 1px solid black;
     font-weight: bold;
     height: 30px;
 }
 select:focus {
     outline: none;
 }
-option {
+select:hover {
+    cursor: pointer;
+}
+option:hover {
     *font-weight: bold;
+}
+
+form .required {
+    background-color: lightgoldenrodyellow;
 }
 
 ::placeholder {
@@ -73,7 +82,15 @@ option {
     color: rgba(0, 200, 0);
 }
 
+form fieldset span.text-error {
+    color: rgb(215,0,0);
+    font-size: 1rem;
+    padding: 1px;
+    width: 100%;
+}
+
 span.text-error {
+    color: red;
     font-size: 0.8rem;
     font-weight: bold;
     text-align: center;
@@ -91,7 +108,7 @@ span.text-error {
 }
 
 /*  */
-.div_select {
+.div_select, .div_input, .div_textarea {
     display: flex;
     flex-flow: column;
     font-weight: bold;
@@ -106,14 +123,37 @@ span.text-error {
     width: 90%;
 }
 
-.div_select input {
-    width: 86%;
+.div_checkbox {
+    align-items: center;
+    column-gap: 5px;
+    display: flex;
 }
 
 .div_pass {
     align-items: center;
     column-gap: 5px;
+    display: grid;
+    grid-template-columns: 25px auto;
+}
+
+#name {
+    margin: 0 auto;
+    width: 86%;
+}
+
+#info, #notes {
+    border: 1px solid black;
     display: flex;
+    height: 80px;
+    padding: 5px;
+}
+
+#info:hover, #notes:hover {
+    cursor: initial;
+}
+
+form span.display_textarea_char {
+    text-align: right;
 }
 
 /* FIELDSET GEN_PASS */
@@ -124,9 +164,9 @@ fieldset.gen_pass {
     row-gap: 10px;
 }
 fieldset.gen_pass label {
-    display: flex;
     align-items: center;
-    column-gap: 10px;
+    column-gap: 5px;
+    display: flex;
 }
 fieldset input[type="number"] {
     width: 50px;
@@ -134,36 +174,35 @@ fieldset input[type="number"] {
 
 
 /* STRONG PASSWORD */
-.spacial_message {
+.special_message {
     align-items: center;
     display: flex;
-    height: 18px;
 }
-div.spacial_message span.dangerous, div.spacial_message span.weak, div.spacial_message span.normal, div.spacial_message span.strong, div.spacial_message span.strongest {
+div.special_message span.dangerous, div.special_message span.weak, div.special_message span.normal, div.special_message span.strong, div.special_message span.strongest {
     font-size: 1rem;
     font-weight: bold;
     text-align: center;
     width: 100%;
 }
-div.spacial_message span.dangerous, div.spacial_message span.strongest {
+div.special_message span.dangerous, div.special_message span.strongest {
     text-transform: uppercase;
 }
-div.spacial_message span.weak, div.spacial_message span.normal, div.spacial_message span.strong {
+div.special_message span.weak, div.special_message span.normal, div.special_message span.strong {
     text-transform: capitalize;
 }
-div.spacial_message span.dangerous {
+div.special_message span.dangerous {
     color: red;
 }
-div.spacial_message span.weak {
+div.special_message span.weak {
     color: orangered;
 }
-div.spacial_message span.normal {
+div.special_message span.normal {
     color: orange;
 }
-div.spacial_message span.strong {
+div.special_message span.strong {
     color: yellowgreen;
 }
-div.spacial_message span.strongest {
+div.special_message span.strongest {
     color: limegreen;
 }
 
@@ -218,17 +257,17 @@ div.spacial_message span.strongest {
 }
 
 @media only screen and (min-width: 700px) {
-    .div_select {
+    .div_select, .div_input {
         align-items: center;
         column-gap: 15px;
         display: grid;
-        grid-template-columns: 130px auto auto;
+        grid-template-columns: 110px auto auto;
         justify-content: start;
     }
     .div_select select {
         width: 200px;
     }
-    .div_select input {
+    .div_input input {
         width: 192px;
     }
     .div_pass {
@@ -237,11 +276,31 @@ div.spacial_message span.strongest {
     .div_gen_pass {
         justify-content: start;
     }
+    #name {
+        width: 192px;
+    }
+}
+@media only screen and (min-width: 730px) {
+    .div_select, .div_input {
+        grid-template-columns: 130px auto auto;
+    }
+    .div_textarea {
+        align-items: center;
+        display: grid;
+        grid-template-columns: 130px auto;
+        column-gap: 14px;
+    }
 }
 
 @media only screen and (min-width: 1000px) {
     fieldset.password input[type="text"], fieldset.password input[type="password"] {
         width: 400px;
+    }
+    .div_select, .div_input {
+        grid-template-columns: 180px auto auto;
+    }
+    .div_textarea {
+        grid-template-columns: 180px auto;
     }
 }
 

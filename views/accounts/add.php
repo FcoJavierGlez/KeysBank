@@ -5,57 +5,61 @@
         <div</div>
     </div>
     <div class='result scroll'>
-        <article>
-            <!-- <div class='platform'>
-                <img src="<?php echo '../img/platform/'.normalizeString($result_search[0]['name_platform']).'.png'; ?>" alt="<?php echo 'Logo '.$result_search[0]['name_platform']; ?>">
-                <h3><?php echo $result_search[0]['name_platform']; ?>:</h3>
-            </div> -->
-            <div class='basic-info'>
+        <div <?php echo $addedAcount ? "class='win_added_acc'" : "class='hidden'"; ?> > <!-- win_added_acc --> <!-- registered-box dm10 -->
+            <div>Added account succesfully</div>
+            <div>
+                <a href="accounts.php?add">
+                    <button class="accept">New Account</button>
+                </a>
+            </div>
+        </div>
+        <article <?php echo $addedAcount ? "class='hidden'" : "class=''"; ?>>
+            <div class="basic-info">
                 <form id="form-add" action="accounts.php?add" method="POST">
                     <fieldset class="select_platform">
                         <legend>Platform</legend>
                         <div class="div_select">
-                            <div>
-                                Categories:
-                            </div>
+                            <div>Categories:</div>
                             <select name="categories" id="categories"></select>
+                            <div class="special_message">
+                                <span class="text-error"></span>
+                            </div>
                         </div>
                         <div class="div_select">
-                            <div>
-                                Platforms: 
-                            </div>
+                            <div>Platforms:</div>
                             <select name="subcategories" id="subcategories">
                                 <option value="">-- Choice an option --</option>
                             </select>
+                            <div class="special_message">
+                                <span class="text-error"></span>
+                            </div>
                         </div>
                     </fieldset>
                     <fieldset>
                         <legend>Account data</legend>
-                        <div class="div_select">
-                            <div>
-                                Account name:
+                        <div class="div_input">
+                            <div>Account name:</div>
+                            <input type="text" name="name" id="name" class="required" placeholder="required (*)">
+                            <div class="special_message">
+                                <span class="text-error"></span>
                             </div>
-                            <input type="text" name="name" id="name">
-                            <span></span>
                         </div>
                         <!-- PASSWORD -->
                         <fieldset class="password">
                             <legend>Password</legend>
-                            <div class="div_select">
-                                <div>
-                                    Password:
-                                </div>
+                            <div class="div_input">
+                                <div>Password:</div>
                                 <div class="div_pass">
                                     <div id="shps" class="eye">
                                         <input type="checkbox" name="shps">
                                     </div>
-                                    <input type="password" name="pass" id="pass">
+                                    <input type="password" name="pass" id="pass" class="required" placeholder="required (*)">
                                 </div>
-                                <div class="spacial_message">
-                                    <span id="strong_password"></span>
+                                <div class="special_message">
+                                    <span></span>
                                 </div>
                             </div>
-                            <div class="div_select">
+                            <div class="div_input">
                                 <div>
                                     Repeat password:
                                 </div>
@@ -63,13 +67,15 @@
                                     <div id="shpsr" class="eye">
                                         <input type="checkbox" name="shpsr">
                                     </div>
-                                    <input type="password" name="pass_rep" id="pass_rep">
+                                    <input type="password" name="pswd_rep" id="pass_rep" class="required" placeholder="required (*)">
                                 </div>
-                                <span></span>
+                                <div class="special_message">
+                                    <span class="dangerous"></span>
+                                </div>
                             </div>
                             <!-- GEN PASS -->
                             <div class="div_gen_pass">
-                                <label class="bold text-error div_pass"><input type="checkbox" id="use_generate"><div>Use generate password system</div></label>
+                                <label class="bold text-error div_checkbox"><input type="checkbox" id="use_generate"><div>Use generate password system</div></label>
                             </div>
                             <fieldset id="gen_panel" class="hidden">
                                 <legend>Generate password system</legend>
@@ -87,31 +93,31 @@
                         <!-- END PASSWORD -->
                         <fieldset>
                             <legend>Aditional info</legend>
-                            <div class="div_select">
+                            <div class="div_input">
                                 <div>
-                                    URL:
+                                    URL / IP:
                                 </div>
                                 <div class="div_pass">
-                                    <div id="shpsr" class="eye">
-                                        <input type="checkbox" name="shpsr">
+                                    <div id="shurl" class="eye">
+                                        <input type="checkbox" name="shurl">
                                     </div>
-                                    <input type="password" name="url" id="url">
+                                    <input type="text" name="url" id="url" placeholder="OPTIONAL">
                                 </div>
-                                <span></span>
                             </div>
-                            <div class="div_select">
+                            <div class="div_textarea">
                                 <div>
                                     Notes (Visible info):
                                 </div>
                                 <div class="div_pass">
-                                    <div id="shpsr" class="eye">
-                                        <input type="checkbox" name="shpsr">
+                                    <div id="shnotes" class="eye">
+                                        <input type="checkbox" name="shnotes">
                                     </div>
-                                    <input type="password" name="notes" id="notes">
+                                    <textarea name="notes" id="notes" placeholder="OPTIONAL" maxlength="255"></textarea>
                                 </div>
-                                <span></span>
+                                <div></div>
+                                <span class="display_textarea_char">0/255</span>
                             </div>
-                            <div class="div_select">
+                            <div class="div_textarea">
                                 <div>
                                     Sensible info (Hidden info):
                                 </div>
@@ -119,27 +125,17 @@
                                     <div id="shinfo" class="eye">
                                         <input type="checkbox" name="shinfo">
                                     </div>
-                                    <input type="password" name="info" id="info">
+                                    <textarea name="info" id="info" placeholder="OPTIONAL" maxlength="255"></textarea>
                                 </div>
-                                <span></span>
+                                <div></div>
+                                <span class="display_textarea_char">0/255</span>
                             </div>
                         </fieldset>
                     </fieldset>
-                    <!-- <input type="hidden" name="search" value="<?php echo '?'.$_SESSION['user']['id'].'!'.$_GET['view']; ?>">
-                    <div>
-                        <b><u>Account</u>:</b>
+                    <div class="special_message">
+                        <span class="dangerous"></span>
                     </div>
-                    <div>
-                        <span><?php echo $result_search[0]['AES_DECRYPT(UNHEX(A.name_account),K.password)']; ?></span>
-                    </div>
-                    <div>
-                        <b><u>Pass</u>:</b>
-                    </div>
-                    <div>
-                        <span><?php echo replaceByCharacter($result_search[0]['AES_DECRYPT(UNHEX(A.pass_account),K.password)'],'*'); ?></span>
-                        <input type="submit" id="cp_pss" value="Copy">
-                    </div> -->
-                    <input type="submit" name ="" id="save" value="Save" class="accept">
+                    <input type="submit" name ="add_account" id="save" value="Save" class="accept">
                 </form>
             </div>
         </article>

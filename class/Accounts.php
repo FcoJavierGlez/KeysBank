@@ -54,7 +54,7 @@
          */
         public function getAccountById($idUser, $idAccount) {
             $this->query = "SELECT A.id,A.name_platform,AES_DECRYPT(UNHEX(A.name_account),K.password),
-            AES_DECRYPT(UNHEX(A.pass_account),K.password),A.url,AES_DECRYPT(UNHEX(A.info),K.password),AES_DECRYPT(UNHEX(A.notes),K.password)
+            AES_DECRYPT(UNHEX(A.pass_account),K.password),AES_DECRYPT(UNHEX(A.url),K.password),AES_DECRYPT(UNHEX(A.info),K.password),AES_DECRYPT(UNHEX(A.notes),K.password)
             FROM keysbank_accounts A, keysbank_keys K 
             WHERE K.idUser = A.idUser
             AND K.idCategory = A.idCategory
@@ -71,7 +71,7 @@
         }
 
         /**
-         * Devuelve la información de una cuenta del usuario
+         * Devuelve la contraseña de una cuenta del usuario
          */
         public function getPassAccountById($idUser, $idAccount) {
             $this->query = "SELECT AES_DECRYPT(UNHEX(A.pass_account),K.password)
@@ -88,6 +88,35 @@
             $this->close_connection();
 
             return $this->rows;
+        }
+
+        /**
+         * Inserta una nueva cuenta
+         */
+        public function setPassAccount($data = array()) {
+            $this->query = "INSERT INTO keysbank_accounts 
+            (idUser,idCategory,name_account,pass_account,name_platform,url,info,notes)
+            VALUES
+            (:idUser,
+            :idCategory,
+            HEX(AES_ENCRYPT(:name_account,(SELECT password FROM keysbank_keys WHERE idUser = :idUser AND idCategory = :idCategory))),
+            HEX(AES_ENCRYPT(:pass_account,(SELECT password FROM keysbank_keys WHERE idUser = :idUser AND idCategory = :idCategory))),
+            :name_platform,
+            HEX(AES_ENCRYPT(:url,(SELECT password FROM keysbank_keys WHERE idUser = :idUser AND idCategory = :idCategory))),
+            HEX(AES_ENCRYPT(:info,(SELECT password FROM keysbank_keys WHERE idUser = :idUser AND idCategory = :idCategory))),
+            HEX(AES_ENCRYPT(:notes,(SELECT password FROM keysbank_keys WHERE idUser = :idUser AND idCategory = :idCategory))) )";
+
+            $this->parametros['idUser']        = $data['idUser'];
+            $this->parametros['idCategory']    = $data['idCategory'];
+            $this->parametros['name_account']  = $data['name_account'];
+            $this->parametros['pass_account']  = $data['pass_account'];
+            $this->parametros['name_platform'] = $data['name_platform'];
+            $this->parametros['url']           = $data['url'];
+            $this->parametros['info']          = $data['info'];
+            $this->parametros['notes']         = $data['notes'];
+
+            $this->get_results_from_query();
+            $this->close_connection();
         }
     }
     

@@ -14,7 +14,8 @@
             .forEach( e => {
                 const option = document.createElement("option");
                 option.value = `${e.name}`;
-                option.innerHTML = normalizeOption(`${e.name}`);
+                //option.innerHTML = normalizeOption(`${e.name}`);
+                option.innerHTML = `${e.name}`;
                 optgroup.appendChild(option);
             } );
             fragment.appendChild(optgroup);
@@ -45,8 +46,6 @@
             const FORM = document.getElementById("form-add");
             const CATEGORIES = document.getElementById("categories");
             const SUBCATEGORIES = document.getElementById("subcategories");
-
-            //console.log(FORM);
             
             CATEGORIES.addEventListener("change", () => {
                 if (CATEGORIES.value == "") {

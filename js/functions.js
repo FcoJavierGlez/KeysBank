@@ -14,7 +14,7 @@ const normalizeOption = input => input.replace(/_/g, " ").replace( /\b([\w])/g, 
  * @returns {Boolean} True si tiene el mínimo de caracteres especiales
  */
 const checkMinSpecialCharacters = password => {
-    const SPECIAL_CHARS = /[\?\*\.\-\_\@](?=\w)/g;
+    const SPECIAL_CHARS = /[\?\*\.\:\-\_\@](?=\w)/g;
     let numSpecialChars = 0;
     return ((numSpecialChars = password.match(SPECIAL_CHARS)?.length) == undefined ? 0 : numSpecialChars) >= Math.floor(password.length / 10) + 1;
 }
@@ -28,7 +28,7 @@ const checkMinSpecialCharacters = password => {
  * @returns {String} Contraseña generada.
  */
 const genPass = (lengthPass,specialCharacters = false) => {
-	const CHARACTERS = specialCharacters ? 'abcdefghijklmnopqrstuvwxyz1234567890?*.-_@' : 'abcdefghijklmnopqrstuvwxyz1234567890';
+	const CHARACTERS = specialCharacters ? 'abcdefghijklmnopqrstuvwxyz1234567890?*.:-_@' : 'abcdefghijklmnopqrstuvwxyz1234567890';
 	const LENGTH_PASS = lengthPass < 6 ? 6 : lengthPass > 64 ? 64 : lengthPass;
 	let passGenerated = "";
 	do {
@@ -53,7 +53,7 @@ const genPass = (lengthPass,specialCharacters = false) => {
  */
 const valuePassword = password => {
     let value = 0;
-    const REG_EXP = [/[A-ZÑÁÉÍÓÚ]/g, /[a-zñáéíóú]/g, /\d/g, /[-\_\¿\?\*\.\:\@\!\¡]/g];
+    const REG_EXP = [/[A-ZÑÁÉÍÓÚ]/g, /[a-zñáéíóú]/g, /\d/g, /[\-\_\¿\?\*\.\:\@\!\¡]/g];
     REG_EXP.forEach( (e,i) => {
         const RE = new RegExp(e);
         value += !RE.test(password) ? 0 : i == REG_EXP.length - 1 ? 2 : 1;
@@ -75,8 +75,9 @@ const checkDangerousPassword = password => {
     */
     const REG_EXP = [
         /^(\d+)?(.*r(o|@|0){2,}(t|7).*|.*b(i|1)(e|3)n\_?v(e|3)n(i|1)d(a|o|@|4|0).*|.*(w|vv)(e|3)(l|1)c(o|\@|0)m(e|3).*|.*h(o|@|0)(l|7|1)(a|@|4).*|.*h(e|3)[l71]{2,}(o|\@|0).*|.*c(o|\@|0)n(t|7)r(a|\@|4)\_?(s|5)(e|3)(ñ|n+)(a|\@|4).*|.*p(a|\@|4)[s5]{2,}\_?(w|v+)(o|\@|0)rd.*|.*(a|\@|4)dm(i|1)n.*|.*u(s|5)u(a|\@|4)r(i|1)(a|o|\@|4|0).*|.*u(s|5)(e|3)r.*)?(\d+)?$/i, 
-        /^(.)(\1){3,}$/i
+        /^(.)(\1){1,}$/i
     ];
+    if (password.length == 1) return true;
     for (let i = 0; i < REG_EXP.length; i++) {
         const RE = new RegExp(REG_EXP[i]);
         if (RE.test(password)) return true;
@@ -119,7 +120,7 @@ const validatePasswordStrength = password => {
  * @param {String} input String a limpiar
  * @returns {String} String limpio
  */
-const cleanInput = input => input.replace(/[\s\'\"\<\>\\\/\&\|\´\`\^\(\)\[\]\{\}]/g,"")
+const cleanInput = input => input.replace(/[\s\'\"\<\>\\\/\&\|\´\`\^\(\)\[\]\{\}\,\;\%\$\·]/g,"")
                                     .replace(/[aáàâ]/gi, e => e == e.toUpperCase() ? "A" : "a")
                                     .replace(/[eéèê]/gi, e => e == e.toUpperCase() ? "E" : "e")
                                     .replace(/[iíìî]/gi, e => e == e.toUpperCase() ? "I" : "i")

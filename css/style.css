@@ -28,6 +28,11 @@ textarea {
     resize: none;
 }
 
+textarea.bold {
+    color: black;
+    font-weight: bold;
+}
+
 button:hover, input[type="submit"]:hover, input[type="button"]:hover {
     cursor: pointer;
 }
@@ -37,7 +42,8 @@ input[type="submit"]:focus,
 input[type="button"]:focus,
 input[type="text"]:focus,
 input[type="password"]:focus,
-input[type="number"]:focus {
+input[type="number"]:focus,
+textarea:focus {
     outline: none;
 }
 
@@ -286,7 +292,7 @@ article form {
     color: black;
 }
 
-.basic-info textarea {
+.card .basic-info textarea {
     background-color: antiquewhite;
     border: 2px solid black;
     display: flex;
@@ -342,15 +348,26 @@ button {
     padding: 8px;
 }
 
-/* button:hover {
-    background-color:  rgb(122, 192, 17);
+.dm10 div {
+    margin: 10px;
 }
 
-button:focus {
-    background-color: black;
-    border: 2px solid rgb(122, 192, 17);
-    color: rgb(122, 192, 17);
-} */
+.win_added_acc {
+    align-items: center;
+    align-self: center;
+    background-color: rgba(50, 50, 50, 0.8);
+    border: 3px solid var(--primary_blue);
+    border-radius: 10px;
+    color: white;
+    display: flex;
+    font-weight: bold;
+    flex-flow: column;
+    height: 62vh;
+    justify-content: center;
+    justify-content: center;
+    row-gap: 25px;
+    width: 90%;
+}
 
 
 /* RESPONSIVE */
@@ -436,7 +453,7 @@ button:focus {
         width: 150px;
     }
 }
-@media only screen and (min-width: 1800px) {
+@media only screen and (min-width: 1700px) {
     .cards-view {
         grid-template-columns: repeat(4, 1fr);
     }
