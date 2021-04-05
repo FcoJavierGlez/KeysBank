@@ -53,8 +53,12 @@
          * Devuelve la cuenta del usuario buscada por id de cuenta e id de usuario
          */
         public function getAccountById($idUser, $idAccount) {
-            $this->query = "SELECT A.id,A.name_platform,AES_DECRYPT(UNHEX(A.name_account),K.password),
-            AES_DECRYPT(UNHEX(A.pass_account),K.password),AES_DECRYPT(UNHEX(A.url),K.password),AES_DECRYPT(UNHEX(A.info),K.password),AES_DECRYPT(UNHEX(A.notes),K.password)
+            $this->query = "SELECT A.id,A.idCategory,A.name_platform,
+            AES_DECRYPT(UNHEX(A.name_account),K.password),
+            AES_DECRYPT(UNHEX(A.pass_account),K.password),
+            AES_DECRYPT(UNHEX(A.url),K.password),
+            AES_DECRYPT(UNHEX(A.info),K.password),
+            AES_DECRYPT(UNHEX(A.notes),K.password)
             FROM keysbank_accounts A, keysbank_keys K 
             WHERE K.idUser = A.idUser
             AND K.idCategory = A.idCategory
