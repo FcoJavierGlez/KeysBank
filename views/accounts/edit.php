@@ -1,35 +1,35 @@
 <section>
     <div class='panel-title'>
-        <div><a href='accounts.php'><button class="back">Back</button></a></div>
-        <h3>ADD</h3>
+        <div><a href='accounts.php?view=<?php echo $_GET['edit'] ?>'><button class="back">Back</button></a></div>
+        <h3>EDIT</h3>
         <div</div>
     </div>
     <div class='result scroll'>
-        <div class="<?php if ($addedAcount || $failuredAcount) echo $addedAcount ? "win_added_acc" : "fail_added_acc"; else echo 'hidden' ?>" >
-            <div><?php echo $addedAcount ? "Added account succesfully" : "Add account failed"; ?></div>
+        <div class="<?php if ($editedAcount || $failuredAcount) echo $editedAcount ? 'win_added_acc' : 'fail_added_acc'; else echo 'hidden'; ?>" > <!-- win_added_acc --> <!-- registered-box dm10 -->
+            <div><?php echo $editedAcount ? "Edited account succesfully" : "Edit account failed"; ?></div>
             <div>
-                <a href="accounts.php?add">
-                    <button class="accept"><?php echo $addedAcount ? "New Account" : "Accept" ?></button>
+                <a href="accounts.php?<?php echo 'view='.$_GET['edit'] ?>">
+                    <button class="accept">Accept</button>
                 </a>
             </div>
         </div>
-        <article <?php echo $addedAcount || $failuredAcount ? "class='hidden'" : "class=''"; ?>>
+        <article class="<?php echo $editedAcount || $failuredAcount ? 'hidden' : ''; ?>">
             <div class="basic-info">
-                <form id="form-add" action="accounts.php?add" method="POST">
+                <form id="form-add" action="accounts.php?edit=<?php echo $_GET['edit']; ?>" method="POST">
                     <fieldset class="select_platform">
                         <legend>Platform</legend>
                         <div class="div_select">
                             <div>Categories:</div>
-                            <select name="categories" id="categories"></select>
+                            <div id="category"><?php echo $platformListByCategory[0]['category'] ?></div>
                             <div class="special_message">
                                 <span class="text-error"></span>
                             </div>
                         </div>
                         <div class="div_select">
                             <div>Platforms:</div>
-                            <select name="subcategories" id="subcategories">
-                                <option value="">-- Choice an option --</option>
-                            </select>
+                            <?php
+                                renderPlatformList($platformListByCategory,$dataAccount[0]['name_platform']);
+                            ?>
                             <div class="special_message">
                                 <span class="text-error"></span>
                             </div>
@@ -39,7 +39,8 @@
                         <legend>Account data</legend>
                         <div class="div_input">
                             <div>Account name:</div>
-                            <input type="text" name="name" id="name" class="required" placeholder="required (*)">
+                            <!-- <input type="text" value="<?php echo $dataAccount[0]['name_account']?>" disabled> -->
+                            <input type="text" name="name" id="name" class="required" placeholder="required (*)" value="<?php echo $dataAccount[0]['AES_DECRYPT(UNHEX(A.name_account),K.password)']; ?>">
                             <div class="special_message">
                                 <span class="text-error"></span>
                             </div>
@@ -53,7 +54,7 @@
                                     <div id="shps" class="eye">
                                         <input type="checkbox" name="shps">
                                     </div>
-                                    <input type="password" name="pass" id="pass" class="required" placeholder="required (*)">
+                                    <input type="password" name="pass" id="pass" class="required" placeholder="required (*)" value="<?php echo $dataAccount[0]['AES_DECRYPT(UNHEX(A.pass_account),K.password)']; ?>">
                                 </div>
                                 <div class="special_message">
                                     <span></span>
@@ -67,7 +68,7 @@
                                     <div id="shpsr" class="eye">
                                         <input type="checkbox" name="shpsr">
                                     </div>
-                                    <input type="password" name="pswd_rep" id="pass_rep" class="required" placeholder="required (*)">
+                                    <input type="password" name="pswd_rep" id="pass_rep" class="required" placeholder="required (*)" value="<?php echo $dataAccount[0]['AES_DECRYPT(UNHEX(A.pass_account),K.password)']; ?>">
                                 </div>
                                 <div class="special_message">
                                     <span class="dangerous"></span>
@@ -101,7 +102,7 @@
                                     <div id="shurl" class="eye">
                                         <input type="checkbox" name="shurl">
                                     </div>
-                                    <input type="text" name="url" id="url" placeholder="OPTIONAL">
+                                    <input type="text" name="url" id="url" placeholder="OPTIONAL" value="<?php echo $dataAccount[0]['AES_DECRYPT(UNHEX(A.url),K.password)']; ?>">
                                 </div>
                             </div>
                             <div class="div_textarea">
@@ -112,32 +113,32 @@
                                     <div id="shnotes" class="eye">
                                         <input type="checkbox" name="shnotes">
                                     </div>
-                                    <textarea name="notes" id="notes" placeholder="OPTIONAL" maxlength="255"></textarea>
+                                    <textarea name="notes" id="notes" placeholder="OPTIONAL" maxlength="255"><?php echo $dataAccount[0]['AES_DECRYPT(UNHEX(A.notes),K.password)']; ?></textarea>
                                 </div>
                                 <div></div>
-                                <span class="display_textarea_char">0/255</span>
+                                <span class="display_textarea_char"><?php echo strlen($dataAccount[0]['AES_DECRYPT(UNHEX(A.notes),K.password)']); ?>/255</span>
                             </div>
                             <div class="div_textarea">
                                 <div>
                                     Sensible info (Hidden info):
                                 </div>
                                 <div class="div_pass">
-                                    <div id="shinfo" class="eye">
-                                        <input type="checkbox" name="shinfo">
+                                    <div id="shinfo" class="eye_slash">
+                                        <input type="checkbox" name="shinfo" checked>
                                     </div>
-                                    <textarea name="info" id="info" placeholder="OPTIONAL" maxlength="255"></textarea>
+                                    <textarea name="info" id="info" placeholder="OPTIONAL" maxlength="255" style="display: none;"><?php echo $dataAccount[0]['AES_DECRYPT(UNHEX(A.info),K.password)']; ?></textarea>
                                 </div>
                                 <div></div>
-                                <span class="display_textarea_char">0/255</span>
+                                <span class="display_textarea_char" style="display: none;"><?php echo strlen($dataAccount[0]['AES_DECRYPT(UNHEX(A.info),K.password)']); ?>/255</span>
                             </div>
                         </fieldset>
                     </fieldset>
                     <div class="special_message">
                         <span class="dangerous"></span>
                     </div>
-                    <input type="submit" name ="add_account" id="save" value="Save" class="accept">
+                    <input type="submit" name ="edit_account" id="save" value="Save" class="accept">
                 </form>
             </div>
         </article>
     </div>
-    </section>
+</section>

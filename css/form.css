@@ -25,6 +25,10 @@ legend {
     padding: 2px 5px;
 }
 
+div#category {
+    margin: 4px 15px;
+}
+
 .div_gen_pass {
     align-items: center;
     display: flex;
@@ -257,6 +261,9 @@ div.special_message span.strongest {
 }
 
 @media only screen and (min-width: 700px) {
+    div#category {
+        margin: 2px 0;
+    }
     .div_select, .div_input {
         align-items: center;
         column-gap: 15px;

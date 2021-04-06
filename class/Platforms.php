@@ -49,13 +49,31 @@
          * seleccionada por su id.
          */
         public function getPlatformsByCategory($id) {
-            $this->query = "SELECT S.subcategory, P.name 
+            $this->query = "SELECT C.category, S.subcategory, P.name 
                             FROM keysbank_platform_categories C, keysbank_platform_subcategories S, keysbank_platforms_list P
                             WHERE C.id = P.idCategory
                             AND S.idCategory = P.idCategory
                             AND S.id = P.idSubcategory
                             AND C.id = :id
                             ORDER BY S.subcategory, P.name";
+
+            $this->parametros['id'] = $id;
+
+            $this->get_results_from_query();
+            $this->close_connection();
+
+            return $this->rows;
+        }
+
+         /**
+         * Devuelve una lista con el nombre de plataformas para la categoría seleccionada por su id.
+         */
+        public function getPlatformsListByCategory($id) {
+            $this->query = "SELECT P.name 
+                            FROM keysbank_platform_categories C, keysbank_platforms_list P
+                            WHERE C.id = P.idCategory
+                            AND C.id = :id
+                            ORDER BY P.name";
 
             $this->parametros['id'] = $id;
 

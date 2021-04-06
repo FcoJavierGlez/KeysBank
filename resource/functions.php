@@ -94,7 +94,7 @@
     function renderUserAccountList($list) {
         foreach ($list as $value) {
             $route = file_exists("../img/platform/".normalizeString($value['name_platform']).".png") ? "../img/platform/".normalizeString($value['name_platform']).".png" : "../img/platform/other.png";
-            echo "<a href='".$_SERVER['PHP_SELF']."?view=".$value['id'].""."'>"; //echo "<a href='view_account.php?view=".$value['id'].""."'>";
+            echo "<a href='".$_SERVER['PHP_SELF']."?view=".$value['id'].""."'>";
                 echo "<article class='card'>";
                     echo "<div class='platform'>";
                         echo "<img src='".$route."' alt='Logo ".$value['name_platform']."'>";
@@ -107,10 +107,47 @@
                         echo "<div><b><u>Account</u>:</b></div>";
                         echo "<div><span>".$value['AES_DECRYPT(UNHEX(A.name_account),K.password)']."</span></div>";
                         echo "<div><b><u>Notes</u>:</b></div>";
-                        echo "<div><textarea class='".($value['AES_DECRYPT(UNHEX(A.notes),K.password)'] == "" ? 'text-center' : 'bold')."' disabled>".($value['AES_DECRYPT(UNHEX(A.notes),K.password)'] == "" ? 'Not available' : $value['AES_DECRYPT(UNHEX(A.notes),K.password)'])."</textarea></div>";
+                        echo "<div><textarea class=".($value['AES_DECRYPT(UNHEX(A.notes),K.password)'] == '' ? 'text-center' : 'bold')." disabled>".($value['AES_DECRYPT(UNHEX(A.notes),K.password)'] == "" ? 'Not available' : $value['AES_DECRYPT(UNHEX(A.notes),K.password)'])."</textarea></div>";
                     echo "</div>";
                 echo "</article>";
             echo "</a>";
         }
     }
+
+    /**
+     * Renderiza
+     */
+    function renderPlatformList ($platformList,$platformAccount) {
+        $subcategory = "";
+        echo "<select name='subcategories' id='subcategories'>";
+        echo "<option value=''>-- Choice an option --</option>";
+        foreach ($platformList as $array) {
+            if ($subcategory !== $array['subcategory']) {
+                $subcategory = $array['subcategory'];
+                echo "<optgroup label='".$subcategory."'>";
+                foreach($platformList as $platform) {
+                    if ($platform['subcategory'] == $subcategory) {
+                        echo "<option value='".$platform['name']."' ".($platformAccount == $platform['name'] ? 'selected' : '').">".$platform['name']."</option>";
+                    }
+                }
+                echo "</optgroup>";
+            }
+        }
+        echo "</select>";
+    }
+
+    /**
+     * Valida que la plataforma seleccionada al editar / agregar una cuenta es correcta.
+     * 
+     * @param Array $platformNameList  Array con los nombres de las plataformas para la categoría elegida
+     * @param String $platformSelected Nombre de la plataforma elegida
+     * 
+     * @return Boolean TRUE si es correcta, FALSE si no lo es
+     */
+    function validatePlatformSelected($platformNameList,$platformSelected) {
+        for ($i = 0; $i < sizeof($platformNameList); $i++) 
+            if ($platformNameList[$i]['name'] == $platformSelected) return TRUE;
+        return FALSE;
+    }
+    
 ?>

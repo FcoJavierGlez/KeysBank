@@ -2,8 +2,12 @@
     // ACTIONS CONTROLLER \\
     $result_search = array();
     $dataAccount = array();
+    $platformListByCategory = array();
+
     $emptyList = FALSE;
     $addedAcount = FALSE;
+    $editedAcount = FALSE;
+    $failuredAcount = FALSE;
     
     if (isset($_POST['add_account'])) {
         $dataAccount = array(
@@ -16,10 +20,41 @@
             'info' => dataClean($_POST['info']),
             'notes' => dataClean($_POST['notes']),
         );
-        $_SESSION['instance_accounts']->setPassAccount($dataAccount);
-        $addedAcount = TRUE;
+        $failuredAcount = $dataAccount['idCategory'] < 1 || $dataAccount['idCategory'] > $_SESSION['instance_platforms']->getTotalPlatformCategories();
+        if (!$failuredAcount)
+            $failuredAcount =  !validatePlatformSelected($_SESSION['instance_platforms']->getPlatformsListByCategory($dataAccount['idCategory']),$dataAccount['name_platform']);
+        if (!$failuredAcount) {
+            $_SESSION['instance_accounts']->setPassAccount($dataAccount);
+            $addedAcount = TRUE;
+        }
     }
-    if (isset($_GET['view'])) {
+    elseif (isset($_POST['edit_account'])) {
+        $dataAccount = array(
+            'idUser' => $_SESSION['user']['id'],
+            'idAccount' => $_GET['edit'],
+            'idCategory' => $_SESSION['instance_accounts']->getIdCategoryByAccount($_GET['edit']),
+            'name_account' => $_POST['name'],
+            'pass_account' => $_POST['pass'],
+            'name_platform' => $_POST['subcategories'],
+            'url' => dataClean($_POST['url']),
+            'info' => dataClean($_POST['info']),
+            'notes' => dataClean($_POST['notes']),
+        );
+        $failuredAcount =  !validatePlatformSelected($_SESSION['instance_platforms']->getPlatformsListByCategory($dataAccount['idCategory']),$dataAccount['name_platform']);
+        if (!$failuredAcount) {
+            /* echo "<pre>";
+                print_r($dataAccount);
+            echo "</pre>"; */
+            $_SESSION['instance_accounts']->updateAccount($dataAccount);
+            $editedAcount = TRUE;
+        }
+    }
+    elseif (isset($_GET['edit'])) {
+        $dataAccount = $_SESSION['instance_accounts']->getAccountById($_SESSION['user']['id'],$_GET['edit']);
+        if(!sizeof($dataAccount)) header('Location:./accounts.php');
+        $platformListByCategory = $_SESSION['instance_platforms']->getPlatformsByCategory($dataAccount[0]['idCategory']);
+    }
+    elseif (isset($_GET['view'])) {
         $result_search = $_SESSION['instance_accounts']->getAccountById($_SESSION['user']['id'],$_GET['view']);
         if(!sizeof($result_search)) header('Location:./accounts.php');
     }
@@ -39,7 +74,13 @@
     elseif (isset($_GET['view'])) 
         include "../views/accounts/view.php";
     elseif (isset($_GET['edit'])) {
-        
+        include "../views/accounts/edit.php";
+        /* echo "<pre>";
+            print_r($dataAccount);
+        echo "</pre>"; */
+        /* echo "<pre>";
+            print_r($platformListByCategory);
+        echo "</pre>"; */
     }
     else 
         include "../views/accounts/main.php";

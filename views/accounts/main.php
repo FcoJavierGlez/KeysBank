@@ -11,11 +11,11 @@
             echo "<input type='submit' name='search_account' value='Search'>";
         echo "</form>";
     echo "</div>";
-    echo "<div class='result scroll cards-view'>";
+    echo "<div class='result scroll ".($emptyList || !sizeof($result_search) ? 'empty-search' : 'cards-view')."'>";
         if ($emptyList)
-            echo "<span><b>-- Your accounts list is empty --</b></span>";
+            echo "<span><b>--- Empty account list ---</b></span>";
         elseif (!sizeof($result_search))
-            echo "<span><b>-- Not found --</b></span>";
+            echo "<span><b>--- Not found ---</b></span>";
         else 
             renderUserAccountList($result_search);
     echo "</div>";

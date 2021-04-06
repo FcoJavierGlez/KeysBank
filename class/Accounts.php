@@ -122,6 +122,63 @@
             $this->get_results_from_query();
             $this->close_connection();
         }
+
+        /**
+         * Actualiza una cuenta
+         */
+        public function updateAccount($data = array()) {
+            $this->query = "UPDATE keysbank_accounts 
+                SET 
+                name_account = HEX(AES_ENCRYPT(:name_account,(SELECT password FROM keysbank_keys WHERE idUser = :idUser AND idCategory = :idCategory))),
+                pass_account = HEX(AES_ENCRYPT(:pass_account,(SELECT password FROM keysbank_keys WHERE idUser = :idUser AND idCategory = :idCategory))),
+                name_platform = :name_platform,
+                url = HEX(AES_ENCRYPT(:url,(SELECT password FROM keysbank_keys WHERE idUser = :idUser AND idCategory = :idCategory))),
+                info = HEX(AES_ENCRYPT(:info,(SELECT password FROM keysbank_keys WHERE idUser = :idUser AND idCategory = :idCategory))),
+                notes = HEX(AES_ENCRYPT(:notes,(SELECT password FROM keysbank_keys WHERE idUser = :idUser AND idCategory = :idCategory)))
+                WHERE id = :idAccount";
+
+            $this->parametros['idUser']        = $data['idUser'];
+            $this->parametros['idAccount']     = $data['idAccount'];
+            $this->parametros['idCategory']    = $data['idCategory'];
+            $this->parametros['name_account']  = $data['name_account'];
+            $this->parametros['pass_account']  = $data['pass_account'];
+            $this->parametros['name_platform'] = $data['name_platform'];
+            $this->parametros['url']           = $data['url'];
+            $this->parametros['info']          = $data['info'];
+            $this->parametros['notes']         = $data['notes'];
+
+            $this->get_results_from_query();
+            $this->close_connection();
+        }
+
+        /**
+         * Devuelve el ID de la categoría a la que pertecene la cuenta
+         */
+        public function getIdCategoryByAccount($idAccount) {
+            $this->query = "SELECT idCategory FROM keysbank_accounts WHERE id = :id";
+
+            $this->parametros['id'] = $idAccount;
+
+            $this->get_results_from_query();
+            $this->close_connection();
+
+            return $this->rows[0]['idCategory'];
+        }
+
+        //Devuelve las cuentas cuyo usuario ya estemos usando
+        /* SELECT AES_DECRYPT(UNHEX(A.name_account),K.password), A.name_platform 
+        FROM keysbank_accounts A, keysbank_keys K 
+        WHERE K.idUser = A.idUser 
+        AND K.idCategory = A.idCategory AND A.idUser = 7 
+        AND AES_DECRYPT(UNHEX(A.name_account),K.password) = 'Cualquiera' 
+        ORDER BY A.name_platform */
+
+        //Contar dias de diferencia
+        /* SELECT DATEDIFF(CURDATE(), '2020-08-29') > 180
+        date('Y-m-d'); 
+        //password is older than 180 days
+        */
+
     }
     
 ?>
