@@ -128,14 +128,14 @@
          */
         public function updateAccount($data = array()) {
             $this->query = "UPDATE keysbank_accounts 
-                SET 
-                name_account = HEX(AES_ENCRYPT(:name_account,(SELECT password FROM keysbank_keys WHERE idUser = :idUser AND idCategory = :idCategory))),
-                pass_account = HEX(AES_ENCRYPT(:pass_account,(SELECT password FROM keysbank_keys WHERE idUser = :idUser AND idCategory = :idCategory))),
-                name_platform = :name_platform,
-                url = HEX(AES_ENCRYPT(:url,(SELECT password FROM keysbank_keys WHERE idUser = :idUser AND idCategory = :idCategory))),
-                info = HEX(AES_ENCRYPT(:info,(SELECT password FROM keysbank_keys WHERE idUser = :idUser AND idCategory = :idCategory))),
-                notes = HEX(AES_ENCRYPT(:notes,(SELECT password FROM keysbank_keys WHERE idUser = :idUser AND idCategory = :idCategory)))
-                WHERE id = :idAccount";
+            SET 
+            name_account = HEX(AES_ENCRYPT(:name_account,(SELECT password FROM keysbank_keys WHERE idUser = :idUser AND idCategory = :idCategory))),
+            pass_account = HEX(AES_ENCRYPT(:pass_account,(SELECT password FROM keysbank_keys WHERE idUser = :idUser AND idCategory = :idCategory))),
+            name_platform = :name_platform,
+            url = HEX(AES_ENCRYPT(:url,(SELECT password FROM keysbank_keys WHERE idUser = :idUser AND idCategory = :idCategory))),
+            info = HEX(AES_ENCRYPT(:info,(SELECT password FROM keysbank_keys WHERE idUser = :idUser AND idCategory = :idCategory))),
+            notes = HEX(AES_ENCRYPT(:notes,(SELECT password FROM keysbank_keys WHERE idUser = :idUser AND idCategory = :idCategory)))
+            WHERE id = :idAccount";
 
             $this->parametros['idUser']        = $data['idUser'];
             $this->parametros['idAccount']     = $data['idAccount'];
@@ -169,7 +169,8 @@
         /* SELECT AES_DECRYPT(UNHEX(A.name_account),K.password), A.name_platform 
         FROM keysbank_accounts A, keysbank_keys K 
         WHERE K.idUser = A.idUser 
-        AND K.idCategory = A.idCategory AND A.idUser = 7 
+        AND K.idCategory = A.idCategory 
+        AND A.idUser = 7 
         AND AES_DECRYPT(UNHEX(A.name_account),K.password) = 'Cualquiera' 
         ORDER BY A.name_platform */
 
