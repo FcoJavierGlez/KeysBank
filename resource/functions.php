@@ -69,12 +69,26 @@
     /**
      * Reemplaza todos los caracteres de un String por el caracter
      * pasado como parámetro.
+     * 
+     * Ejemplo: ("frase de ejemplo", "*") -> "****************"
      */
     function replaceByCharacter($string,$character) {
         $stringReturned = "";
         for ($i = 0; $i < strlen($string); $i++) 
             $stringReturned .= $character;
         return $stringReturned;
+    }
+
+    /**
+     * Reemplaza todos los caracteres especificados de un String por el caracter
+     * pasado como parámetro. 
+     * 
+     * Ejemplo: ("frase de ejemplo", " ", "\\s") -> "frase\sde\sejemplo";
+     */
+    function replaceCharacterByOtherCharacter($string,$characterToReplace,$otherCharacter) {
+        $replaceThis = array($characterToReplace);
+        $replaceBy   = array($otherCharacter);
+        return strtolower(str_replace( $replaceThis, $replaceBy, $string ));
     }
 
     /**
