@@ -84,11 +84,14 @@
      * pasado como parámetro. 
      * 
      * Ejemplo: ("frase de ejemplo", " ", "\\s") -> "frase\sde\sejemplo";
+     * 
+     * @param Array $characterToReplace Array con los caracteres que van a ser sustituidos
+     * @param Array $otherCharacter Array con los caracteres que van a sustituir
+     * 
+     * @return String Cadena con los caracteres sustituídos
      */
     function replaceCharacterByOtherCharacter($string,$characterToReplace,$otherCharacter) {
-        $replaceThis = array($characterToReplace);
-        $replaceBy   = array($otherCharacter);
-        return strtolower(str_replace( $replaceThis, $replaceBy, $string ));
+        return str_replace( $characterToReplace, $otherCharacter, $string );
     }
 
     /**
