@@ -120,7 +120,7 @@ nav a:hover {
 }
 
 main {
-    *background-color: white;
+    *background-color: black;
     background-image: url(../img/matrix.gif);
     background-position: center;
     background-repeat: no-repeat;
@@ -328,9 +328,9 @@ article form {
     text-transform: uppercase;
 }
 
-.cards-view {
+/* .cards-view {
 
-}
+} */
 
 .card:hover {
     box-shadow: ghostwhite 0px 0px 6px 1px;
