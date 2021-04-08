@@ -34,7 +34,7 @@
     const validateNameAccount = name => {
         if (name.value == "")
             throw new Error('name_account_req');
-        else if (name.value !== cleanInput(name.value))
+        else if (name.value !== functions.cleanInput(name.value))
             throw new Error('name_account_incorrect');
         return  true;
     };
@@ -44,7 +44,7 @@
         let passwordRep = passwords[1].value;
         if (password === "")
             throw new Error('password_req');
-        else if (checkDangerousPassword(password))
+        else if (passManager.checkDangerousPassword(password))
             throw new Error('password_dang');
         else if (password !== passwordRep)
             throw new Error('passwords_must_match');
@@ -93,8 +93,8 @@
                 SPANS[1].innerText = SELECTS[1].value == "" ? "REQUIRED" : ""
                 NAME_ACCOUNT.classList = NAME_ACCOUNT.value == "" ? "input-error" : "input-correct";
                 SPANS[2].innerText = NAME_ACCOUNT.value == "" ? "REQUIRED" : "";
-                SPANS[3].innerText = PASSWORD.value !== "" ? `${validatePasswordStrength(PASSWORD.value)}` : "REQUIRED";
-                SPANS[3].classList = PASSWORD.value !== "" ? `${validatePasswordStrength(PASSWORD.value)}` : "dangerous";
+                SPANS[3].innerText = PASSWORD.value !== "" ? `${passManager.validatePasswordStrength(PASSWORD.value)}` : "REQUIRED";
+                SPANS[3].classList = PASSWORD.value !== "" ? `${passManager.validatePasswordStrength(PASSWORD.value)}` : "dangerous";
                 PASSWORD.classList = PASS_REP.classList = PASS_REP.value == PASSWORD.value && PASS_REP.value !== "" ? 'input-correct' : 'input-error';
             }
 
@@ -123,22 +123,28 @@
             SELECTS[1].addEventListener( "change", () => SPANS[1].innerText = "" );
 
             NAME_ACCOUNT.addEventListener("keyup", () => {
-                NAME_ACCOUNT.value = cleanInput(NAME_ACCOUNT.value);
+                NAME_ACCOUNT.value = functions.cleanInput(NAME_ACCOUNT.value);
                 NAME_ACCOUNT.classList = NAME_ACCOUNT.value !== "" ? "input-correct" : "required";
                 SPANS[2].innerText = "";
             });
 
             PASSWORD.addEventListener("keyup", () => {
-                PASSWORD.value = cleanInput(PASSWORD.value);
-                SPANS[3].className = SPANS[3].innerText = PASSWORD.value !== "" ? `${validatePasswordStrength(PASSWORD.value)}` : "";
-                PASS_REP.dispatchEvent(new Event("keyup"));
+                if (!NAME_ACCOUNT.value.replace(/\s/g,"").length) {
+                    PASSWORD.value = functions.cleanInput(PASSWORD.value);
+                    SPANS[3].className = SPANS[3].innerText = PASSWORD.value !== "" ? `${passManager.validatePasswordStrength(PASSWORD.value)}` : "";
+                    PASS_REP.dispatchEvent(new Event("keyup"));
+                    return;
+                }
+                PASSWORD.value = "";
+                SPANS[2].innerText = "ACCOUNT NAME REQUIRED";
+                NAME_ACCOUNT.classList = 'input-error';
             });
             PASSWORD.addEventListener("focus", () => PASS_REP.dispatchEvent(new Event("keyup")) );
             PASSWORD.addEventListener("blur", () => PASS_REP.dispatchEvent(new Event("keyup")) );
             PASSWORD.addEventListener("copy", e => e.preventDefault() );
 
             PASS_REP.addEventListener("keyup", () => {
-                PASS_REP.value = cleanInput(PASS_REP.value);
+                PASS_REP.value = functions.cleanInput(PASS_REP.value);
                 PASS_REP.value == "" ? 
                     PASSWORD.classList = PASS_REP.classList = "required" :
                     (
@@ -169,7 +175,12 @@
 
             GEN_PASSWORD.addEventListener("click", e => {
                 e.preventDefault();
-                PASS_REP.value = PASSWORD.value = genPass(NUMBER_CHAR.value, SPECIAL_CHAR.checked);
+                if (!NAME_ACCOUNT.value.replace(/\s/g,"").length) {
+                    SPANS[2].innerText = "ACCOUNT NAME REQUIRED";
+                    NAME_ACCOUNT.classList = 'input-error';
+                    return;
+                }
+                PASS_REP.value = PASSWORD.value = passManager.genPass(NUMBER_CHAR.value, SPECIAL_CHAR.checked);
                 PASSWORD.dispatchEvent(new Event("keyup"));
                 PASS_REP.dispatchEvent(new Event("keyup"));
                 EYE_BUTTONS.filter( e=> e.id === "shps" || e.id === "shpsr" ).forEach( e => {

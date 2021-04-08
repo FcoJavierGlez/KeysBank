@@ -2,73 +2,13 @@
  * @author Francisco Javier González Sabariego
  */
  {
-    const INFO_ROUTES = {
-        'pass': 'get_pass',
-    }
-
-    const INFO_ARRAY = {
-        'pass': 'AES_DECRYPT(UNHEX(A.pass_account),K.password)',
-    }
-
-    const copyValue = textToCopy => {  
+    const copyText = textToCopy => {  
         const passBox = document.createElement("textarea");
         passBox.value = textToCopy;
         document.body.appendChild(passBox);
         passBox.select();
         document.execCommand("copy");
         document.body.removeChild(passBox);
-    }
-
-    /**
-     * 
-     * @param {*} formDOM 
-     */
-    async function copyPass(formDOM) {
-        let idCleanClipBoard = 0;
-        let path = "";
-        const ROUTE = `${location.origin}/${(path = location.pathname.match(/^\/(\w+)(\/pages\/)?(\w+\.(html|php))?$/)?.[1]) == undefined ? "" : path}`;
-
-        const data = new FormData(formDOM);
-
-        const connect = await fetch(`${ROUTE}/api/${INFO_ROUTES.pass}.php`,{ 
-            method: 'POST',
-            body: data
-        });
-        
-        const pass = await connect.json();
-
-        copyValue( pass.length ? pass[0]['AES_DECRYPT(UNHEX(A.pass_account),K.password)'] : 'Error 404. Not found.');
-
-        idCleanClipBoard = setTimeout( () => {
-
-            copyValue('*******************');
-
-            clearTimeout(idCleanClipBoard);
-        }, 4700);
-    }
-
-    /**
-     * 
-     * @param {*} formDOM 
-     * @param {*} info 
-     * @param {*} elementDom 
-     */
-    async function showInfo(formDOM,info,elementDom = undefined) {
-        let path = "";
-        const ROUTE = `${location.origin}/${(path = location.pathname.match(/^\/(\w+)(\/pages\/)?(\w+\.(html|php))?$/)?.[1]) == undefined ? "" : path}`;
-
-        const data = new FormData(formDOM);
-
-        const connect = await fetch(`${ROUTE}/api/${INFO_ROUTES[`${info}`]}.php`,{ 
-            method: 'POST',
-            body: data
-        });
-        
-        const getInfo = await connect.json();
-
-        elementDom.nextElementSibling.tagName == 'INPUT' || elementDom.nextElementSibling.tagName == 'TEXTAREA' ? 
-                elementDom.nextElementSibling.value = `${getInfo[0][INFO_ARRAY[`${info}`]]}` :
-                elementDom.nextElementSibling.innerText = `${getInfo[0][INFO_ARRAY[`${info}`]]}`;
     }
 
     /**
@@ -98,13 +38,13 @@
 
     /**
      * 
-     * @param {*} form 
+     * @param {*} data 
      * @param {*} info 
      * @param {*} elementDom 
      */
-    const toggleShowNextSibling = function(form, info, elementDom) {
+    const toggleShowNextSibling = function(data, request, elementDom, callback) {
         if (elementDom.children[0].checked)
-            showInfo( form, info, elementDom );
+            functions.requestApi( data, request, callback, elementDom );
         else
             elementDom.nextElementSibling.tagName == 'INPUT' || elementDom.nextElementSibling.tagName == 'TEXTAREA' ?
                 elementDom.nextElementSibling.value = `${"".padStart(elementDom.nextElementSibling.value.length,'*')}` :
@@ -118,16 +58,24 @@
             const SHOW_PASS   = document.getElementById("shps");
             const COPY_BUTTON = document.getElementById("cp_pss");
 
+            const showInfo = (info,elementDom) => {
+                elementDom.nextElementSibling.tagName == 'INPUT' || elementDom.nextElementSibling.tagName == 'TEXTAREA' ? 
+                        elementDom.nextElementSibling.value = info :
+                        elementDom.nextElementSibling.innerText = info;
+            }
+
             COPY_BUTTON.addEventListener("click", e => {
                 e.preventDefault();
                 if ( !validateAccountId(HIDDEN) ) return;
-                copyPass( FORM );
+                const data = new FormData(FORM);
+                functions.requestApi( data, 'pass', copyText );
             });
 
             SHOW_PASS.addEventListener("click", function() {
                 if ( !validateAccountId(HIDDEN) ) return;
+                const data = new FormData(FORM);
                 toggleEye(this);
-                toggleShowNextSibling( FORM, 'pass', this );
+                toggleShowNextSibling( data, 'pass', this, showInfo );
             });
         }
         

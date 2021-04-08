@@ -19,7 +19,7 @@
         subCategoriesList.forEach( e => {
             const option = document.createElement("option");
                 option.value = `${e.subcategory}`;
-                option.innerHTML = normalizeOption(`${e.subcategory}`);
+                option.innerHTML = functions.normalizeOption(`${e.subcategory}`);
             fragment.appendChild(option);
         });
 

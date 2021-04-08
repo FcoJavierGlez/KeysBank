@@ -14,7 +14,7 @@
             .forEach( e => {
                 const option = document.createElement("option");
                 option.value = `${e.name}`;
-                //option.innerHTML = normalizeOption(`${e.name}`);
+                //option.innerHTML = functions.normalizeOption(`${e.name}`);
                 option.innerHTML = `${e.name}`;
                 optgroup.appendChild(option);
             } );

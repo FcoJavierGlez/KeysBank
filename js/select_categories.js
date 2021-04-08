@@ -18,7 +18,7 @@
         categoriesList.forEach( e => {
             const option = document.createElement("option");
             option.value = `${e.id}`;
-            option.innerText = normalizeOption(`${e.category}`);
+            option.innerText = functions.normalizeOption(`${e.category}`);
             fragment.appendChild(option);
         });
         

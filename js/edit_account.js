@@ -52,14 +52,14 @@
             });
 
             NAME_ACCOUNT.addEventListener("keyup", () => {
-                NAME_ACCOUNT.value = cleanInput(NAME_ACCOUNT.value);
+                NAME_ACCOUNT.value = functions.cleanInput(NAME_ACCOUNT.value);
                 NAME_ACCOUNT.classList = NAME_ACCOUNT.value !== "" ? "input-correct" : "required";
                 SPANS[2].innerText = "";
             });
 
             PASSWORD.addEventListener("keyup", () => {
-                PASSWORD.value = cleanInput(PASSWORD.value);
-                SPANS[3].className = SPANS[3].innerText = PASSWORD.value !== "" ? `${validatePasswordStrength(PASSWORD.value)}` : "";
+                PASSWORD.value = functions.cleanInput(PASSWORD.value);
+                SPANS[3].className = SPANS[3].innerText = PASSWORD.value !== "" ? `${passManager.validatePasswordStrength(PASSWORD.value)}` : "";
                 PASS_REP.dispatchEvent(new Event("keyup"));
             });
             PASSWORD.addEventListener("focus", () => PASS_REP.dispatchEvent(new Event("keyup")) );
@@ -67,7 +67,7 @@
             PASSWORD.addEventListener("copy", e => e.preventDefault() );
 
             PASS_REP.addEventListener("keyup", () => {
-                PASS_REP.value = cleanInput(PASS_REP.value);
+                PASS_REP.value = functions.cleanInput(PASS_REP.value);
                 PASS_REP.value == "" ? 
                     PASSWORD.classList = PASS_REP.classList = "required" :
                     (
@@ -98,7 +98,7 @@
 
             GEN_PASSWORD.addEventListener("click", e => {
                 e.preventDefault();
-                PASS_REP.value = PASSWORD.value = genPass(NUMBER_CHAR.value, SPECIAL_CHAR.checked);
+                PASS_REP.value = PASSWORD.value = passManager.genPass(NUMBER_CHAR.value, SPECIAL_CHAR.checked);
                 PASSWORD.dispatchEvent(new Event("keyup"));
                 PASS_REP.dispatchEvent(new Event("keyup"));
                 EYE_BUTTONS.filter( e=> e.id === "shps" || e.id === "shpsr" ).forEach( e => {
@@ -136,7 +136,7 @@
             console.log(SAVE_BUTTON);
             console.log(TEXT_AREA);
 
-            CATEGORY.innerText = `${normalizeOption(CATEGORY.innerText)}`;
+            CATEGORY.innerText = `${functions.normalizeOption(CATEGORY.innerText)}`;
         }
     });
 }
