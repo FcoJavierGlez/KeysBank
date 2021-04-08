@@ -36,6 +36,7 @@
         <link rel="stylesheet" href="../css/style.css">
         <link rel="icon" href="../favicon.ico">
         <script src="../js/functions.js"></script>
+        <script src="../js/passManager.js"></script>
         <script src="../js/view_account.js"></script>
         <script src="../js/select_categories.js"></script>
         <script src="../js/select_platforms.js"></script>
