@@ -122,7 +122,7 @@
                     ?>
                 </nav>
                 <div class="container">
-                    <div class="name-page"><h2>INDEX</h2></div>
+                    <div class="name-page"><h2><?php echo ($_SESSION['user']['perfil'] == 'INVITED' ? "" : "INDEX"); ?></h2></div>
                     <?php
                         //Controller
                     ?>
