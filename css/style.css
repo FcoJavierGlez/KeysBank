@@ -271,6 +271,13 @@ section {
 .scroll::-webkit-scrollbar {
     display: none;
 }
+.category {
+    color: orange;
+    font-weight: bold;
+    *margin: 10px;
+    text-align: center;
+    text-transform: uppercase;
+}
 article {
     border: 3px solid black;
     margin: 5px auto;
@@ -471,6 +478,9 @@ button {
     }
     .basic-info {
         font-size: 1rem;
+    }
+    .category {
+        font-size: 1.5rem;
     }
 }
 @media only screen and (min-width: 750px) {

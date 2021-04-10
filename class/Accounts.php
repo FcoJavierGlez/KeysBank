@@ -25,17 +25,19 @@
          */
         public function getUserAccounts($idUser, $search = '') {
             if ($search == '' || $search == '*') {
-                $this->query = "SELECT A.id,A.idCategory,A.name_platform,AES_DECRYPT(UNHEX(A.name_account),K.password),DATEDIFF(CURDATE(), A.pass_date),AES_DECRYPT(UNHEX(A.notes),K.password)
-                FROM keysbank_accounts A, keysbank_keys K 
+                $this->query = "SELECT A.id,A.idCategory,C.category,A.name_platform,AES_DECRYPT(UNHEX(A.name_account),K.password),DATEDIFF(CURDATE(), A.pass_date),AES_DECRYPT(UNHEX(A.notes),K.password)
+                FROM keysbank_accounts A, keysbank_keys K, keysbank_platform_categories C 
                 WHERE K.idUser = A.idUser
                 AND K.idCategory = A.idCategory
+                AND C.id = A.idCategory
                 AND A.idUser = :idUser";
             }
             else {
-                $this->query = "SELECT A.id,A.name_platform,AES_DECRYPT(UNHEX(A.name_account),K.password),DATEDIFF(CURDATE(), A.pass_date),AES_DECRYPT(UNHEX(A.notes),K.password) 
-                FROM keysbank_accounts A, keysbank_keys K 
+                $this->query = "SELECT A.id,A.idCategory,C.category,A.name_platform,AES_DECRYPT(UNHEX(A.name_account),K.password),DATEDIFF(CURDATE(), A.pass_date),AES_DECRYPT(UNHEX(A.notes),K.password) 
+                FROM keysbank_accounts A, keysbank_keys K, keysbank_platform_categories C 
                 WHERE K.idUser = A.idUser
                 AND K.idCategory = A.idCategory
+                AND C.id = A.idCategory
                 AND A.idUser = :idUser
                 AND lower(A.name_platform) LIKE :search";
             }
@@ -176,12 +178,6 @@
         AND A.idUser = 7 
         AND AES_DECRYPT(UNHEX(A.name_account),K.password) = 'Cualquiera' 
         ORDER BY A.name_platform */
-
-        //Contar dias de diferencia
-        /* SELECT DATEDIFF(CURDATE(), '2020-08-29') > 180
-        date('Y-m-d'); 
-        //password is older than 180 days
-        */
 
     }
     

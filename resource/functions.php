@@ -106,9 +106,35 @@
     }
 
     /**
-     * Renderiza la lista de cuentas del usuario (o la búsqueda realizada en la misma)
+     * @param
+     * @param
+     * @return
      */
+    function filterAccountsIdCategory($arrayAccounts,$id) {
+        $array = array();
+        foreach ($arrayAccounts as $value) {
+            if ($id == $value['idCategory']) 
+                array_push($array,$value);
+        }
+        return $array;
+    }
+
     function renderUserAccountList($list) {
+        $accountsListByCategory = array();
+        for ($i = 0; $i < 7; $i++) { 
+            $accountsListByCategory = filterAccountsIdCategory($list,$i);
+            if (!sizeof($accountsListByCategory)) continue;
+            echo "<div class='category'><hr/>".replaceCharacterByOtherCharacter($accountsListByCategory[0]['category'],array("_"),array(" "))."<hr/></div>";
+            echo "<div class='cards-view'>";
+            renderAccountsList($accountsListByCategory);
+            echo "</div>";
+        }
+    }
+
+    /**
+     * Renderiza la lista de cuentas pasada por parámetro
+     */
+    function renderAccountsList($list) {
         foreach ($list as $value) {
             $route = file_exists("../img/platform/".normalizeString($value['name_platform']).".png") ? "../img/platform/".normalizeString($value['name_platform']).".png" : "../img/platform/other.png";
             echo "<a href='".$_SERVER['PHP_SELF']."?view=".$value['id'].""."'>";
@@ -118,9 +144,6 @@
                         echo "<h3>".$value['name_platform'].":</h3>";
                     echo "</div>";
                     echo "<div class='basic-info info-card'>";
-                        /* echo "<pre>";
-                            print_r($list);
-                        echo "</pre>"; */
                         echo "<div><b><u>Account</u>:</b></div>";
                         echo "<div><span>".$value['AES_DECRYPT(UNHEX(A.name_account),K.password)']."</span></div>";
                         echo "<div><b><u>Notes</u>:</b></div>";
@@ -131,6 +154,7 @@
             echo "</a>";
         }
     }
+
 
     /**
      * Renderiza
