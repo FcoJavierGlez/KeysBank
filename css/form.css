@@ -261,6 +261,9 @@ div.special_message span.strongest {
 }
 
 @media only screen and (min-width: 700px) {
+    form#form-view, form#form-add {
+        font-size: 1rem;
+    }
     div#category {
         margin: 2px 0;
     }

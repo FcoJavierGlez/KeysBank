@@ -95,9 +95,10 @@ const passManager = (
          * - strongest: contraseña muy robusta
          * 
          * @param {String} password Contraseña a validar
+         * @param {Array} array 
          * @returns {String} Validación obtenida de la contraseña [dangerous-strongest]
          */
-        const validatePasswordStrength = function(password) {
+        const validatePasswordStrength = function(password,array = undefined) {
             const VALUE = valuePassword(password);
             const LENGTH = password.length;
             const STRENGTH = {
@@ -107,7 +108,7 @@ const passManager = (
                 3: 'strong',
                 4: 'strongest',
             }
-            if (checkDangerousPassword(password)) return STRENGTH[0];
+            if (checkDangerousPassword(password,array)) return STRENGTH[0];
             else if (LENGTH >= 16 && VALUE == 5) return STRENGTH[4];
             else if (LENGTH >= 8 && VALUE == 5 || LENGTH >= 12 && VALUE > 3) return STRENGTH[3];
             else if (LENGTH >= 6 && VALUE >= 3) return STRENGTH[2];

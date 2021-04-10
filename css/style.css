@@ -300,9 +300,32 @@ article form {
     padding: 15px 10px;
     font-size: 0.8rem;
 }
+article.card .basic-info {
+    padding: 15px 10px 0;
+}
+.alert {
+    align-items: center;
+    color: red;
+    display: flex;
+    font-size: 1rem;
+    font-weight: bold;
+    height: 20px;
+    justify-content: center;
+    margin: 0;
+    padding: 0px 0;
+    *text-align: center;
+}
+.info-card div.alert {
+    margin: 0;
+}
 .basic-info div span {
     margin: 0 10px;
     color: black;
+}
+.basic-info span.alert {
+    color: red;
+    display: inline;
+    text-align: left;
 }
 
 .card .basic-info textarea {
@@ -327,10 +350,6 @@ article form {
     justify-content: center;
     text-transform: uppercase;
 }
-
-/* .cards-view {
-
-} */
 
 .card:hover {
     box-shadow: ghostwhite 0px 0px 6px 1px;
@@ -449,6 +468,9 @@ button {
     nav a {
         *height: 2.5vh;
         width: 100px;
+    }
+    .basic-info {
+        font-size: 1rem;
     }
 }
 @media only screen and (min-width: 750px) {

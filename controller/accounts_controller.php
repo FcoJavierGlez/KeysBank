@@ -15,6 +15,7 @@
             'idCategory' => $_POST['categories'],
             'name_account' => dataClean($_POST['name']),
             'pass_account' => $_POST['pass'],
+            'pass_date' => date('Y-m-d'),
             'name_platform' => $_POST['subcategories'],
             'url' => dataClean($_POST['url']),
             'info' => dataClean($_POST['info']),

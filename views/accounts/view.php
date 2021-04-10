@@ -24,6 +24,7 @@
                     </div>
                     <div>
                         <b><u>Pass</u>:</b>
+                        <span class="alert"><?php echo $result_search[0]['DATEDIFF(CURDATE(), A.pass_date)'] >= 90 ? "PASSWORD TOO OLD" : ""; ?></span>
                     </div>
                     <div class="info">
                         <div id="shps" class="eye">

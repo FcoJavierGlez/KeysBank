@@ -44,8 +44,8 @@
         let passwordRep = passwords[1].value;
         if (password === "")
             throw new Error('password_req');
-        else if (passManager.checkDangerousPassword(password))
-            throw new Error('password_dang');
+        /* else if (passManager.checkDangerousPassword(password))
+            throw new Error('password_dang'); */
         else if (password !== passwordRep)
             throw new Error('passwords_must_match');
         return true;
@@ -93,8 +93,8 @@
                 SPANS[1].innerText = SELECTS[1].value == "" ? "REQUIRED" : ""
                 NAME_ACCOUNT.classList = NAME_ACCOUNT.value == "" ? "input-error" : "input-correct";
                 SPANS[2].innerText = NAME_ACCOUNT.value == "" ? "REQUIRED" : "";
-                SPANS[3].innerText = PASSWORD.value !== "" ? `${passManager.validatePasswordStrength(PASSWORD.value)}` : "REQUIRED";
-                SPANS[3].classList = PASSWORD.value !== "" ? `${passManager.validatePasswordStrength(PASSWORD.value)}` : "dangerous";
+                SPANS[3].innerText = PASSWORD.value !== "" ? `${passManager.validatePasswordStrength(PASSWORD.value,[NAME_ACCOUNT.value])}` : "REQUIRED";
+                SPANS[3].classList = PASSWORD.value !== "" ? `${passManager.validatePasswordStrength(PASSWORD.value,[NAME_ACCOUNT.value])}` : "dangerous";
                 PASSWORD.classList = PASS_REP.classList = PASS_REP.value == PASSWORD.value && PASS_REP.value !== "" ? 'input-correct' : 'input-error';
             }
 
@@ -126,18 +126,28 @@
                 NAME_ACCOUNT.value = functions.cleanInput(NAME_ACCOUNT.value);
                 NAME_ACCOUNT.classList = NAME_ACCOUNT.value !== "" ? "input-correct" : "required";
                 SPANS[2].innerText = "";
+                if (NAME_ACCOUNT.value.replace(/\s/g,"").length && PASSWORD.value.length) 
+                    PASSWORD.dispatchEvent(new Event("keyup"));
+                else if (!NAME_ACCOUNT.value.replace(/\s/g,"").length && PASSWORD.value.length) {
+                    SPANS[3].innerText = SPANS[2].innerText = "ACCOUNT NAME REQUIRED";
+                    NAME_ACCOUNT.classList = 'input-error';
+                    PASS_REP.value = PASSWORD.value = "";
+                    SPANS[3].classList = "dangerous";
+                    PASS_REP.dispatchEvent(new Event("keyup"));
+                }
             });
 
             PASSWORD.addEventListener("keyup", () => {
                 if (!NAME_ACCOUNT.value.replace(/\s/g,"").length) {
-                    PASSWORD.value = functions.cleanInput(PASSWORD.value);
-                    SPANS[3].className = SPANS[3].innerText = PASSWORD.value !== "" ? `${passManager.validatePasswordStrength(PASSWORD.value)}` : "";
-                    PASS_REP.dispatchEvent(new Event("keyup"));
+                    PASSWORD.value = "";
+                    SPANS[2].innerText = "ACCOUNT NAME REQUIRED";
+                    NAME_ACCOUNT.classList = 'input-error';
                     return;
                 }
-                PASSWORD.value = "";
-                SPANS[2].innerText = "ACCOUNT NAME REQUIRED";
-                NAME_ACCOUNT.classList = 'input-error';
+                PASSWORD.value = functions.cleanInput(PASSWORD.value);
+                SPANS[3].className = SPANS[3].innerText = PASSWORD.value !== "" ? `${passManager.validatePasswordStrength(PASSWORD.value,[NAME_ACCOUNT.value])}` : "";
+                PASS_REP.dispatchEvent(new Event("keyup"));
+                
             });
             PASSWORD.addEventListener("focus", () => PASS_REP.dispatchEvent(new Event("keyup")) );
             PASSWORD.addEventListener("blur", () => PASS_REP.dispatchEvent(new Event("keyup")) );
@@ -176,8 +186,11 @@
             GEN_PASSWORD.addEventListener("click", e => {
                 e.preventDefault();
                 if (!NAME_ACCOUNT.value.replace(/\s/g,"").length) {
-                    SPANS[2].innerText = "ACCOUNT NAME REQUIRED";
+                    SPANS[3].innerText = SPANS[2].innerText = "ACCOUNT NAME REQUIRED";
                     NAME_ACCOUNT.classList = 'input-error';
+                    PASS_REP.value = PASSWORD.value = "";
+                    SPANS[3].classList = "dangerous";
+                    PASS_REP.dispatchEvent(new Event("keyup"));
                     return;
                 }
                 PASS_REP.value = PASSWORD.value = passManager.genPass(NUMBER_CHAR.value, SPECIAL_CHAR.checked);
