@@ -74,7 +74,6 @@
 
     const printAccountsNameRepeat = info => {
         let string = "";
-        info.forEach( e => console.log(e['AES_DECRYPT(UNHEX(A.name_account)']) );
         info.forEach( e => string += `<a href="./accounts.php?view=${e.id}" class="account_used" target="_blank"><div>${Object.values(e)[1]}</div><div>${Object.values(e)[2]}</div></a>` );
         return string;
     }
@@ -107,7 +106,6 @@
                     }
                 </div>
                 `;
-                info.forEach( e => console.log(e) );
             }
 
             const showErrors = () => {
