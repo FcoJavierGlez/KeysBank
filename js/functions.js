@@ -3,15 +3,6 @@
  */
 const functions = (
     () => {
-        let path = "";
-        const ROUTE = `${location.origin}/${(path = location.pathname.match(/^\/(\w+)(\/pages\/)?(\w+\.(html|php))?$/)?.[1]) == undefined ? "" : path}`;
-        const INFO_ROUTES = {
-            'pass': 'get_pass',
-        };
-        const INFO_ARRAY = {
-            'pass': 'AES_DECRYPT(UNHEX(A.pass_account),K.password)',
-        };
-        
         /**
          * 
          * @param {Object} FormData     Object DataForm con los datos del formulario
@@ -20,6 +11,17 @@ const functions = (
          * @param {Element} elementDom  
          */
          async function requestApi(dataForm, dataRequest, callBack, elementDom = undefined) {
+            let path = "";
+            const ROUTE = `${location.origin}/${(path = location.pathname.match(/^\/(\w+)(\/pages\/)?(\w+\.(html|php))?$/)?.[1]) == undefined ? "" : path}`;
+            
+            const INFO_ROUTES = {
+                'pass': 'get_pass',
+                'name_account_repeat': 'get_repeat_name_accounts',
+            };
+            const INFO_ARRAY = {
+                'pass': 'AES_DECRYPT(UNHEX(A.pass_account),K.password)',
+            };
+
             const connect = await fetch(`${ROUTE}/api/${INFO_ROUTES[dataRequest]}.php`, { 
                 method: 'POST',
                 body: dataForm
@@ -27,10 +29,14 @@ const functions = (
             
             const getInfo = await connect.json();
 
-            if (getInfo.length)
-                elementDom == undefined ?
-                    callBack(`${getInfo[0][INFO_ARRAY[dataRequest]]}`) :
-                    callBack(`${getInfo[0][INFO_ARRAY[dataRequest]]}`,elementDom);
+            if (getInfo.length) {
+                if (dataRequest == 'name_account_repeat')
+                    callBack(getInfo);
+                else
+                    elementDom == undefined ?
+                        callBack(`${getInfo[0][INFO_ARRAY[dataRequest]]}`) :
+                        callBack(`${getInfo[0][INFO_ARRAY[dataRequest]]}`,elementDom);
+            }
         }
         
         /**

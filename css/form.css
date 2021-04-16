@@ -160,6 +160,39 @@ form span.display_textarea_char {
     text-align: right;
 }
 
+/* NAME ACCOUNTS REPEAT */
+#acc_name_rep a.account_used {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    align-items: center;
+    justify-items: center;
+}
+
+.name_accounts_repeat {
+    background-color: ghostwhite;
+    border: 2px solid black;
+    display: flex;
+    flex-flow: column;
+    height: 100px;
+    overflow-y: auto;
+    margin: 0 auto;
+    scrollbar-width: none;
+    width: 98%;
+}
+.account_used {
+    padding: 5px;
+}
+.account_used:hover {
+    cursor: pointer;
+}
+.account_used:nth-child(odd) {
+    background-color: gray;
+    color: white;
+}
+.account_used:nth-child(even) {
+    background-color: lightcyan;
+}
+
 /* FIELDSET GEN_PASS */
 fieldset.gen_pass {
     background-color: lightgray;

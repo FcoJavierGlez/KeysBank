@@ -170,14 +170,26 @@
             return $this->rows[0]['idCategory'];
         }
 
-        //Devuelve las cuentas cuyo usuario ya estemos usando
-        /* SELECT AES_DECRYPT(UNHEX(A.name_account),K.password), A.name_platform 
-        FROM keysbank_accounts A, keysbank_keys K 
-        WHERE K.idUser = A.idUser 
-        AND K.idCategory = A.idCategory 
-        AND A.idUser = 7 
-        AND AES_DECRYPT(UNHEX(A.name_account),K.password) = 'Cualquiera' 
-        ORDER BY A.name_platform */
+        /**
+         * Devuelve una lista de cuentas propietarias del usuario que repiten el mismo nombre de cuenta
+         */
+        public function getAccountsUserByNameRepeat($idUser,$nameAccount) {
+            $this->query = "SELECT A.id, AES_DECRYPT(UNHEX(A.name_account),K.password), A.name_platform
+            FROM keysbank_accounts A, keysbank_keys K 
+            WHERE K.idUser = A.idUser 
+            AND K.idCategory = A.idCategory 
+            AND A.idUser = :idUser
+            AND LOWER(CONVERT(AES_DECRYPT(UNHEX(A.name_account),K.password) USING utf8)) = LOWER(:name_account)
+            ORDER BY A.name_platform";
+
+            $this->parametros['idUser']       = $idUser;
+            $this->parametros['name_account'] = $nameAccount;
+
+            $this->get_results_from_query();
+            $this->close_connection();
+
+            return $this->rows;
+        }
 
     }
     

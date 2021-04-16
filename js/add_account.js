@@ -72,11 +72,20 @@
         }
     }
 
+    const printAccountsNameRepeat = info => {
+        let string = "";
+        info.forEach( e => console.log(e['AES_DECRYPT(UNHEX(A.name_account)']) );
+        info.forEach( e => string += `<a href="./accounts.php?view=${e.id}" class="account_used" target="_blank"><div>${Object.values(e)[1]}</div><div>${Object.values(e)[2]}</div></a>` );
+        return string;
+    }
+
     const init = () => {
         if (location.href.match(/accounts\.php\?add$/)?.input !== undefined) {
+            const FORM  = document.getElementById("form-add");
             const SPANS = [...document.getElementsByTagName("span")];
             const SELECTS = [...document.getElementsByTagName("select")];
             const NAME_ACCOUNT   = document.getElementById("name");
+            const NAME_REPEAT    = document.getElementById("acc_name_rep");
             const PASSWORD       = document.getElementById("pass");
             const PASS_REP       = document.getElementById("pass_rep");
             const EYE_BUTTONS    = [...document.getElementsByTagName("div")].filter( e => e.id.match(/^sh/) );/* [document.getElementById("shps"), document.getElementById("shpsr")]; */
@@ -87,6 +96,19 @@
             const GEN_PASSWORD   = document.getElementById("gen_pass");
             const SAVE_BUTTON    = document.getElementById("save");
             const TEXT_AREA      = [...document.getElementsByTagName("textarea")];
+
+            const getAccountsNameRepeat = info => {
+                NAME_REPEAT.classList = 'name_accounts_repeat';
+                NAME_REPEAT.innerHTML = `
+                <div class="alert">Account name used</div>
+                <div class="scroll">
+                    ${
+                        printAccountsNameRepeat(info)
+                    }
+                </div>
+                `;
+                info.forEach( e => console.log(e) );
+            }
 
             const showErrors = () => {
                 SPANS[0].innerText = SELECTS[0].value == "" ? "REQUIRED" : "";
@@ -123,9 +145,15 @@
             SELECTS[1].addEventListener( "change", () => SPANS[1].innerText = "" );
 
             NAME_ACCOUNT.addEventListener("keyup", () => {
+                NAME_REPEAT.innerHTML = '';
+                NAME_REPEAT.classList = 'hidden';
                 NAME_ACCOUNT.value = functions.cleanInput(NAME_ACCOUNT.value);
                 NAME_ACCOUNT.classList = NAME_ACCOUNT.value !== "" ? "input-correct" : "required";
                 SPANS[2].innerText = "";
+                if (NAME_ACCOUNT.value.replace(/\s/g,"").length) {
+                    const data = new FormData(FORM);
+                    functions.requestApi(data, 'name_account_repeat', getAccountsNameRepeat);
+                }
                 if (NAME_ACCOUNT.value.replace(/\s/g,"").length && PASSWORD.value.length) 
                     PASSWORD.dispatchEvent(new Event("keyup"));
                 else if (!NAME_ACCOUNT.value.replace(/\s/g,"").length && PASSWORD.value.length) {

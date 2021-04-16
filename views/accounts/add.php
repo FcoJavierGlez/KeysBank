@@ -44,6 +44,7 @@
                                 <span class="text-error"></span>
                             </div>
                         </div>
+                        <div id="acc_name_rep" class="hidden"></div>
                         <!-- PASSWORD -->
                         <fieldset class="password">
                             <legend>Password</legend>
