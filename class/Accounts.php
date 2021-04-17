@@ -99,8 +99,10 @@
 
         /**
          * Inserta una nueva cuenta
+         * 
+         * @param Array $data Conjunto de datos necesarios para insertar una nueva cuenta
          */
-        public function setPassAccount($data = array()) {
+        public function addAccount($data = array()) {
             $this->query = "INSERT INTO keysbank_accounts 
             (idUser,idCategory,name_account,pass_account,pass_date,name_platform,url,info,notes)
             VALUES

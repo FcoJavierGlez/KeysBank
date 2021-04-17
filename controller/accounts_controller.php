@@ -25,7 +25,7 @@
         if (!$failuredAcount)
             $failuredAcount =  !validatePlatformSelected($_SESSION['instance_platforms']->getPlatformsListByCategory($dataAccount['idCategory']),$dataAccount['name_platform']);
         if (!$failuredAcount) {
-            $_SESSION['instance_accounts']->setPassAccount($dataAccount);
+            $_SESSION['instance_accounts']->addAccount($dataAccount);
             $addedAcount = TRUE;
         }
     }
