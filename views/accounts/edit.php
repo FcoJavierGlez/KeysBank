@@ -2,7 +2,7 @@
     <div class='panel-title'>
         <div><a href='accounts.php?view=<?php echo $_GET['edit'] ?>'><button class="back">Back</button></a></div>
         <h3>EDIT</h3>
-        <div</div>
+        <div></div>
     </div>
     <div class='result scroll'>
         <div class="<?php if ($editedAcount || $failuredAcount) echo $editedAcount ? 'win_added_acc' : 'fail_added_acc'; else echo 'hidden'; ?>" > <!-- win_added_acc --> <!-- registered-box dm10 -->
