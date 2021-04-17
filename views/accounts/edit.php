@@ -99,7 +99,7 @@
                                     URL / IP:
                                 </div>
                                 <div class="div_pass">
-                                    <div id="shurl" class="eye">
+                                    <div id="shurl" class="eye_slash">
                                         <input type="checkbox" name="shurl">
                                     </div>
                                     <input type="text" name="url" id="url" placeholder="OPTIONAL" value="<?php echo $dataAccount[0]['AES_DECRYPT(UNHEX(A.url),K.password)']; ?>">
@@ -110,10 +110,10 @@
                                     Notes (Visible info):
                                 </div>
                                 <div class="div_pass">
-                                    <div id="shnotes" class="eye">
+                                    <div id="shnotes" class="eye_slash">
                                         <input type="checkbox" name="shnotes">
                                     </div>
-                                    <textarea name="notes" id="notes" placeholder="OPTIONAL" maxlength="255"><?php echo $dataAccount[0]['AES_DECRYPT(UNHEX(A.notes),K.password)']; ?></textarea>
+                                    <textarea name="notes" id="notes" placeholder="OPTIONAL" maxlength="255"><?php echo replaceCharacterByOtherCharacter( $dataAccount[0]['AES_DECRYPT(UNHEX(A.notes),K.password)'], array("\\s","\\'",'\\"',"\\&","\\|","\\<","\\>"), array(" ","'",'"',"&","|","<",">") ); ?></textarea>
                                 </div>
                                 <div></div>
                                 <span class="display_textarea_char"><?php echo strlen($dataAccount[0]['AES_DECRYPT(UNHEX(A.notes),K.password)']); ?>/255</span>
@@ -123,10 +123,10 @@
                                     Sensible info (Hidden info):
                                 </div>
                                 <div class="div_pass">
-                                    <div id="shinfo" class="eye_slash">
+                                    <div id="shinfo" class="eye">
                                         <input type="checkbox" name="shinfo" checked>
                                     </div>
-                                    <textarea name="info" id="info" placeholder="OPTIONAL" maxlength="255" style="display: none;"><?php echo $dataAccount[0]['AES_DECRYPT(UNHEX(A.info),K.password)']; ?></textarea>
+                                    <textarea name="info" id="info" placeholder="OPTIONAL" maxlength="255" style="display: none;"><?php echo replaceCharacterByOtherCharacter( $dataAccount[0]['AES_DECRYPT(UNHEX(A.info),K.password)'], array("\\s","\\'",'\\"',"\\&","\\|","\\<","\\>"), array(" ","'",'"',"&","|","<",">") ); ?></textarea>
                                 </div>
                                 <div></div>
                                 <span class="display_textarea_char" style="display: none;"><?php echo strlen($dataAccount[0]['AES_DECRYPT(UNHEX(A.info),K.password)']); ?>/255</span>

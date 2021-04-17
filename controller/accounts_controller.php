@@ -17,9 +17,9 @@
             'pass_account' => $_POST['pass'],
             'pass_date' => date('Y-m-d'),
             'name_platform' => $_POST['subcategories'],
-            'url' => dataClean($_POST['url']),
-            'info' => dataClean($_POST['info']),
-            'notes' => dataClean($_POST['notes']),
+            'url' => replaceCharacterByOtherCharacter( dataClean($_POST['url']), array(" ","'",'"',"&","|","<",">"), array("\\s","\\'",'\\"',"\\&","\\|","\\<","\\>") ),
+            'info' => replaceCharacterByOtherCharacter( dataClean($_POST['info']), array(" ","'",'"',"&","|","<",">"), array("\\s","\\'",'\\"',"\\&","\\|","\\<","\\>") ),
+            'notes' => replaceCharacterByOtherCharacter( dataClean($_POST['notes']), array(" ","'",'"',"&","|","<",">"), array("\\s","\\'",'\\"',"\\&","\\|","\\<","\\>") ),
         );
         $failuredAcount = $dataAccount['idCategory'] < 1 || $dataAccount['idCategory'] > $_SESSION['instance_platforms']->getTotalPlatformCategories();
         if (!$failuredAcount)
@@ -37,9 +37,9 @@
             'name_account' => $_POST['name'],
             'pass_account' => $_POST['pass'],
             'name_platform' => $_POST['subcategories'],
-            'url' => dataClean($_POST['url']),
-            'info' => dataClean($_POST['info']),
-            'notes' => dataClean($_POST['notes']),
+            'url' => replaceCharacterByOtherCharacter( dataClean($_POST['url']), array(" ","'",'"',"&","|","<",">"), array("\\s","\\'",'\\"',"\\&","\\|","\\<","\\>") ),
+            'info' => replaceCharacterByOtherCharacter( dataClean($_POST['info']), array(" ","'",'"',"&","|","<",">"), array("\\s","\\'",'\\"',"\\&","\\|","\\<","\\>") ),
+            'notes' => replaceCharacterByOtherCharacter( dataClean($_POST['notes']), array(" ","'",'"',"&","|","<",">"), array("\\s","\\'",'\\"',"\\&","\\|","\\<","\\>") ),
         );
         $failuredAcount =  !validatePlatformSelected($_SESSION['instance_platforms']->getPlatformsListByCategory($dataAccount['idCategory']),$dataAccount['name_platform']);
         if (!$failuredAcount) {
