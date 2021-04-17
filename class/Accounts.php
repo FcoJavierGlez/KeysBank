@@ -166,7 +166,7 @@
          * @param Number $idUser ID del usuario propietario de la cuenta
          * @param Number $idAccount ID de la cuenta
          */
-        public function deleteAccountById($idUser,$idAccount) {
+        public function deleteAccount($idUser,$idAccount) {
             $this->query = "DELETE FROM keysbank_accounts WHERE id = :id AND idUser = :idUser";
 
             $this->parametros['id']     = $idAccount;
