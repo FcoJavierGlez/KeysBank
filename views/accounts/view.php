@@ -37,7 +37,7 @@
                 <a href="<?php echo '#' ?>"> <!-- 'accounts.php?edit='.$result_search[0]['id'];  -->
                     <button class="edit">Edit</button>
                 </a>
-                <a href="#">
+                <a href="<?php echo 'accounts.php?del='.$result_search[0]['id']; ?>">
                     <button class="cancel">Delete</button>
                 </a>
             </div>

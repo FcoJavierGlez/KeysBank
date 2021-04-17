@@ -211,6 +211,7 @@ section {
 }
 .cancel:hover {
     background-color: red;
+    color: black;
 }
 .cancel:active {
     background-color: black;
@@ -418,6 +419,7 @@ button {
     justify-content: center;
     justify-content: center;
     row-gap: 25px;
+    text-align: center;
     width: 90%;
 }
 
@@ -431,6 +433,11 @@ button {
 }
 .win_added_acc .accept, .win_added_acc .back, .win_added_acc .cancel, .win_added_acc .edit {
     width: 120px;
+}
+
+.panel-dual_button {
+    display: flex;
+    column-gap: 5px;
 }
 
 /* RESPONSIVE */

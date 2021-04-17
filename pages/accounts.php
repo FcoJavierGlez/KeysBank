@@ -42,6 +42,7 @@
         <script src="../js/select_platforms.js"></script>
         <script src="../js/add_account.js"></script>
         <script src="../js/edit_account.js"></script>
+        <script src="../js/delete_account.js"></script>
         <title>KeysBank</title>
     </head>
     <body>

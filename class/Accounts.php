@@ -130,6 +130,8 @@
 
         /**
          * Actualiza una cuenta
+         * 
+         * @param Array $data Conjunto de datos necesarios para actualizar los datos de la cuenta
          */
         public function updateAccount($data = array()) {
             $this->query = "UPDATE keysbank_accounts 
@@ -151,6 +153,22 @@
             $this->parametros['url']           = $data['url'];
             $this->parametros['info']          = $data['info'];
             $this->parametros['notes']         = $data['notes'];
+
+            $this->get_results_from_query();
+            $this->close_connection();
+        }
+
+        /**
+         * Borra una cuenta determinada pasándole por parámetros el id del usuario propietario y el id de la cuenta
+         * 
+         * @param Number $idUser ID del usuario propietario de la cuenta
+         * @param Number $idAccount ID de la cuenta
+         */
+        public function deleteAccountById($idUser,$idAccount) {
+            $this->query = "DELETE FROM keysbank_accounts WHERE id = :id AND idUser = :idUser";
+
+            $this->parametros['id']     = $idAccount;
+            $this->parametros['idUser'] = $idUser;
 
             $this->get_results_from_query();
             $this->close_connection();
