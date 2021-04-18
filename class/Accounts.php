@@ -98,6 +98,26 @@
         }
 
         /**
+         * Devuelve la información adicional de una cuenta del usuario
+         */
+        public function getInfoAccountById($idUser, $idAccount) {
+            $this->query = "SELECT AES_DECRYPT(UNHEX(A.info),K.password)
+            FROM keysbank_accounts A, keysbank_keys K 
+            WHERE K.idUser = A.idUser
+            AND K.idCategory = A.idCategory
+            AND A.id = :idAccount
+            AND A.idUser = :idUser";
+
+            $this->parametros['idUser']    = $idUser;
+            $this->parametros['idAccount'] = $idAccount;
+
+            $this->get_results_from_query();
+            $this->close_connection();
+
+            return $this->rows;
+        }
+
+        /**
          * Inserta una nueva cuenta
          * 
          * @param Array $data Conjunto de datos necesarios para insertar una nueva cuenta

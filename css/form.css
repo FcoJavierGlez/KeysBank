@@ -22,6 +22,7 @@ fieldset fieldset {
 legend {
     background-color: ghostwhite;
     border: 1px solid black;
+    font-weight: bold;
     padding: 2px 5px;
 }
 
@@ -33,6 +34,14 @@ div#category {
     align-items: center;
     display: flex;
     justify-content: center;
+}
+
+form#form-view a {
+    color: blue;
+    text-decoration: underline;
+}
+form#form-view a:visited {
+    color: blueviolet;
 }
 
 #form-add fieldset {
@@ -245,10 +254,12 @@ div.special_message span.strongest {
 
 /* EYE FORM CHECKBOX */
 .info {
-    margin-left: 15px;
     align-items: center;
-    *column-gap: 10px;
-    display: flex;
+    column-gap: 10px;
+    display: grid;
+    grid-template-columns: 25px auto;
+    margin-left: 10px;
+    width: 100%;
 }
 
 .eye input[type='checkbox'] {
@@ -322,10 +333,17 @@ div.special_message span.strongest {
     #name {
         width: 192px;
     }
+    /* .info {
+        margin-left: 10px;
+    } */
 }
 @media only screen and (min-width: 730px) {
     .div_select, .div_input {
         grid-template-columns: 130px auto auto;
+    }
+    form#form-view .div_textarea {
+        column-gap: 0;
+        grid-template-columns: 125px auto;
     }
     .div_textarea {
         align-items: center;
@@ -350,5 +368,11 @@ div.special_message span.strongest {
 @media only screen and (min-width: 1500px) {
     fieldset.password input[type="text"], fieldset.password input[type="password"] {
         width: 750px;
+    }
+}
+
+@media only screen and (min-width: 1650px) {
+    .box-info{
+        width: max-content;
     }
 }

@@ -56,6 +56,7 @@
             const FORM        = document.getElementById("form-view");
             const HIDDEN      = document.querySelector("input[type='hidden']");
             const SHOW_PASS   = document.getElementById("shps");
+            const SHOW_INFO   = document.getElementById("shinfo");
             const COPY_BUTTON = document.getElementById("cp_pss");
 
             const showInfo = (info,elementDom) => {
@@ -76,6 +77,13 @@
                 const data = new FormData(FORM);
                 toggleEye(this);
                 toggleShowNextSibling( data, 'pass', this, showInfo );
+            });
+
+            SHOW_INFO.addEventListener("click", function() {
+                if ( !validateAccountId(HIDDEN) ) return;
+                const data = new FormData(FORM);
+                toggleEye(this);
+                toggleShowNextSibling( data, 'info', this, showInfo );
             });
         }
         

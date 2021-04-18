@@ -28,6 +28,10 @@ body {
     text-align: center;
 }
 
+.text-right {
+    text-align: right;
+}
+
 textarea {
     resize: none;
 }
@@ -176,7 +180,7 @@ section {
 }
 
 /* ACCEPT, CANCEL, BACK, EDIT BUTTONS */
-.accept, .back, .cancel, .edit, .search input[type="submit"] {
+.accept, .back, .cancel, .copy, .search input[type="submit"] {
     border: 2px solid black;
     min-width: 85px;
 }
@@ -218,17 +222,18 @@ section {
     border: 2px solid red;
     color: red;
 }
-.edit {
-    background-color: orange;
+.copy {
+    background-color: darkorange;
     color: white;
 }
-.edit:hover {
-    background-color: var(--primary_blue);
+.copy:hover {
+    background-color: orange;
+    color: black;
 }
-.edit:active {
+.copy:active {
     background-color: black;
-    border: 2px solid var(--primary_blue);
-    color: var(--primary_blue);
+    border: 2px solid orange;
+    color: orange;
 }
 
 .search {
@@ -268,6 +273,9 @@ section {
 .result a {
     text-decoration: none;
     color: black;
+}
+.word-break {
+    word-break: break-all;
 }
 .scroll {
     overflow-x: auto;
@@ -365,6 +373,7 @@ article.card .basic-info {
 
 .card:hover {
     box-shadow: ghostwhite 0px 0px 6px 1px;
+    cursor: pointer;
 }
 
 .info-card div {
@@ -437,7 +446,13 @@ button {
 
 .panel-dual_button {
     display: flex;
-    column-gap: 5px;
+    column-gap: 10px;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.panel-dual_button button, .panel-dual_button input[type='submit'] {
+    width: 120px;
 }
 
 /* RESPONSIVE */
@@ -513,6 +528,9 @@ button {
     .search input[type="text"] {
         height: 25px;
         width: 350px;
+    }
+    .panel-dual_button {
+        justify-content: flex-end;
     }
 }
 @media only screen and (min-width: 1200px) {

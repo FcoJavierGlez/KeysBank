@@ -15,31 +15,87 @@
             </div>
             <div class='basic-info'>
                 <form id="form-view">
-                    <input type="hidden" name="search" value="<?php echo '?'.$_SESSION['user']['id'].'!'.$_GET['view']; ?>">
-                    <div>
-                        <b><u>Account</u>:</b>
-                    </div>
-                    <div>
-                        <span><?php echo $result_search[0]['AES_DECRYPT(UNHEX(A.name_account),K.password)']; ?></span>
-                    </div>
-                    <div>
-                        <b><u>Pass</u>:</b>
-                        <span class="alert"><?php echo $result_search[0]['DATEDIFF(CURDATE(), A.pass_date)'] >= 90 ? "PASSWORD TOO OLD" : ""; ?></span>
-                    </div>
-                    <div class="info">
-                        <div id="shps" class="eye">
-                            <input type="checkbox" name="shps">
-                        </div>
-                        <span><?php echo replaceByCharacter($result_search[0]['AES_DECRYPT(UNHEX(A.pass_account),K.password)'],'*'); ?></span>
-                        <input type="submit" id="cp_pss" value="Copy">
-                    </div>
+                    <input type="hidden" name="search" value="<?php echo $_GET['view']; ?>">
+                    <fieldset>
+                        <legend>Access - Login</legend>
+                        <fieldset class="<?php echo ($result_search[0]['AES_DECRYPT(UNHEX(A.url),K.password)'] !== "" ? "" : 'hidden'); ?>">
+                            <legend>Address account</legend>
+                            <div>
+                                <b><u>URL / IP</u>:</b>
+                            </div>
+                            <div>
+                                <span>
+                                    <?php
+                                        echo (
+                                            $result_search[0]['AES_DECRYPT(UNHEX(A.url),K.password)'] !== "" ? 
+                                            "<a href='".$result_search[0]['AES_DECRYPT(UNHEX(A.url),K.password)']."' target='_blank'>".$result_search[0]['AES_DECRYPT(UNHEX(A.url),K.password)']."</a>" :
+                                            "Not available"
+                                        );
+                                    ?>
+                                </span>
+                            </div>
+                        </fieldset>
+                        <fieldset>
+                            <legend>Data login</legend>
+                            <div>
+                                <b><u>Account</u>:</b>
+                            </div>
+                            <div>
+                                <span><?php echo $result_search[0]['AES_DECRYPT(UNHEX(A.name_account),K.password)']; ?></span>
+                            </div>
+                            <div>
+                                <b><u>Pass</u>:</b>
+                                <span class="alert"><?php echo $result_search[0]['DATEDIFF(CURDATE(), A.pass_date)'] >= 90 ? "PASSWORD TOO OLD" : ""; ?></span>
+                            </div>
+                            <div class="box-info">
+                                <div class="info">
+                                    <div id="shps" class="eye">
+                                        <input type="checkbox" name="shps">
+                                    </div>
+                                    <div class="word-break"><?php echo replaceByCharacter($result_search[0]['AES_DECRYPT(UNHEX(A.pass_account),K.password)'],'*'); ?></div>
+                                </div>
+                                <div class="text-right">
+                                    <input type="submit" id="cp_pss" value="Copy" class="copy">
+                                </div>
+                            </div>
+                        </fieldset>
+                    </fieldset>
+                    <fieldset>
+                        <legend>Aditional data</legend>
+                        <fieldset>
+                            <legend>Notes</legend>
+                            <div class="div_textarea">
+                                <div><u>Personal notes</u>:</div>
+                                <div class="div_pass">
+                                    <div></div>
+                                    <textarea name="notes" id="notes" maxlength="255" disabled><?php echo replaceCharacterByOtherCharacter( $result_search[0]['AES_DECRYPT(UNHEX(A.notes),K.password)'], array("\\s","\\'",'\\"',"\\&","\\|","\\<","\\>"), array(" ","'",'"',"&","|","<",">") ); ?></textarea>
+                                </div>
+                                <div></div>
+                            </div>
+                        </fieldset>
+                        <fieldset>
+                            <legend>Sensible info</legend>
+                            <div class="div_textarea">
+                                <div><u>Aditional info</u>:</div>
+                                <div class="div_pass">
+                                    <div id="shinfo" class="eye">
+                                        <input type="checkbox" name="shinfo">
+                                    </div>
+                                    <textarea name="info" id="info" maxlength="255" disabled><?php echo replaceByCharacter( replaceCharacterByOtherCharacter( $result_search[0]['AES_DECRYPT(UNHEX(A.info),K.password)'], array("\\s","\\'",'\\"',"\\&","\\|","\\<","\\>"), array(" ","'",'"',"&","|","<",">") ), '*' ); ?></textarea>
+                                </div>
+                                <div></div>
+                            </div>
+                        </fieldset>
+                    </fieldset>
                 </form>
-                <a href="<?php echo '#' ?>"> <!-- 'accounts.php?edit='.$result_search[0]['id'];  -->
-                    <button class="edit">Edit</button>
-                </a>
-                <a href="<?php echo 'accounts.php?del='.$result_search[0]['id']; ?>">
-                    <button class="cancel">Delete</button>
-                </a>
+                <div class="panel-dual_button">
+                    <a href="<?php echo '#'; ?>"> <!-- 'accounts.php?edit='.$result_search[0]['id'];  -->
+                        <button class="back">Edit</button>
+                    </a>
+                    <a href="<?php echo 'accounts.php?del='.$result_search[0]['id']; ?>">
+                        <button class="cancel">Delete</button>
+                    </a>
+                </div>
             </div>
         </article>
     </div>
