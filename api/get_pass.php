@@ -11,6 +11,8 @@
     include "../class/DBAbstractModel.php";
     include "../class/Accounts.php";
 
+    session_start();
+
     if (!isset($_POST['search'])) {
         //header('Location:../index.php');
         echo "<h1 style='margin: 21.44px 0'>¡Objeto no localizado!</h1>";
@@ -27,10 +29,12 @@
     } else {
         $account = Accounts::singleton();
 
-        preg_match('/^\?(\d+)\!(\d+)$/', $_POST['search'], $matches);
+        print_r( json_encode($account->getPassAccountById($_SESSION['user']['id'],$_POST['search'])) );
+        
+        //preg_match('/^\?(\d+)\!(\d+)$/', $_POST['search'], $matches);
 
-        if (sizeof($matches)) 
-            print_r( json_encode($account->getPassAccountById($matches[1],$matches[2])) );
+        /* if (sizeof($matches)) 
+            print_r( json_encode($account->getPassAccountById($matches[1],$matches[2])) ); */
     }
 
     

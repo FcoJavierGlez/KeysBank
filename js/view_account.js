@@ -17,7 +17,7 @@
     const validateAccountId = elementDom => {
         try {
             const {idAccountUrl} = location.href.match(/\?view=(?<idAccountUrl>\d+)$/).groups;
-            const {idAccountDom} = elementDom.value.match(/^\?\d+!(?<idAccountDom>\d+)$/).groups;
+            const idAccountDom   = elementDom.value;
 
             return idAccountUrl == idAccountDom;
         } catch (error) {
