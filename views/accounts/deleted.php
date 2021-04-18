@@ -4,7 +4,7 @@
         <h3>DELETED</h3>
         <div></div>
     </div>
-    <div class='result scroll'>
+    <div class='account justify-content-center scroll'>
         <div class="fail_added_acc" >
             <div>Account succesfully deleted.</div>
             <div>

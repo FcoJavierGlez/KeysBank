@@ -4,7 +4,7 @@
         <h3>DELETE</h3>
         <div></div>
     </div>
-    <div class='result scroll'>
+    <div class='account justify-content-center scroll'>
         <div class="fail_added_acc" >
             <div>This action is irreversible. If you delete this account, your data will not be recovered.</div>
             <div>Are you sure you want to delete this account?</div>

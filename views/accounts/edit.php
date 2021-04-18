@@ -4,7 +4,7 @@
         <h3>EDIT</h3>
         <div></div>
     </div>
-    <div class='result scroll'>
+    <div class='account scroll'>
         <div class="<?php if ($editedAcount || $failuredAcount) echo $editedAcount ? 'win_added_acc' : 'fail_added_acc'; else echo 'hidden'; ?>" > <!-- win_added_acc --> <!-- registered-box dm10 -->
             <div><?php echo $editedAcount ? "Edited account succesfully" : "Edit account failed"; ?></div>
             <div>

@@ -4,7 +4,7 @@
         <h3>ADD</h3>
         <div</div>
     </div>
-    <div class='result scroll'>
+    <div class='account scroll'>
         <div class="<?php if ($addedAcount || $failuredAcount) echo $addedAcount ? "win_added_acc" : "fail_added_acc"; else echo 'hidden' ?>" >
             <div><?php echo $addedAcount ? "Added account succesfully" : "Add account failed"; ?></div>
             <div>

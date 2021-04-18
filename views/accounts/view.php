@@ -7,7 +7,7 @@
         <h3>ACCOUNT</h3>
         <div</div>
     </div>
-    <div class='result scroll'>
+    <div class='account scroll'>
         <article>
             <div class='platform'>
                 <img src="<?php echo $route; ?>" alt="<?php echo 'Logo '.$result_search[0]['name_platform']; ?>">
