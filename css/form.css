@@ -290,6 +290,10 @@ div.special_message span.strongest {
     cursor: pointer;
 }
 
+.box-info{
+    width: fit-content;
+}
+
 
 @media only screen and (min-width: 550px) {
     header .logo {
@@ -363,16 +367,14 @@ div.special_message span.strongest {
     .div_textarea {
         grid-template-columns: 180px auto;
     }
+    .view_account-pass {
+        display: grid;
+        grid-template-columns: repeat(2,50%);
+    }
 }
 
 @media only screen and (min-width: 1500px) {
     fieldset.password input[type="text"], fieldset.password input[type="password"] {
         width: 750px;
-    }
-}
-
-@media only screen and (min-width: 1650px) {
-    .box-info{
-        width: max-content;
     }
 }

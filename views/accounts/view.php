@@ -28,7 +28,7 @@
                                     <?php
                                         echo (
                                             $result_search[0]['AES_DECRYPT(UNHEX(A.url),K.password)'] !== "" ? 
-                                            "<a href='".$result_search[0]['AES_DECRYPT(UNHEX(A.url),K.password)']."' target='_blank'>".$result_search[0]['AES_DECRYPT(UNHEX(A.url),K.password)']."</a>" :
+                                            "<a href='".$result_search[0]['AES_DECRYPT(UNHEX(A.url),K.password)']."' target='_blank' class='word-break'>".$result_search[0]['AES_DECRYPT(UNHEX(A.url),K.password)']."</a>" :
                                             "Not available"
                                         );
                                     ?>
@@ -37,25 +37,31 @@
                         </fieldset>
                         <fieldset>
                             <legend>Data login</legend>
-                            <div>
-                                <b><u>Account</u>:</b>
-                            </div>
-                            <div>
-                                <span><?php echo $result_search[0]['AES_DECRYPT(UNHEX(A.name_account),K.password)']; ?></span>
-                            </div>
-                            <div>
-                                <b><u>Pass</u>:</b>
-                                <span class="alert"><?php echo $result_search[0]['DATEDIFF(CURDATE(), A.pass_date)'] >= 90 ? "PASSWORD TOO OLD" : ""; ?></span>
-                            </div>
-                            <div class="box-info">
-                                <div class="info">
-                                    <div id="shps" class="eye">
-                                        <input type="checkbox" name="shps">
+                            <div class="view_account-pass">
+                                <div>
+                                    <div>
+                                        <b><u>Account</u>:</b>
                                     </div>
-                                    <div class="word-break"><?php echo replaceByCharacter($result_search[0]['AES_DECRYPT(UNHEX(A.pass_account),K.password)'],'*'); ?></div>
+                                    <div>
+                                        <span class="word-break"><?php echo $result_search[0]['AES_DECRYPT(UNHEX(A.name_account),K.password)']; ?></span>
+                                    </div>
                                 </div>
-                                <div class="text-right">
-                                    <input type="submit" id="cp_pss" value="Copy" class="copy">
+                                <div>
+                                    <div>
+                                        <b><u>Pass</u>:</b>
+                                        <span class="alert"><?php echo $result_search[0]['DATEDIFF(CURDATE(), A.pass_date)'] >= 90 ? "PASSWORD TOO OLD" : ""; ?></span>
+                                    </div>
+                                    <div class="box-info">
+                                        <div class="info">
+                                            <div id="shps" class="eye">
+                                                <input type="checkbox" name="shps">
+                                            </div>
+                                            <div class="word-break"><?php echo replaceByCharacter($result_search[0]['AES_DECRYPT(UNHEX(A.pass_account),K.password)'],'*'); ?></div>
+                                        </div>
+                                        <div class="text-right">
+                                            <input type="submit" id="cp_pss" value="Copy" class="copy">
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </fieldset>
