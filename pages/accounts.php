@@ -37,12 +37,12 @@
         <link rel="icon" href="../favicon.ico">
         <script src="../js/functions.js"></script>
         <script src="../js/passManager.js"></script>
-        <script src="../js/view_account.js"></script>
-        <script src="../js/select_categories.js"></script>
-        <script src="../js/select_platforms.js"></script>
-        <script src="../js/add_account.js"></script>
-        <script src="../js/edit_account.js"></script>
-        <script src="../js/delete_account.js"></script>
+        <script src="../js/selects/select_categories.js"></script>
+        <script src="../js/selects/select_platforms.js"></script>
+        <script src="../js/accounts/add_account.js"></script>
+        <script src="../js/accounts/delete_account.js"></script>
+        <script src="../js/accounts/edit_account.js"></script>
+        <script src="../js/accounts/view_account.js"></script>
         <title>KeysBank</title>
     </head>
     <body>
