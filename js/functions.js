@@ -22,8 +22,9 @@ const functions = (
          * @param {Array} getInfo             Datos obtenidos tras la petición a la API
          * @param {Function} functionCallback La función que se va a ejecutar con los datos obtenidos
          * @param {Element} domElement        Elemento del árbol DOM en el que se van a añadir o realizar cambios con los datos extraídos [opcional]
+         * @param {Event} event               Evento que ha disparado el evento [opcional]
          */
-        const apiAction = (dataRequest,getInfo,functionCallback,domElement) => {
+        const apiAction = (dataRequest,getInfo,functionCallback,domElement,event = undefined) => {
             const INFO_ARRAY = {
                 'pass': 'AES_DECRYPT(UNHEX(A.pass_account),K.password)',
                 'info': 'AES_DECRYPT(UNHEX(A.info),K.password)',
@@ -35,6 +36,10 @@ const functions = (
                     return domElement == undefined ?
                         functionCallback(`${replaceHtmlCharacters(getInfo[0][INFO_ARRAY[dataRequest]])}`) :
                         functionCallback(`${replaceHtmlCharacters(getInfo[0][INFO_ARRAY[dataRequest]])}`, domElement);
+                case 'pass':
+                    return domElement == undefined ?
+                        functionCallback(`${getInfo[0][INFO_ARRAY[dataRequest]]}`, event) :
+                        functionCallback(`${getInfo[0][INFO_ARRAY[dataRequest]]}`, domElement, event);
                 default:
                     return domElement == undefined ?
                         functionCallback(`${getInfo[0][INFO_ARRAY[dataRequest]]}`) :
@@ -49,8 +54,9 @@ const functions = (
          * @param {String} dataRequest  El dato que pedimos al servidor puede ser: 'pass','info'
          * @param {Function} callback   La función que se va a ejecutar con los datos obtenidos tras la consulta
          * @param {Element} elementDom  Elemento del árbol DOM en el que se van a añadir o realizar cambios con los datos extraídos [opcional]
+         * @param {Event} event         Evento que ha disparado el evento [opcional]
          */
-         async function requestApi(dataForm, dataRequest, callBack, elementDom = undefined) {
+         async function requestApi(dataForm, dataRequest, callBack, elementDom = undefined, event = undefined) {
             let path = "";
             const ROUTE = `${location.origin}/${(path = location.pathname.match(/^\/(\w+)(\/pages\/)?(\w+\.(html|php))?$/)?.[1]) == undefined ? "" : path}`;
             
@@ -68,7 +74,7 @@ const functions = (
             const getInfo = await connect.json();
 
             if (getInfo.length) 
-                apiAction(dataRequest,getInfo,callBack,elementDom);
+                apiAction(dataRequest, getInfo, callBack, elementDom, event);
         }
         
         /**

@@ -60,6 +60,15 @@ textarea:focus {
     outline: none;
 }
 
+.tooltip {
+    background-color: beige;
+    width: max-content;
+    border: 1px solid black;
+    border-radius: 5px;
+    padding: 8px 10px;
+    position: absolute;
+}
+
 .logo {
     background-image: url(../img/logo.png);
     background-position: center;
