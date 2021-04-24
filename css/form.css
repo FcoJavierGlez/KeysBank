@@ -180,6 +180,7 @@ form span.display_textarea_char {
     grid-template-columns: repeat(2, 1fr);
     align-items: center;
     justify-items: center;
+    text-decoration: none;
 }
 
 .name_accounts_repeat {
@@ -204,7 +205,8 @@ form span.display_textarea_char {
     color: white;
 }
 .account_used:nth-child(even) {
-    background-color: lightcyan;
+    background-color: lightgray;
+    color: black;
 }
 
 /* FIELDSET GEN_PASS */

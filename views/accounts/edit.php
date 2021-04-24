@@ -45,9 +45,11 @@
                                 <span class="text-error"></span>
                             </div>
                         </div>
+                        <div id="acc_name_rep" class="hidden"></div>
                         <!-- PASSWORD -->
                         <fieldset class="password">
                             <legend>Password</legend>
+                            <div id="oldPassMessage"><?php echo $dataAccount[0]['DATEDIFF(CURDATE(), A.pass_date)'] >= $_SESSION['user']['days_old_password'] ? "PASSWORD TOO OLD" : ""; ?></div>
                             <div class="div_input">
                                 <div>Password:</div>
                                 <div class="div_pass">

@@ -1,10 +1,14 @@
 /**
  * @author Francisco Javier González Sabariego
+ * 
+ * Formulario añadir cuenta.
  */
  {
     /**
+     * Commuta el estado que renderiza el botón del ojo y 
+     * activa/desactiva el checkbox que tiene oculto por hijo.
      * 
-     * @param {*} eye 
+     * @param {Element} eye Elemento del árbol DOM
      */
     const toggleEye = function (eye){
         eye.children[0].checked = !eye.children[0].checked;
@@ -12,16 +16,33 @@
         eye.classList.toggle("eye_slash");
     }
 
+    /**
+     * Cambiar el color del texto asociado a un checkbox.
+     * 
+     * @param {Element} checkbox Elemento DOM (checkbox)
+     */
     const toggleColorCheckbox = (checkbox) => {
         checkbox.parentElement.classList.toggle("text-error");
         checkbox.parentElement.classList.toggle("text-green");
     }
 
+    /**
+     * Normaliza la longitud del textarea pasado por parámetro y 
+     * actualiza el contador de caracteres asociado a él.
+     * 
+     * @param {Element} textarea Elemento DOM (textarea) a normalizar.
+     */
     const normalizeTextarea = textarea => {
         textarea.maxlength = "255";
         textarea.parentElement.nextElementSibling.nextElementSibling.innerText = `${textarea.value.length}/255`;
     }
 
+    /**
+     * Valida los selectores del formulario
+     * 
+     * @param {Array} selects Array con la lista de selectores del árbol DOM
+     * @returns {Boolean}     True si los selectores son válidos (en caso de no serlos lanzará un excepción) 
+     */
     const validateSelects = selects => {
         let numCategories  = [...selects[0].getElementsByTagName("option")].length;
         let optionCategory = [...selects[0].getElementsByTagName("option")].find( e => e.selected ).value;
@@ -31,6 +52,12 @@
         return true;
     }
 
+    /**
+     * Valida el nombre de la cuenta
+     * 
+     * @param {Element} name Elemento (input) del nombre de cuenta
+     * @returns {Boolean}    True si el nombre es válido (en caso de no serlo lanzará un excepción)
+     */
     const validateNameAccount = name => {
         if (name.value == "")
             throw new Error('name_account_req');
@@ -39,6 +66,12 @@
         return  true;
     };
 
+    /**
+     * Valida la contraseña de la cuenta
+     * 
+     * @param {Array} passwords Array con el elemento DOM de la contraseña y la contraseña repetida 
+     * @returns {Boolean}       True si la contraseña es válida (en caso de no serlo lanzará un excepción)
+     */
     const validatePasswords = passwords => {
         let password = passwords[0].value;
         let passwordRep = passwords[1].value;
@@ -51,10 +84,24 @@
         return true;
     }
 
+    /**
+     * Valida el formulario. En caso de que no sea válido la validación donde falle lanzará una excepción.
+     * 
+     * @param {Array} selects       Array con la lista de selectores del árbol DOM
+     * @param {Element} nameAccount Elemento (input) del nombre de cuenta
+     * @param {Array} passwords     Array con el elemento DOM de la contraseña y la contraseña repetida
+     * @returns {Boolean}           True si es válido
+     */
     const validateForm = (selects, nameAccount, passwords) => {
         return validateSelects(selects) && validateNameAccount(nameAccount) && validatePasswords(passwords);
     }
 
+    /**
+     * Muestra el mensaje de error del formulario
+     * 
+     * @param {String} messageError Mensaje del error capturado
+     * @returns {String}            Mensaje de error que se mostrará al usuario
+     */
     const messageFormError = messageError => {
         switch (messageError) {
             case 'selectors':
@@ -72,6 +119,12 @@
         }
     }
 
+    /**
+     * Devuelve una template string con enlaces de las cuentas con el nombre de cuenta del usuario repetidas
+     * 
+     * @param {Array} info Array con el conjunto de cuentas cuyo nombre de cuenta está repetido.
+     * @returns {String}   Template string con la lista de cuentas repetidas
+     */
     const printAccountsNameRepeat = info => {
         let string = "";
         info.forEach( e => string += `<a href="./accounts.php?view=${e.id}" class="account_used" target="_blank"><div>${Object.values(e)[1]}</div><div>${Object.values(e)[2]}</div></a>` );
@@ -96,6 +149,11 @@
             const SAVE_BUTTON    = document.getElementById("save");
             const TEXT_AREA      = [...document.getElementsByTagName("textarea")];
 
+            /**
+             * Muestra un recuadro con la lista de cuentas cuyo nombre de cuenta está repetido
+             * 
+             * @param {Array} info Array con el conjunto de cuentas cuyo nombre de cuenta está repetido.
+             */
             const getAccountsNameRepeat = info => {
                 NAME_REPEAT.classList = 'name_accounts_repeat';
                 NAME_REPEAT.innerHTML = `
@@ -108,6 +166,9 @@
                 `;
             }
 
+            /**
+             * En caso de que el formulario no sea válido muestra los errores de los campos o selectores no válidos.
+             */
             const showErrors = () => {
                 SPANS[0].innerText = SELECTS[0].value == "" ? "REQUIRED" : "";
                 SPANS[1].innerText = SELECTS[1].value == "" ? "REQUIRED" : ""
@@ -142,6 +203,7 @@
             SELECTS[0].addEventListener( "change", () => SPANS[0].innerText = "" );
             SELECTS[1].addEventListener( "change", () => SPANS[1].innerText = "" );
 
+            //NAME_ACCOUNT
             NAME_ACCOUNT.addEventListener("keyup", () => {
                 NAME_REPEAT.innerHTML = '';
                 NAME_REPEAT.classList = 'hidden';
@@ -163,6 +225,7 @@
                 }
             });
 
+            //PASWORD
             PASSWORD.addEventListener("keyup", () => {
                 if (!NAME_ACCOUNT.value.replace(/\s/g,"").length) {
                     PASSWORD.value = "";
@@ -173,12 +236,12 @@
                 PASSWORD.value = functions.cleanInput(PASSWORD.value);
                 SPANS[3].className = SPANS[3].innerText = PASSWORD.value !== "" ? `${passManager.validatePasswordStrength(PASSWORD.value,[NAME_ACCOUNT.value])}` : "";
                 PASS_REP.dispatchEvent(new Event("keyup"));
-                
             });
             PASSWORD.addEventListener("focus", () => PASS_REP.dispatchEvent(new Event("keyup")) );
             PASSWORD.addEventListener("blur", () => PASS_REP.dispatchEvent(new Event("keyup")) );
             PASSWORD.addEventListener("copy", e => e.preventDefault() );
 
+            //PASS_REP
             PASS_REP.addEventListener("keyup", () => {
                 PASS_REP.value = functions.cleanInput(PASS_REP.value);
                 PASS_REP.value == "" ? 
@@ -192,6 +255,7 @@
             PASS_REP.addEventListener("blur", () => PASSWORD.dispatchEvent(new Event("keyup")) );
             PASS_REP.addEventListener("paste", e => e.preventDefault() );
 
+            //USE_GENERATE
             USE_GENERATE.addEventListener("click", () => {
                 toggleColorCheckbox(USE_GENERATE);
                 GEN_PASS_PANEL.classList.toggle("hidden");
@@ -200,8 +264,10 @@
                 PASS_REP.toggleAttribute("disabled");
             });
 
+            //SPECIAL_CHAR
             SPECIAL_CHAR.addEventListener("click", () => toggleColorCheckbox(SPECIAL_CHAR) );
 
+            //NUMBER_CHAR
             NUMBER_CHAR.addEventListener("blur", () => {
                 NUMBER_CHAR.min = 6;
                 NUMBER_CHAR.max = 64;
@@ -209,6 +275,7 @@
                 NUMBER_CHAR.value = NUMBER_CHAR.value < 6 ? 6 : NUMBER_CHAR.value > 64 ? 64 : NUMBER_CHAR.value;
             });
 
+            //GEN_PASSWORD
             GEN_PASSWORD.addEventListener("click", e => {
                 e.preventDefault();
                 if (!NAME_ACCOUNT.value.replace(/\s/g,"").length) {
@@ -227,6 +294,7 @@
                 });
             });
 
+            //SAVE_BUTTON
             SAVE_BUTTON.addEventListener("click", e => {
                 SPANS[7].innerText = "";
                 try {

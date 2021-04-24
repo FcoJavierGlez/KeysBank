@@ -95,7 +95,7 @@
                     </fieldset>
                 </form>
                 <div class="panel-dual_button">
-                    <a href="<?php echo '#'; ?>"> <!-- 'accounts.php?edit='.$result_search[0]['id'];  -->
+                    <a href="<?php echo 'accounts.php?edit='.$result_search[0]['id']; ?>">
                         <button class="back">Edit</button>
                     </a>
                     <a href="<?php echo 'accounts.php?del='.$result_search[0]['id']; ?>">
