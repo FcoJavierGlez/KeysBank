@@ -148,7 +148,7 @@
                         echo "<div><span class='word-break'>".$value['AES_DECRYPT(UNHEX(A.name_account),K.password)']."</span></div>";
                         echo "<div><b><u>Notes</u>:</b></div>";
                         echo "<div><textarea class=".($value['AES_DECRYPT(UNHEX(A.notes),K.password)'] == '' ? 'text-center' : 'bold')." disabled>".($value['AES_DECRYPT(UNHEX(A.notes),K.password)'] == "" ? 'Not available' : replaceCharacterByOtherCharacter( $value['AES_DECRYPT(UNHEX(A.notes),K.password)'], array("\\s","\\'",'\\"',"\\&","\\|","\\<","\\>"), array(" ","'",'"',"&","|","<",">") ) )."</textarea></div>";
-                        echo "<div class='alert'>".($value['DATEDIFF(CURDATE(), A.pass_date)'] >= 90 ? "PASSWORD TOO OLD" : "")."</div>";
+                        echo "<div class='alert'>".($value['DATEDIFF(CURDATE(), A.pass_date)'] >= $_SESSION['user']['days_old_password'] ? "PASSWORD TOO OLD" : "")."</div>";
                     echo "</div>";
                 echo "</article>";
             echo "</a>";

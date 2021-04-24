@@ -49,7 +49,7 @@
                                 <div>
                                     <div>
                                         <b><u>Pass</u>:</b>
-                                        <span class="alert"><?php echo $result_search[0]['DATEDIFF(CURDATE(), A.pass_date)'] >= 90 ? "PASSWORD TOO OLD" : ""; ?></span>
+                                        <span class="alert"><?php echo $result_search[0]['DATEDIFF(CURDATE(), A.pass_date)'] >= $_SESSION['user']['days_old_password'] ? "THIS PASSWORD IS OLDER THAN ".$_SESSION['user']['days_old_password']." DAYS" : ""; ?></span>
                                     </div>
                                     <div class="box-info">
                                         <div class="info">

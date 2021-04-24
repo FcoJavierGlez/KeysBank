@@ -50,14 +50,15 @@
                 $errorLogin = TRUE;
             }
             else {
-                $_SESSION['user']['id']            = $usuario[0]['id'];
-                $_SESSION['user']['nick']          = $usuario[0]['nick'];
-                $_SESSION['user']['pass']          = $usuario[0]['AES_DECRYPT(UNHEX(U.pass),K.password)'];
-                $_SESSION['user']['name']          = $usuario[0]['AES_DECRYPT(UNHEX(U.name),K.password)'];
-                $_SESSION['user']['surname']       = $usuario[0]['AES_DECRYPT(UNHEX(U.surname),K.password)'];
-                $_SESSION['user']['email']         = $usuario[0]['email'];
-                $_SESSION['user']['perfil']        = $usuario[0]['perfil'];
-                $_SESSION['user']['current_state'] = $usuario[0]['current_state'];
+                $_SESSION['user']['id']                = $usuario[0]['id'];
+                $_SESSION['user']['nick']              = $usuario[0]['nick'];
+                $_SESSION['user']['pass']              = $usuario[0]['AES_DECRYPT(UNHEX(U.pass),K.password)'];
+                $_SESSION['user']['name']              = $usuario[0]['AES_DECRYPT(UNHEX(U.name),K.password)'];
+                $_SESSION['user']['surname']           = $usuario[0]['AES_DECRYPT(UNHEX(U.surname),K.password)'];
+                $_SESSION['user']['email']             = $usuario[0]['email'];
+                $_SESSION['user']['perfil']            = $usuario[0]['perfil'];
+                $_SESSION['user']['current_state']     = $usuario[0]['current_state'];
+                $_SESSION['user']['days_old_password'] = $usuario[0]['days_old_password'];
                 $loggedNow = TRUE;
             }
             

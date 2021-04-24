@@ -61,7 +61,8 @@
                 AES_DECRYPT(UNHEX(U.surname),K.password),
                 U.email,
                 U.perfil,
-                U.current_state
+                U.current_state,
+                U.days_old_password
                 FROM keysbank_users U, keysbank_keys K
                 WHERE U.id = K.idUser and K.idCategory = 0 and U.id = (SELECT id FROM keysbank_users WHERE lower( nick ) = :nick)";
 
