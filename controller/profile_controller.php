@@ -57,8 +57,8 @@
 
             $edited_successfully = TRUE;
         } 
-        catch (PassCheckException $passCheckException) {}  //Excepción de nick ya registrado
-        catch (CheckOldPassException $checkOldPassException) {} //Excepción de formato de correo inválido
+        catch (CheckOldPassException $checkOldPassException) {} //Contraseña actual incorrecta
+        catch (PassCheckException $passCheckException) {}  //Comprobación de contraseña nueva y repetición incorrectas
     }
     
 
