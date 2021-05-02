@@ -58,6 +58,59 @@ form#form-add .accept {
     width: 85px;
 }
 
+form.perfil-info input[type='text'],
+form.perfil-info input[type='mail'],
+form.perfil-info input[type='number'],
+form.perfil-info input[type='password'],
+form.perfil-info #name {
+    height: 18px;
+    margin: 0 auto;
+    width: 80%;
+}
+form.perfil-info input[type='number'] {
+    width: 15%;
+}
+/* DIVs con diseño de botones */
+/* Div que simula la forma de un botón de la clase cancel */
+.div-cancel_button {
+    background-color: rgb(200, 0, 0);
+    height: 18px;
+    color: white;
+    border: 2px solid black;
+    padding: 8px;
+    width: 100px;
+    text-align: center;
+}
+.div-cancel_button:hover {
+    background-color: red;
+    color: black;
+}
+.div-cancel_button:active {
+    background-color: black;
+    border: 2px solid red;
+    color: red;
+}
+/* Div que simula la forma de un botón de la clase copy */
+.div-copy_button {
+    background-color: darkorange;
+    border: 2px solid black;
+    color: white;
+    height: 18px;
+    margin: 0 auto;
+    padding: 4px;
+    text-align: center;
+    width: 73px;
+}
+.div-copy_button:hover {
+    background-color: orange;
+    color: black;
+}
+.div-copy_button:active {
+    background-color: black;
+    border: 2px solid orange;
+    color: orange;
+}
+
 select {
     border: 1px solid black;
     font-weight: bold;

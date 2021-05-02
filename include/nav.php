@@ -5,8 +5,8 @@
             'url' => 'accounts.php'
         ),
         array(
-            'name' => 'Perfil',
-            'url' => 'perfil.php'
+            'name' => 'Profile',
+            'url' => 'profile.php'
         ),
     );
     $admin_nav = array(
@@ -19,8 +19,8 @@
             'url' => 'platforms.php'
         ),
         array(
-            'name' => 'Perfil',
-            'url' => 'perfil.php'
+            'name' => 'Profile',
+            'url' => 'profile.php'
         ),
     );
     

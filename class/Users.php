@@ -75,6 +75,9 @@
             return $this->rows;
         }
 
+        /**
+         * Devuelve el usuario que coincida con el email
+         */
         public function getUserByEmail( $email = '' ) {
             if ( $email !== '' ) {
                 $this->query = "SELECT * FROM keysbank_users WHERE email = lower( :email )";
@@ -84,6 +87,20 @@
                 $this->get_results_from_query();
                 $this->close_connection();
             }
+
+            return $this->rows;
+        }
+
+        /**
+         * Devuelve el usuario con el id pasado por parámetro
+         */
+        public function getUserById( $id ) {
+            $this->query = "SELECT * FROM keysbank_users WHERE id = :id";
+
+            $this->parametros['id'] = $id;
+
+            $this->get_results_from_query();
+            $this->close_connection();
 
             return $this->rows;
         }
@@ -150,6 +167,57 @@
             $this->get_results_from_query();
             $this->close_connection();
         }
+
+        public function editUser ( $user_data = array() ) {
+            $userSearchByNick  = $this->getUserByNick($user_data['nick']);
+            $userSearchByEmail = $this->getUserByEmail($user_data['email']);
+            if ( sizeof( $userSearchByNick ) && $userSearchByNick[0]['id'] !== $user_data['id'] )   //Si otro usuario tiene el nuevo nick
+                throw new UserExistException();
+            elseif ( !preg_match('/^([^-_@()<>[\]\"\'\.,;:])\w+([^-_@()<>[\]\"\'\.,;:])@([^-_@()<>[\]\"\'\.,;:])+\.(com|es)$/', $user_data['email']) )  //Si el correo tiene un formato inválido                                            //Si el email no cumple con el formato válido
+                throw new MailFormatException();
+            elseif ( sizeof( $userSearchByEmail ) && $userSearchByEmail[0]['id'] !== $user_data['id'] ) //Si el nuevo correo ya está registrado
+                throw new MailExistException();
+
+            $this->query = "UPDATE keysbank_users
+                            SET nick = :nick, 
+                            name = HEX( AES_ENCRYPT( :name,(SELECT password FROM keysbank_keys WHERE idUser = :id AND idCategory = 0) ) ), 
+                            surname = HEX( AES_ENCRYPT( :surname, (SELECT password FROM keysbank_keys WHERE idUser = :id AND idCategory = 0) ) ), 
+                            email = :email, 
+                            days_old_password = :days_old_password
+                            WHERE id = :id";
+
+            $this->parametros['id']                = $user_data['id'];
+            $this->parametros['nick']              = $user_data['nick'];
+            $this->parametros['name']              = $user_data['name'];
+            $this->parametros['surname']           = $user_data['surname'];
+            $this->parametros['email']             = $user_data['email'];
+            $this->parametros['days_old_password'] = $user_data['days_old_password'];
+
+            $this->get_results_from_query();
+            $this->close_connection();
+        }
+
+        /**
+         * Edita la contraseña de una cuenta de acceso a la aplicacción
+         */
+        public function editPass ( $user_data = array() ) {
+            $oldPass = $this->getUserByNick( $user_data['nick'] )[0]['AES_DECRYPT(UNHEX(U.pass),K.password)'];
+            if ( $oldPass !== $user_data['old_pass'] )      //Si la contraseña vieja no coincide con la alamacenada
+                throw new CheckOldPassException();
+            elseif ( $user_data['new_pass'] !== $user_data['new_pass2'])
+                throw new PassCheckException();
+
+
+            $this->query = "UPDATE keysbank_users
+                SET pass = HEX( AES_ENCRYPT( :pass,(SELECT password FROM keysbank_keys WHERE idUser = :id AND idCategory = 0) ) )
+                WHERE id = :id";
+
+            $this->parametros['id'] = $user_data['id'];
+            $this->parametros['pass'] = $user_data['new_pass'];
+
+            $this->get_results_from_query();
+            $this->close_connection();
+        }
         
         /**
          * Edita el estado del usuario
@@ -186,48 +254,6 @@
                 'directorio' => $nombreDirectorio
             );
             $this->editEstado( $user_data );
-        } */
-        
-        /**
-         * Cambiar contraseña
-         */
-        /* public function editPass ( $user_data = array() ) {
-            if ( $this->getUserById( $user_data['id'] )[0]['pass'] !== $user_data['old_pass'] )      //Si la contraseña vieja no coincide con la alamacenada
-                throw new CheckOldPassException();
-            elseif ( $user_data['new_pass'] !== $user_data['new_pass2'])
-                throw new PassCheckException();
-            else {
-                $this->query = "UPDATE sevi_usuarios SET pass = :pass WHERE id = :id";
-    
-                $this->parametros['id'] = $user_data['id'];
-                $this->parametros['pass'] = $user_data['new_pass'];
-    
-                $this->get_results_from_query();
-                $this->close_connection();
-            }
-        } */
-    
-        /**
-         * Actualizar perfil
-         */
-        /* public function editUser ( $user_data = array() ) {
-            if ( !preg_match( '/^([^-_@()<>[\]\"\'\.,;:])\w+([^-_@()<>[\]\"\'\.,;:])@([^-_@()<>[\]\"\'\.,;:])+\.(com|es)$/', $user_data['email'] ) )                                      //Si el email no cumple con el formato válido
-                throw new MailInvalidException();
-            elseif ( $this->getUserById( $user_data['id'] )[0]['email'] !== $user_data['email'] && 
-                        sizeof( $this->getUserByEmail( $user_data['email'] ) ) )  //Si ya existe este email registrado
-                throw new MailExistException();
-            else {
-                $this->query = "UPDATE sevi_usuarios SET nombre = :nombre, apellidos = :apellidos, email = :email 
-                                WHERE id = :id";
-    
-                $this->parametros['id'] = $user_data['id'];
-                $this->parametros['nombre'] = $user_data['nombre'];
-                $this->parametros['apellidos'] = $user_data['apellidos'];
-                $this->parametros['email'] = $user_data['email'];
-    
-                $this->get_results_from_query();
-                $this->close_connection();
-            }
         } */
     }
     

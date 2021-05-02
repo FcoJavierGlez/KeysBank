@@ -85,6 +85,13 @@ textarea:focus {
     width: 100%;
 }
 
+.col2 {
+    display: grid;
+    align-items: center;
+    grid-template-columns: repeat(2,1fr);
+    text-align: center;
+}
+
 header {
     align-items: center;
     background-color: black;
@@ -149,6 +156,9 @@ main {
     background-size: cover;
     height: 88vh;
 }
+.background-matrix {
+    background-image: url(../img/matrix.gif);
+}
 .container {
     height: 83vh;
 }
@@ -178,6 +188,14 @@ section {
     margin: 3vh auto;
     padding: 3px;
     width: 85%;
+}
+.panel-title-flex {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 4vh;
+    text-align: center;
+    margin: 4px 0;
 }
 .panel-title {
     display: grid;
@@ -332,10 +350,63 @@ article form {
     margin: 0 5px;
     font-size: 1rem;
 }
-.basic-info {
+
+/* Basic-info & perfil-info */
+.basic-info, .perfil-info {
     background-color: ghostwhite;
     padding: 15px 10px;
     font-size: 0.8rem;
+}
+.perfil-info {
+    display: flex;
+    flex-flow: column;
+    justify-content: space-between;
+    margin: 0 auto;
+    min-height: 57vh;
+    width: 85%;
+}
+.perfil-info h3 {
+    color: black;
+    text-align: center;
+}
+.perfil-info .back {
+    width: 120px;
+}
+.perfil-data {
+    margin: 0 auto;
+    text-align: center;
+    *width: 80%;
+    width: 100%;
+}
+.perfil-data hr {
+    border: 1px dashed;
+    margin: 15px;
+}
+.container-data {
+    *background-color: lightgray;
+    margin: 10px auto;
+    width: 100%;
+}
+.container-data .col2 {
+    border: outset;
+    grid-template-columns: 30% 70%;
+    height: 35px;
+    word-break: break-all;
+}
+.container-data .col2:nth-child(odd) {
+    background-color: rgb(100, 100, 100);
+    color: white;
+}
+.container-data .col2:nth-child(even) {
+    background-color: rgb(225, 225, 225);
+    color: black;
+}
+.container-data .col2 .bold {
+    word-break: break-word;
+}
+.container-data button.copy {
+    height: 30px;
+    padding: 4px;
 }
 article.card .basic-info {
     padding: 15px 10px 0;
@@ -529,7 +600,7 @@ button {
         *height: 2.5vh;
         width: 100px;
     }
-    .basic-info {
+    .basic-info, .perfil-info {
         font-size: 1rem;
     }
     .category {
@@ -540,6 +611,9 @@ button {
     .cards-view {
         display: grid;
         grid-template-columns: repeat(2, 1fr);
+    }
+    .perfil-data hr {
+        margin: 20px;
     }
 }
 @media only screen and (min-width: 1000px) {
@@ -559,10 +633,19 @@ button {
     .panel-dual_button {
         justify-content: flex-end;
     }
+    .container-data {
+        width: 80%;
+    }
+    .perfil-data hr {
+        margin: 20px 15%;
+    }
 }
 @media only screen and (min-width: 1200px) {
     .cards-view {
         grid-template-columns: repeat(3, 1fr);
+    }
+    .container-data {
+        width: 70%;
     }
 }
 @media only screen and (min-width: 1500px) {
@@ -573,9 +656,15 @@ button {
     nav a {
         width: 150px;
     }
+    .container-data {
+        width: 60%;
+    }
 }
 @media only screen and (min-width: 1700px) {
     .cards-view {
         grid-template-columns: repeat(4, 1fr);
+    }
+    .container-data {
+        width: 55%;
     }
 }

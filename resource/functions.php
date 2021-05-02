@@ -119,6 +119,9 @@
         return $array;
     }
 
+    /**
+     * Renderiza la lista de cuentas del usuario dividiéndolas por categorías
+     */
     function renderUserAccountList($list) {
         $accountsListByCategory = array();
         for ($i = 0; $i < 7; $i++) { 
@@ -132,7 +135,7 @@
     }
 
     /**
-     * Renderiza la lista de cuentas pasada por parámetro
+     * Renderiza la lista de cuentas de una categoría específica
      */
     function renderAccountsList($list) {
         foreach ($list as $value) {
@@ -157,7 +160,8 @@
 
 
     /**
-     * Renderiza
+     * Renderiza la lista de plataformas de una categoría seleccionando la plataforma a la que pertenece
+     * la cuenta que se está mostrando en la vista 'edit'
      */
     function renderPlatformList ($platformList,$platformAccount) {
         $subcategory = "";

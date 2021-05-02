@@ -8,6 +8,7 @@
     include "../class/DBAbstractModel.php";
     include "../class/Users.php";
     include "../class/error/UserExistException.php";
+    include "../class/error/CheckOldPassException.php";
     include "../class/error/PassCheckException.php";
     include "../class/error/MailFormatException.php";
     include "../class/error/MailExistException.php";
@@ -34,7 +35,10 @@
         <link rel="stylesheet" href="../css/login.css">
         <link rel="stylesheet" href="../css/style.css">
         <link rel="icon" href="../favicon.ico">
-        <!-- <script src="../js/main.js"></script> -->
+        <script src="../js/functions.js"></script>
+        <script src="../js/passManager.js"></script>
+        <script src="../js/profile/edit_profile.js"></script>
+        <script src="../js/profile/edit_profile_password.js"></script>
         <title>KeysBank</title>
     </head>
     <body>
@@ -61,7 +65,7 @@
                     ?>
                 </nav>
                 <div class="container">
-                    <div class="name-page"><h2>PERFIL</h2></div>
+                    <div class="name-page"><h2>PROFILE</h2></div>
                     <?php
                         include "../controller/profile_controller.php";
                     ?>
