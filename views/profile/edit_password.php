@@ -31,6 +31,7 @@
                         <input type="password" name="old_pass" id="old_pass" class="<?php echo $checkOldPassException ? 'input-error' : ''; ?>" value="<?php echo $new_data_edit && !$checkOldPassException ? $_POST['new_pass'] : ''; ?>">
                     </div>
                     <input type="hidden" value="<?php echo $_SESSION['user']['nick']; ?>">
+                    <input type="hidden" value="<?php echo $_SESSION['user']['perfil']; ?>">
                 </div>
                 <hr>
                 <h3>New password</h3>

@@ -423,6 +423,10 @@ article.card .basic-info {
     padding: 0px 0;
     *text-align: center;
 }
+.container-data div#alert {
+    word-break: break-word;
+    margin: 10px 0;
+}
 .info-card div.alert {
     margin: 0;
 }

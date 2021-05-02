@@ -10,18 +10,20 @@
  */
  {
     document.addEventListener("DOMContentLoaded", () => {
-        if (location.href.match(/profile\.php(\?edit_password)?$/)?.input !== undefined) {
+        if (location.href.match(/profile\.php\?edit_password$/)?.input !== undefined) {
             const OLD_PASS  = document.getElementById("old_pass");
             const NEW_PASS  = document.getElementById("new_pass");
             const NEW_PASS2 = document.getElementById("new_pass2");
             const ALERT     = document.getElementById("alert");
-            const HIDDEN    = document.querySelector("input[type='hidden']");
+            const HIDDEN    = [...document.querySelectorAll("input[type='hidden']")];   //Nick & perfil
             const BUTTON    = document.getElementsByName("update_password")[0];
             const PASSWORD_STRENGTH = document.getElementById("password_strength");
 
-            let userNick = HIDDEN.value;
+            let userNick = HIDDEN[0].value;
+            let perfil   = HIDDEN[1].value;
             
-            document.getElementsByClassName("container-data")[0].removeChild(HIDDEN);
+            document.getElementsByClassName("container-data")[0].removeChild(HIDDEN[0]);
+            document.getElementsByClassName("container-data")[0].removeChild(HIDDEN[1]);
 
             NEW_PASS.classList = NEW_PASS2.classList = NEW_PASS.value == '' ? '' : NEW_PASS.value !== NEW_PASS2.value ? 'input-error' : 'input-correct';
             PASSWORD_STRENGTH.classList = PASSWORD_STRENGTH.innerText = NEW_PASS.value !== '' ? passManager.validatePasswordStrength( NEW_PASS.value, [userNick] ) : '';
@@ -29,10 +31,6 @@
             OLD_PASS.addEventListener( "keyup", () => OLD_PASS.value = functions.cleanInput(OLD_PASS.value) );
             NEW_PASS.addEventListener( "keyup", () => OLD_PASS.value = functions.cleanInput(OLD_PASS.value) );
             NEW_PASS2.addEventListener( "keyup", () => OLD_PASS.value = functions.cleanInput(OLD_PASS.value) );
-
-            OLD_PASS.addEventListener( "copy", e => e.preventDefault() );
-            NEW_PASS.addEventListener( "copy", e => e.preventDefault() );
-            NEW_PASS2.addEventListener( "copy", e => e.preventDefault() );
 
             OLD_PASS.addEventListener( "paste", e => e.preventDefault() );
             NEW_PASS.addEventListener( "paste", e => e.preventDefault() );
@@ -46,15 +44,29 @@
             } );
 
             BUTTON.addEventListener("click", e => {
-                if ( OLD_PASS.value == "" ) {
+                //Si el campo de la contraseña actual está vacío
+                if ( OLD_PASS.value == "" ) { 
                     OLD_PASS.classList = 'input-error';
                     ALERT.innerText = 'Old password required';
                     e.preventDefault();
                     return;
                 }
-                else if ( NEW_PASS.value == "" || NEW_PASS.value !== NEW_PASS2.value ) {
+                //Si el campo d ela contraseña nueva está vacío o si no coincide con la repetición
+                else if ( NEW_PASS.value == "" || NEW_PASS.value !== NEW_PASS2.value ) { 
                     NEW_PASS.classList = NEW_PASS2.classList = NEW_PASS.value == '' ? 'input-error' : NEW_PASS.value !== NEW_PASS2.value ? 'input-error' : 'input-correct';
                     ALERT.innerText = NEW_PASS.value == '' ? 'New password required' : NEW_PASS.value !== NEW_PASS2.value ? 'Passwords must match' : '';
+                    e.preventDefault();
+                    return;
+                }
+                //Si la contraseña actual coincide con la nueva
+                else if ( OLD_PASS.value == NEW_PASS.value ) {  
+                    ALERT.innerText = 'Old & new passwords cannot match';
+                    e.preventDefault();
+                    return;
+                }
+                //Si el perfil que está cambiando la contraseña es 'ADMIN' y la nueva contraseña no está considerada como 'strongest'
+                else if ( perfil == 'ADMIN' && passManager.validatePasswordStrength( NEW_PASS.value, [userNick] ) !== 'strongest' ) {
+                    ALERT.innerText = 'As an administrator, your account password must be the strongest';
                     e.preventDefault();
                     return;
                 }
