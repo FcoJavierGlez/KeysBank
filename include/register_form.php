@@ -14,8 +14,8 @@
                 'nick' => strtolower( dataClean($_POST['nick']) ),
                 'pass' => dataClean($_POST['pswd']),
                 'pass2' => dataClean($_POST['pswd2']),
-                'name' => (($name = dataClean($_POST['name'])) == "" ? NULL : $name),
-                'surname' => (($surname = dataClean($_POST['surname'])) == "" ? NULL : $surname),
+                'name' => replaceCharacterByOtherCharacter( dataClean($_POST['name']), array(" ","'",'"',"&","|","<",">"), array("\\s","\\'",'\\"',"\\&","\\|","\\<","\\>") ),
+                'surname' => replaceCharacterByOtherCharacter( dataClean($_POST['surname']), array(" ","'",'"',"&","|","<",">"), array("\\s","\\'",'\\"',"\\&","\\|","\\<","\\>") ),
                 'email' => dataClean($_POST['email']),
                 'keypass' => $userKeys[0]
             );

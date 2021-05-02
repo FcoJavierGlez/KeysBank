@@ -51,7 +51,7 @@
                 <div class="<?php echo ($passCheckException || $checkOldPassException ? 'alert' : '');  ?>">
                     <?php 
                         if ($checkOldPassException)
-                            echo 'Old password invalid';
+                            echo 'Current password incorrect';
                         elseif ($passCheckException)
                             echo 'Passwords must match';
                     ?>

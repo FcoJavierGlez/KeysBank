@@ -18,8 +18,8 @@
         $user_data = array(
             'id' => $_SESSION['user']['id'],
             'nick' => $_POST['nick'],
-            'name' => $_POST['name'],
-            'surname' => $_POST['surname'],
+            'name' => replaceCharacterByOtherCharacter( dataClean($_POST['name']), array(" ","'",'"',"&","|","<",">"), array("\\s","\\'",'\\"',"\\&","\\|","\\<","\\>") ),
+            'surname' => replaceCharacterByOtherCharacter( dataClean($_POST['surname']), array(" ","'",'"',"&","|","<",">"), array("\\s","\\'",'\\"',"\\&","\\|","\\<","\\>") ),
             'email' => $_POST['email'],
             'days_old_password' => $_POST['days_old_password'],
         );
@@ -70,6 +70,5 @@
     }
     else 
         include "../views/profile/main.php";
-
 
 ?>
