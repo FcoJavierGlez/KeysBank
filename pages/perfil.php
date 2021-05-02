@@ -5,13 +5,13 @@
 
     include "../config/config_dev.php";
     include "../resource/functions.php";
-    /* include "../class/DBAbstractModel.php";
+    include "../class/DBAbstractModel.php";
     include "../class/Users.php";
-    include "../class/Platforms.php";
     include "../class/error/UserExistException.php";
     include "../class/error/PassCheckException.php";
     include "../class/error/MailFormatException.php";
-    include "../class/error/MailExistException.php"; */
+    include "../class/error/MailExistException.php";
+    /* include "../class/Platforms.php";*/
     /* include "../class/Clave.php";
     include "../class/Documento.php";
     include "../class/error/CheckOldPassException.php";
@@ -63,12 +63,11 @@
                 <div class="container">
                     <div class="name-page"><h2>PERFIL</h2></div>
                     <?php
-                        //Controller
+                        include "../controller/profile_controller.php";
                     ?>
                 </div>
             </main>
             <footer></footer>
         </div>
-        
     </body>
 </html>
