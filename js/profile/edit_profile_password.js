@@ -58,8 +58,6 @@
                     e.preventDefault();
                     return;
                 }
-                /* console.log('correcto');
-                e.preventDefault(); */
             });
         }
     });
