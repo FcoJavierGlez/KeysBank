@@ -125,7 +125,8 @@
                 <div class="container">
                     <div class="name-page"><h2><?php echo ($_SESSION['user']['perfil'] == 'INVITED' ? "" : "INDEX"); ?></h2></div>
                     <?php
-                        //Controller
+                        if ($_SESSION['user']['perfil'] !== 'INVITED')
+                            include "views/index/main.php";
                     ?>
                 </div>
             </main>

@@ -92,6 +92,10 @@ textarea:focus {
     text-align: center;
 }
 
+.vh70 {
+    height: 70vh;
+}
+
 header {
     align-items: center;
     background-color: black;
@@ -266,6 +270,23 @@ section {
     background-color: black;
     border: 2px solid orange;
     color: orange;
+}
+
+.index-message {
+    height: 69vh;
+    background-color: antiquewhite;
+    border-radius: 20px;
+    margin: 1vh auto;
+    padding: 0 25px;
+    width: 82%;
+}
+.index-message h2, h4 {
+    text-align: center;
+    text-transform: uppercase;
+    margin: 10px 0;
+}
+.index-message h4 {
+    text-decoration: underline;
 }
 
 .search {
