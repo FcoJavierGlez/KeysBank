@@ -1,6 +1,7 @@
 index.html
 
 [hc]*.php
+!class/error/[hc]*.php
 
 api/pru*
 
