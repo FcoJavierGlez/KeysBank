@@ -292,6 +292,9 @@ fieldset input[type="number"] {
     align-items: center;
     display: flex;
 }
+.container-data .special_message {
+    margin: 5px auto;
+}
 div.special_message span.dangerous, div.special_message span.weak, div.special_message span.normal, div.special_message span.strong, div.special_message span.strongest {
     font-size: 1rem;
     font-weight: bold;
