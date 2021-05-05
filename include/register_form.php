@@ -52,7 +52,7 @@
 
             echo "<input type='text' name='nick' placeholder='nick (*)' class='".($userExistException ? 'error' : 'required')."'
                 value='".(isset($_POST['add_user']) ? $_POST['nick'] : '')."' required>";
-            echo "<span class='text-error'>".($userExistException ? 'Username is not available.' : '')."</span>";
+            echo "<span class='text-error'>".($userExistException ? 'Nick is not available.' : '')."</span>";
 
             echo "<input type='password' name='pswd' placeholder='password (*)' class='".($passCheckException ? 'error' : 'required')."' value='' required>";
             echo "<input type='password' name='pswd2' placeholder='repeat password (*)' class='".($passCheckException ? 'error' : 'required')."' value='' required>";

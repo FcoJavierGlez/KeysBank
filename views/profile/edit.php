@@ -61,7 +61,7 @@
                 <div class="<?php echo ($userExistException || $mailFormatException || $mailExistException ? 'alert' : '');  ?>">
                     <?php 
                         if ($userExistException)
-                            echo 'Username is not available';
+                            echo 'Nick is not available';
                         elseif ($mailFormatException)
                             echo 'Email format error';
                         elseif ($mailExistException)
