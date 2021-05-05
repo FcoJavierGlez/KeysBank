@@ -9,6 +9,18 @@
  * En esta vista el usuario podrá editar la contraseña de su cuenta de la propia app.
  */
  {
+    /**
+     * Commuta el estado que renderiza el botón del ojo y 
+     * activa/desactiva el checkbox que tiene oculto por hijo.
+     * 
+     * @param {Element} eye Elemento del árbol DOM
+     */
+     const toggleEye = function (eye){
+        eye.children[0].checked = !eye.children[0].checked;
+        eye.classList.toggle("eye");
+        eye.classList.toggle("eye_slash");
+    }
+
     document.addEventListener("DOMContentLoaded", () => {
         if (location.href.match(/profile\.php\?edit_password$/)?.input !== undefined) {
             const OLD_PASS  = document.getElementById("old_pass");
@@ -18,6 +30,17 @@
             const HIDDEN    = [...document.querySelectorAll("input[type='hidden']")];   //Nick & perfil
             const BUTTON    = document.getElementsByName("update_password")[0];
             const PASSWORD_STRENGTH = document.getElementById("password_strength");
+            const EYES     = [...document.getElementsByTagName("div")].filter( e => e.id.match(/^sh/) );
+
+            console.log(EYES);
+
+            EYES.forEach( eye => {
+                console.log(eye);
+                eye.addEventListener("click", () => {
+                    toggleEye(eye);
+                    eye.nextElementSibling.type = eye.nextElementSibling.type == 'text' ? 'password' : 'text';
+                });
+            });
 
             let userNick = HIDDEN[0].value;
             let perfil   = HIDDEN[1].value;

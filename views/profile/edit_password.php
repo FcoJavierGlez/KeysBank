@@ -28,7 +28,12 @@
                 <div class="container-data">
                     <div class="col2">
                         <div class="bold">Old password</div>
-                        <input type="password" name="old_pass" id="old_pass" class="<?php echo $checkOldPassException ? 'input-error' : ''; ?>" value="<?php echo $new_data_edit && !$checkOldPassException ? $_POST['new_pass'] : ''; ?>">
+                        <div class="div_pass">
+                            <div id="shops" class="eye">
+                                <input type="checkbox" name="shops">
+                            </div>
+                            <input type="password" name="old_pass" id="old_pass" class="<?php echo $checkOldPassException ? 'input-error' : ''; ?>" value="<?php echo $new_data_edit && !$checkOldPassException ? $_POST['new_pass'] : ''; ?>">
+                        </div>
                     </div>
                     <input type="hidden" value="<?php echo $_SESSION['user']['nick']; ?>">
                     <input type="hidden" value="<?php echo $_SESSION['user']['perfil']; ?>">
@@ -38,11 +43,21 @@
                 <div class="container-data">
                     <div class="col2">
                         <div class="bold">New password</div>
-                        <input type="password" name="new_pass" id="new_pass" class="<?php echo $passCheckException ? 'input-error' : ''; ?>" value="<?php echo $passCheckException ? $_POST['new_pass'] : ''; ?>">
+                        <div class="div_pass">
+                            <div id="shops" class="eye">
+                                <input type="checkbox" name="shops">
+                            </div>
+                            <input type="password" name="new_pass" id="new_pass" class="<?php echo $passCheckException ? 'input-error' : ''; ?>" value="<?php echo $passCheckException ? $_POST['new_pass'] : ''; ?>">
+                        </div>
                     </div>
                     <div class="col2">
                         <div class="bold">Repeat</div>
-                        <input type="password" name="new_pass2" id="new_pass2" class="<?php echo $passCheckException ? 'input-error' : ''; ?>" value="<?php echo $passCheckException ? $_POST['new_pass2'] : ''; ?>">
+                        <div class="div_pass">
+                            <div id="shops" class="eye">
+                                <input type="checkbox" name="shops">
+                            </div>
+                            <input type="password" name="new_pass2" id="new_pass2" class="<?php echo $passCheckException ? 'input-error' : ''; ?>" value="<?php echo $passCheckException ? $_POST['new_pass2'] : ''; ?>">
+                        </div>
                     </div>
                     <div class="special_message">
                         <span id="password_strength"></span>

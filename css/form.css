@@ -70,6 +70,14 @@ form.perfil-info #name {
 form.perfil-info input[type='number'] {
     width: 15%;
 }
+form.perfil-info .div_pass {
+    align-items: center;
+    display: flex;
+}
+form.perfil-info .div_pass input {
+    margin: 0 10px;
+}
+
 /* DIVs con diseño de botones */
 /* Div que simula la forma de un botón de la clase cancel */
 .div-cancel_button {
