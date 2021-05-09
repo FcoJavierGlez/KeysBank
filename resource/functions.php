@@ -17,14 +17,6 @@
         return  $loggedNow ? 'input_logged' : '';
     }
 
-    /* function getInputLogin($errorLogin,$loggedNow) {
-        if ($errorLogin) 
-            return "<input type='text' name='username' placeholder='username' class='error'><input type='password' name='pswd' placeholder='password' class='error'>";
-        return $loggedNow ? 
-            "<input type='text' name='username' placeholder='username' class='input_logged'><input type='password' name='pswd' placeholder='password' class='input_logged'>" :
-            "<input type='text' name='username' placeholder='username' class=''><input type='password' name='pswd' placeholder='password' class=''>";
-    } */
-
     /**
      * 
      */
@@ -53,17 +45,6 @@
         $tildes  = array(" ","á","é","í","ó","ú","Á","É","Í","Ó","Ú","Ñ","ñ","!");
         $letters = array("_","a","e","i","o","u","a","e","i","o","u","n","n","");
         return strtolower(str_replace( $tildes, $letters, $string ));
-    }
-    /**
-     * Genera una clave hexadecimal de 255 caracteres
-     */
-    function genKey() {
-        $CHARACTERES = ['a','b','c','d','e','f','1','2','3','4','5','6','7','8','9','0'];
-        $LENGTH_PASS = 255;
-        $keyGenerated = "";
-        for ($i = 0; $i < $LENGTH_PASS; $i++) 
-            $keyGenerated .= strtoupper($CHARACTERES[ intval( rand(0,sizeof($CHARACTERES) - 1) ) ]);
-        return $keyGenerated;
     }
 
     /**
@@ -95,17 +76,6 @@
     }
 
     /**
-     * Devuelve un array con claves hexadecimales de 255 caracteres de longitud. 
-     * El número de claves creadas será pasado por parámetro.
-     */
-    function genUserKeys($nKeys) {
-        $keys = array();
-        for ($i = 0; $i < $nKeys; $i++) 
-            array_push($keys,genKey());
-        return $keys;
-    }
-
-    /**
      * @param
      * @param
      * @return
@@ -117,6 +87,39 @@
                 array_push($array,$value);
         }
         return $array;
+    }
+
+    /**
+     * 
+     */
+    function renderUserList( $userList ) {
+        echo "<table>";
+            echo "<th>NICK</th><th>EMAIL</th><th>PROFILE</th><th>STATE</th><th>UPDATE</th><th>DELETE</th>";
+                foreach ($userList as $user) {
+                    echo "<tr>";
+                        echo "<td>".$user['nick']."</td>";      //NICK
+                        echo "<td>".$user['email']."</td>";     //EMAIL
+                        echo "<td>".$user['perfil']."</td>";    //PROFILE
+                        //STATE
+                        echo "<td class='".strtolower($user['current_state'])."'>".$user['current_state']."</td>";
+                        if ( $user['perfil'] == "USER" ) {
+                            echo ( ( ( $user['current_state'] == "PENDING" || $user['current_state'] == "BANNED" ) ) ? 
+                                "<td><a href=".$_SERVER['PHP_SELF']."?activate=".$user['id']."><button class='accept'>ACTIVATE</button></a></td>" : 
+                                "<td><a href=".$_SERVER['PHP_SELF']."?ban=".$user['id']."><button class='cancel'>BAN</button></a></td>" );
+                            echo ( $user['current_state'] !== "ACTIVE" ? 
+                                "<td><a href=".$_SERVER['PHP_SELF']."?del=".$user['id']."><button class='delete_user'>DELETE</button></a></td>" :
+                                "<td>---</td>" );
+                        }
+                        else {
+                            echo "<td></td>";
+                            echo "<td></td>";
+                        }
+                        /* echo ( ( $user['current_state'] == "ACTIVE" && $user['perfil'] == "USER" ) ? 
+                            "<td><a href=".$_SERVER['PHP_SELF']."?ban=".$user['id']."><button class='boton_sq cancelar'>Bloquear</button></a></td>" : "<td>---</td>" ); */
+                        //echo "<td><a href=".$_SERVER['PHP_SELF']."?delete=".$user['id']."><button class='boton_sq cancelar'>Bloquear</button></a></td>";
+                    echo "</tr>";
+                }
+            echo "</table>";
     }
 
     /**

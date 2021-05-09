@@ -8,7 +8,6 @@
     if (isset($_POST['add_user'])) {
         try {
             $idUser   = 0;
-            $userKeys = genUserKeys($_SESSION['instance_platforms']->getTotalPlatformCategories() + 1);
 
             $user_data = array(
                 'nick' => strtolower( dataClean($_POST['nick']) ),
@@ -17,19 +16,11 @@
                 'name' => replaceCharacterByOtherCharacter( dataClean($_POST['name']), array(" ","'",'"',"&","|","<",">"), array("\\s","\\'",'\\"',"\\&","\\|","\\<","\\>") ),
                 'surname' => replaceCharacterByOtherCharacter( dataClean($_POST['surname']), array(" ","'",'"',"&","|","<",">"), array("\\s","\\'",'\\"',"\\&","\\|","\\<","\\>") ),
                 'email' => dataClean($_POST['email']),
-                'keypass' => $userKeys[0]
             );
 
             //Creamos usuario
             $_SESSION['instance_users']->setUser($user_data);
-
-            //si no ha saltado excepción obtenemos su id en la BBDD
-            $idUser = $_SESSION['instance_users']->getIdUserByNick($user_data['nick']);
-
-            //creamos sus claves
-            for ($i = 0; $i < sizeof($userKeys); $i++) { 
-                $_SESSION['instance_users']->setUserKeys( $idUser, $i, $userKeys[$i] );
-            }
+            
             $registered = TRUE;
         } 
         catch (UserExistException $userExistException) {}
@@ -70,5 +61,4 @@
             echo "<div><a href=".$_SERVER['PHP_SELF']." class='back-login'>Back to login</a></div>";
         echo "</form>";
     }
-    
 ?>

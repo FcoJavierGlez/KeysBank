@@ -5,10 +5,10 @@
 
     include "../config/config_dev.php";
     include "../resource/functions.php";
-    /* include "../class/DBAbstractModel.php";
+    include "../class/DBAbstractModel.php";
     include "../class/Users.php";
     include "../class/Platforms.php";
-    include "../class/error/UserExistException.php";
+    /* include "../class/error/UserExistException.php";
     include "../class/error/PassCheckException.php";
     include "../class/error/MailFormatException.php";
     include "../class/error/MailExistException.php"; */
@@ -34,7 +34,7 @@
         <link rel="stylesheet" href="../css/login.css">
         <link rel="stylesheet" href="../css/style.css">
         <link rel="icon" href="../favicon.ico">
-        <!-- <script src="../js/main.js"></script> -->
+        <script src="../js/users/delete_user.js"></script>
         <title>KeysBank</title>
     </head>
     <body>
@@ -63,7 +63,7 @@
                 <div class="container">
                     <div class="name-page"><h2>USERS</h2></div>
                     <?php
-                        //Controller
+                        include '../controller/users_controller.php';
                     ?>
                 </div>
             </main>

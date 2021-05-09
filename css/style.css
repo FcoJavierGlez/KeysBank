@@ -258,6 +258,21 @@ section {
     border: 2px solid red;
     color: red;
 }
+.delete_user {
+    background-color: black;
+    border: 2px solid red;
+    color: red;
+}
+.delete_user:hover {
+    background-color: red;
+    border: 2px solid black;
+    color: black;
+}
+.delete_user:active {
+    background-color: darkorange;
+    border: 2px solid black;
+    color: black;
+}
 .copy {
     background-color: darkorange;
     color: white;
@@ -339,6 +354,44 @@ section {
 }
 .scroll::-webkit-scrollbar {
     display: none;
+}
+.user-list {
+    background-color: white;
+    border-radius: 15px;
+    margin: 0 auto;
+}
+.user-list table {
+    margin: 20px auto;
+    text-align: center;
+    width: 95%;
+}
+.user-list button {
+    font-weight: bold;
+    width: 100px;
+}
+tr:nth-child(even) {
+    background-color: rgb(230, 230, 230);
+}
+.user-list th {
+    background-color: var(--primary_blue);
+    color: white;
+    height: 35px;
+}
+.user-list table tr td {
+    *border: 1px solid black;
+    height: 50px;
+}
+.banned, .active, .pending {
+    font-weight: bold;
+}
+.banned {
+    color: red;
+}
+.active {
+    color: rgb(0, 220, 0);
+}
+.pending {
+    color: var(--primary_blue);
 }
 .category {
     color: orange;
@@ -663,6 +716,9 @@ button {
     }
     .perfil-data hr {
         margin: 20px 15%;
+    }
+    .user-list {
+        width: 90%;
     }
 }
 @media only screen and (min-width: 1200px) {

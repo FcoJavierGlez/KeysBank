@@ -21,16 +21,30 @@
         }
 
         /**
-         * Devuelve todos los usuarios de la tabla usuarios
+         * Devuelve todos los usuarios de la tabla usuarios coincidan 
+         * en nick o email a la búsqueda pasada como parámetro. 
+         * 
+         * En caso de no pasarle nada devolverá todos los usuarios con perfil 'USER'.
+         * En caso de pasarle un asterisco devolverá toda la lista, incluyendo el perfil 'ADMIN'.
          */
-        /* public function getAllUsers () {
-            $this->query = "SELECT * FROM sevi_usuarios";
+        public function getUsers ($search = '') {
+            if ($search == '')
+                $this->query = "SELECT id, nick, email, perfil, current_state FROM keysbank_users WHERE perfil = 'USER'";
+            elseif ($search == '*')
+                $this->query = "SELECT id, nick, email, perfil, current_state FROM keysbank_users";
+            else
+                $this->query = "SELECT id, nick, email, perfil, current_state FROM keysbank_users 
+                                WHERE perfil = 'USER' 
+                                AND nick LIKE :search
+                                OR email LIKE :search";
+
+            $this->parametros['search'] = '%'.$search.'%';
 
             $this->get_results_from_query();
             $this->close_connection();
             
             return $this->rows;
-        } */
+        }
 
         /**
          * Devuelve el ID del usario buscado por nick
@@ -109,6 +123,9 @@
          * Inserta un nuevo usuario en el sistema
          */
         public function setUser ( $user_data = array() ) {
+            $idUser = 0;
+            $generalKey = $this->_genKey();
+
             if ( sizeof( $this->getUserByNick( strtolower($user_data['nick']) ) ) )         //Si existe ese nick invalidamos el registro
                 throw new UserExistException();
             elseif ( !preg_match('/^([^-_@()<>[\]\"\'\.,;:])\w+([^-_@()<>[\]\"\'\.,;:])@([^-_@()<>[\]\"\'\.,;:])+\.(com|es)$/', 
@@ -146,28 +163,40 @@
                 $this->parametros['perfil']        = "USER";
                 $this->parametros['current_state'] = "PENDING";
                 $this->parametros['email']         = strtolower($user_data['email']);
-                $this->parametros['keypass']       = $user_data['keypass'];
+                $this->parametros['keypass']       = $generalKey;  //Obtenemos la llave genérica (llave idCategory == 0)
+                //$this->parametros['keypass']       = $user_data['keypass'];
 
                 $this->get_results_from_query();
                 $this->close_connection();
+
+                //Una vez ingresado el usuario insertamos la llave general
+
+                //Recuperamos el ID del usuario a partir de su nick
+                $idUser = $this->getIdUserByNick( strtolower($user_data['nick']) );
+
+                //E insertamos la llave general
+                $this->_setUserKeys( $idUser, 0, $generalKey );
             }
         }
 
         /**
-         * Inserta las llaves del usuario par alas distintas plataformas
+         * Inserta las llaves del usuario para las distintas plataformas
          */
-        public function setUserKeys( $idUser,$idCategory,$keypass ) {
+        private function _setUserKeys( $idUser,$idCategory,$keypass ) {
             $this->query = "INSERT INTO keysbank_keys (keysbank_keys.idUser, keysbank_keys.idCategory, keysbank_keys.password) 
                                 VALUES (:idUser, :idCategory, :keypass)";
 
             $this->parametros['idUser']      = $idUser;
-            $this->parametros['idCategory'] = $idCategory;
+            $this->parametros['idCategory']  = $idCategory;
             $this->parametros['keypass']     = $keypass;
 
             $this->get_results_from_query();
             $this->close_connection();
         }
 
+        /**
+         * 
+         */
         public function editUser ( $user_data = array() ) {
             $userSearchByNick  = $this->getUserByNick($user_data['nick']);
             $userSearchByEmail = $this->getUserByEmail($user_data['email']);
@@ -218,43 +247,78 @@
             $this->get_results_from_query();
             $this->close_connection();
         }
-        
+
         /**
          * Edita el estado del usuario
+         * 
+         * @param String newState El nuevo estado que tendrá el usuario. Sólo dos posibles ['ACTIVATE','BANNED']
+         * @param Number idUser   El ID del usuario que se va a actualizar
          */
-        /* public function editEstado ( $user_data = array() ) {
-            $this->query = "UPDATE sevi_usuarios SET estado = :estado, directorio = :directorio WHERE id = :id";
+        public function updateState( $newState, $idUser ) {
+            $newState      = strtoupper( $newState );
+            $current_state = $this->getUserById( $idUser )[0]['current_state'];
+            $userKeys      = array();
+            
+            if ($newState == 'ACTIVE' && $current_state == 'PENDING') {
+                //generamos las llaves del usuario para cada categoría
+                $userKeys = $this->_genUserKeys( $_SESSION['instance_platforms']->getTotalPlatformCategories() );
+                //insertar nuevas llaves
+                for ($i = 0; $i < sizeof($userKeys); $i++) 
+                    $this->_setUserKeys( $idUser, $i + 1, $userKeys[$i] );
+            }
 
-            $this->parametros['estado'] = $user_data['estado'];
-            $this->parametros['directorio'] = $user_data['directorio'];
-            $this->parametros['id'] = $user_data['id'];
+            $this->query = "UPDATE keysbank_users SET current_state = :new_state WHERE id = :id";
+
+            $this->parametros['id']        = $idUser;
+            $this->parametros['new_state'] = $newState;
 
             $this->get_results_from_query();
             $this->close_connection();
-        } */
-        
+        }
+
         /**
-         * Activa el perfil del usuario:
+         * Elimina un usuario cuyo ID es pasado como parámetro.
          * 
-         * -Se genera una carpeta con un nombre único para el usuario
-         * -Actualiza el perfil del usuario (estado = "activo" | nombre de su directorio)
+         * Esta acción provocará en la base de datos un borrado previo (trigger)
+         * de todas las cuentas y keys asociados al usuario.
+         * 
+         * @param Number $idUser ID del usuario a eliminar
          */
-        /* public function activarPerfil( $id ) {
-            //Generar nombre único para carpeta
-            $usuario = $this->getUserById( $id )[0];
-            $nombreDirectorio = $this->getDirectoryNameUser( $usuario['nombre'], $usuario['apellidos'] );
-            
-            if ( !file_exists("users/".$nombreDirectorio) )     //crear carpeta con permisos
-                mkdir("users/".$nombreDirectorio,0777,true);
-            
-            //actualizamos perfil a activo y guardarmos el nombre de la carpeta generada
-            $user_data = array(
-                'id' => $id,
-                'estado' => "activo",
-                'directorio' => $nombreDirectorio
-            );
-            $this->editEstado( $user_data );
-        } */
+        public function deleteUser( $idUser ) {
+            $this->query = "DELETE FROM keysbank_users WHERE id = :id";
+
+            $this->parametros['id']        = $idUser;
+
+            $this->get_results_from_query();
+            $this->close_connection();
+        }
+
+        /**
+         * Devuelve un array con claves hexadecimales de 255 caracteres de longitud. 
+         * El número de claves creadas será pasado por parámetro.
+         * 
+         * @param Number $nKeys Número de llaves a generar
+         */
+        private function _genUserKeys($nKeys) {
+            $keys = array();
+            for ($i = 0; $i < $nKeys; $i++) 
+                array_push( $keys, $this->_genKey() );
+            return $keys;
+        }
+
+        /**
+         * Genera una de las llaves hexadecimal de 255 caracteres pertenecientes al usuario
+         */
+        private function _genKey() {
+            $CHARACTERES = ['a','b','c','d','e','f','1','2','3','4','5','6','7','8','9','0'];
+            $LENGTH_KEY  = 255;
+            $keyGenerated = "";
+            for ($i = 0; $i < $LENGTH_KEY; $i++) 
+                $keyGenerated .= strtoupper( $CHARACTERES[ intval( rand(0,sizeof($CHARACTERES) - 1) ) ] );
+            return $keyGenerated;
+        }
+        
+
     }
     
 ?>
