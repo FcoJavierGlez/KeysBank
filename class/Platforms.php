@@ -88,7 +88,7 @@
          * Devuelve una lista de subcategorías para la categoría seleccionada por su id.
          */
         public function getSubcategoriesList($id) {
-            $this->query = "SELECT subcategory FROM keysbank_platform_subcategories WHERE idCategory = :id";
+            $this->query = "SELECT id, subcategory FROM keysbank_platform_subcategories WHERE idCategory = :id";
 
             $this->parametros['id'] = $id;
 
