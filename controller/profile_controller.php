@@ -65,9 +65,8 @@
     //  VIEWS  \\
     if (isset($_GET['edit'])) 
         include "../views/profile/edit.php";
-    elseif (isset($_GET['edit_password'])) {
+    elseif (isset($_GET['edit_password'])) 
         include "../views/profile/edit_password.php";
-    }
     else 
         include "../views/profile/main.php";
 
