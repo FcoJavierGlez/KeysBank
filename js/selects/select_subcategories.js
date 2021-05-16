@@ -28,8 +28,8 @@
     }
 
     const init = () => {
-        if (location.href.match(/platforms\.php\?add$/)?.input !== undefined) {
-            const FORM = document.getElementById("categories-subcategories");
+        if (location.href.match(/(platforms\.php\?add|platforms\.php\?edit=(\d+))$/)?.input !== undefined) {
+            const FORM = document.getElementById("platform");
             const CATEGORIES = document.getElementById("categories");
             const SUBCATEGORIES = document.getElementById("subcategories");
             
