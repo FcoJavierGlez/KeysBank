@@ -2,18 +2,13 @@
  * @author Francisco Javier González Sabariego
  */
 {
-    async function createPlataformCategoriesOptions(selectElement) {
-        let path = "";
-        const ROUTE = `${location.origin}/${(path = location.pathname.match(/^\/(\w+)(\/pages\/)?(\w+\.(html|php))?$/)?.[1]) == undefined ? "" : path}`;
-
+    /**
+     * 
+     * @param {*} categoriesList 
+     * @param {*} selectElement 
+     */
+    const createPlataformCategoriesOptions = (categoriesList,selectElement) => {
         const fragment = new DocumentFragment();
-
-        const connect = await fetch(`${ROUTE}/api/platform_categories_list.php`,{ 
-            type: "GET",
-            contentType: "text/plain; charset=UTF-8"
-        });
-        
-        const categoriesList = await connect.json();
 
         categoriesList.forEach( e => {
             const option = document.createElement("option");
@@ -31,7 +26,7 @@
         if (location.href.match(/(accounts|platforms)\.php\?add$/)?.input !== undefined) {
             const CATEGORIES = document.getElementById("categories");
     
-            createPlataformCategoriesOptions(CATEGORIES);
+            functions.requestApi(null, 'categories', createPlataformCategoriesOptions, CATEGORIES);
         }
     }
 
