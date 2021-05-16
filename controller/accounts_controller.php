@@ -77,15 +77,8 @@
         include "../views/accounts/add.php";
     elseif (isset($_GET['view'])) 
         include "../views/accounts/view.php";
-    elseif (isset($_GET['edit'])) {
+    elseif (isset($_GET['edit'])) 
         include "../views/accounts/edit.php";
-        /* echo "<pre>";
-            print_r($dataAccount);
-        echo "</pre>"; */
-        /* echo "<pre>";
-            print_r($platformListByCategory);
-        echo "</pre>"; */
-    }
     elseif (isset($_GET['del'])) 
         include "../views/accounts/delete.php";
     elseif (isset($_GET['deleted'])) 
