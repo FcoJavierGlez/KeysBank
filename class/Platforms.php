@@ -21,7 +21,7 @@
         }
 
         /**
-         * Devuelve el número de plataformas
+         * Devuelve el total de categorías almacenada en la base de datos
          */
         public function getTotalPlatformCategories() {
             $this->query = "SELECT id FROM keysbank_platform_categories";
@@ -33,7 +33,8 @@
         }
 
         /**
-         * Devuelve el conjunto de plataformas registradas en la BBDD
+         * Devuelve el conjunto de categorías registradas en la BBDD:
+         * digital_platform, social_media, etc
          */
         public function getPlatformCategories() {
             $this->query = "SELECT * FROM keysbank_platform_categories";
@@ -96,6 +97,44 @@
 
             return $this->rows;
         }
+
+        /**
+         * Devuelve una lista con todas las plataformas ordenadas por: categorías, subcategorías y nombre de plataforma
+         */
+        public function getPlatformsList() {
+            $this->query = "SELECT P.id, C.category, S.subcategory, P.name 
+                            FROM keysbank_platform_categories C, keysbank_platform_subcategories S, keysbank_platforms_list P
+                            WHERE C.id = P.idCategory
+                            AND S.idCategory = P.idCategory
+                            AND S.id = P.idSubcategory
+                            ORDER BY C.category, S.subcategory, P.name";
+
+            $this->get_results_from_query();
+            $this->close_connection();
+
+            return $this->rows;
+        }
+
+        /**
+         * Devuelve la plataforma buscada por nombre
+         */
+        public function getPlatformByName($search) {
+            $this->query = "SELECT P.id, C.category, S.subcategory, P.name 
+                            FROM keysbank_platform_categories C, keysbank_platform_subcategories S, keysbank_platforms_list P
+                            WHERE C.id = P.idCategory
+                            AND S.idCategory = P.idCategory
+                            AND S.id = P.idSubcategory
+                            AND P.name LIKE :search
+                            ORDER BY C.category, S.subcategory, P.name";
+            
+            $this->parametros['search'] = '%'.$search.'%';
+
+            $this->get_results_from_query();
+            $this->close_connection();
+
+            return $this->rows;
+        }
+
     }
     
 ?>
