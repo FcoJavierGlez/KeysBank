@@ -1,21 +1,39 @@
 /**
  * @author Francisco Javier González Sabariego
+ * 
+ * Este script se carga al añadir una nueva cuenta en la página de 'accounts' del usuario.
+ * 
+ * Se encarga de crear el conjunto de opciones del selector de plataformas en el formulario de añadir cuentas, 
+ * y su comportamiento es el siguiente:
+ * 
+ * - Si no hay una categoría seleccionada, el selector de plataformas 
+ *      sólo tiene una opción: <option value="">-- Choice an option --</option>
+ * 
+ * - En caso de seleccionarse una categoría se lanza una petición 
+ *      a la API usando: functions.requestApi(dataForm, 'platforms', createPlataformsOptions, SUBCATEGORIES);
+ *      y una vez recibidos los datos en forma de array se crea el conjunto de opciones agrupados 
+ *      por su correspondiente subcategoría en forma de optgroup.
  */
 {
     /**
+     * Crea el conjunto de opciones de plataformas (pertenecientes a la categoría seleccionada)
+     * y las agrupa por su correspondiente subcategoría.
      * 
-     * @param {*} categoriesList 
-     * @param {*} elementDom 
+     * @param {Array} platformsList La lista de plataformas (pertenecientes a la categoría seleccionada) recibidas de la API
+     * @param {Element} elementDom  El selector donde irán las opciones de las plataformas
      */
-    const createPlataformsOptions = (categoriesList, elementDom) => {
+    const createPlataformsOptions = (platformsList, elementDom) => {
         const fragment = new DocumentFragment();
 
-        const subcategoryList = [...new Set(categoriesList.map( e => e.subcategory))]
+        /* Filtro las subcategorías de la lista para evitar que se repitan y tener solo 1 subcategoría
+        de cada tipo, de esta forma se podrán crear los optgroup y agrupar las plataformas en su
+        correspondiente subcategoría */
+        const subcategoryList = [...new Set(platformsList.map( e => e.subcategory))]
 
         subcategoryList.forEach( subcategory => {
             const optgroup = document.createElement("optgroup");
             optgroup.label = `${subcategory}`;
-            categoriesList.filter( e => e.subcategory == subcategory )
+            platformsList.filter( e => e.subcategory == subcategory )
             .forEach( e => {
                 const option = document.createElement("option");
                 option.value = `${e.name}`;
@@ -24,11 +42,12 @@
             } );
             fragment.appendChild(optgroup);
         });
-
+        
+        elementDom.innerHTML = `<option value="">-- Choice an option --</option>`;
         elementDom.appendChild(fragment);
     }
 
-    const init = () => {
+    document.addEventListener("DOMContentLoaded", () => {
         if (location.href.match(/accounts\.php\?add$/)?.input !== undefined) {
             const FORM = document.getElementById("form-add");
             const CATEGORIES = document.getElementById("categories");
@@ -43,8 +62,5 @@
                 functions.requestApi(dataForm, 'platforms', createPlataformsOptions, SUBCATEGORIES);
             });
         }
-        
-    }
-
-    document.addEventListener("DOMContentLoaded", init);
+    });
 }
