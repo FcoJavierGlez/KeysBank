@@ -1,5 +1,21 @@
 /**
  * @author Francisco Javier González Sabariego
+ * 
+ * Éste script devuelve una función llamada 'functions' que contiene en su interior un conjunto 
+ * de funciones de las cuales, algunas de ellas, son devueltas en un objeto literal.
+ * 
+ * De esta forma obtenemos una encapsulación sin necesidad de emplear clases, ya que las funciones que son devueltas
+ * en el objeto literal del return de la función 'functions' serán accesibles como métodos públicos de una clase,
+ * las funciones que no estén incorporadas en el objeto literal del return serán equivalentes a métodos privados y,
+ * por tanto, no serán accesibles desde fuera si no que se serán usadas internamente por las funciones 'públicas'.
+ * 
+ * El objetivo de éste script es unificar funciones generales empleadas desde cualquier script de la app.
+ * 
+ * De todas las funciones que encontrarás en este script las dos más importantes son:
+ * 
+ * - requestApi (pública): Que lanzará peticiones al servidor y la BBDD para recavar los datos solicitados
+ * - apiAction (privada): Función ejecutada en el interior de la función anterior y sirve para construir
+ *                        los elementos del árbol DOM dónde mostraremos la información obtenida.
  */
 const functions = (
     () => {
@@ -30,8 +46,13 @@ const functions = (
                 'info': 'AES_DECRYPT(UNHEX(A.info),K.password)',
             };
             switch (dataRequest) {
+                case 'categories':
+                case 'subcategories':
+                case 'platforms':
                 case 'name_account_repeat':
-                    return functionCallback(getInfo);
+                    return domElement == undefined ? 
+                            functionCallback(getInfo) :
+                            functionCallback(getInfo, domElement);
                 case 'info':
                     return domElement == undefined ?
                         functionCallback(`${replaceHtmlCharacters(getInfo[0][INFO_ARRAY[dataRequest]])}`) :
@@ -63,6 +84,9 @@ const functions = (
             const INFO_ROUTES = {
                 'pass': 'get_pass',
                 'info': 'get_info',
+                'categories': 'platform_categories_list',
+                'subcategories': 'subcategories_list',
+                'platforms': 'platforms_list',
                 'name_account_repeat': 'get_repeat_name_accounts',
             };
 
