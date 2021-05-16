@@ -44,16 +44,19 @@ form#form-view a:visited {
     color: blueviolet;
 }
 
-#form-add fieldset {
+#form-add fieldset, form#platform fieldset {
     margin: 5px 0;
 }
 
-#form-add input {
+#form-add input, form#platform input {
     border: 1px solid black;
     height: 26px;
 }
+form#platform input#logo {
+    border: none;
+}
 
-form#form-add .accept {
+form#form-add .accept, form#platform .accept {
     height: 35px;
     width: 85px;
 }
@@ -380,7 +383,7 @@ div.special_message span.strongest {
 }
 
 @media only screen and (min-width: 700px) {
-    form#form-view, form#form-add {
+    form#form-view, form#form-add, form#platform {
         font-size: 1rem;
     }
     div#category {

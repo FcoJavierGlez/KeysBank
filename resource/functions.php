@@ -76,6 +76,9 @@
     }
 
     /**
+     * Filtra la lista de cuentas del usuario por categorías
+     * según el id de la categoría.
+     * 
      * @param
      * @param
      * @return
@@ -91,6 +94,60 @@
 
     /**
      * 
+     */
+    function filterPlatformsByCategory($arrayPlatformList,$category) {
+        $array = array();
+        foreach ($arrayPlatformList as $value) {
+            if ($category == $value['category']) 
+                array_push($array,$value);
+        }
+        return $array;
+    }
+
+    /**
+     * Renderiza varias tablas, una por cada categoría, 
+     * con las plataformas pertenecientes a dicha categoría
+     * 
+     * @param Array $categories    Conjunto de categorías almacenada en la BBDD
+     * @param Array $result_search Resultado de la búsqueda de plataformas
+     */
+    function renderTablePlatformList($categories, $result_search) {
+        $platformList = array();
+        for ($i = 0; $i < sizeof($categories); $i++) { 
+            //filtramos las plataformas por categoría para crear una tabla para cada categoría
+            $platformList = filterPlatformsByCategory($result_search,$categories[$i]['category']);
+            
+            if (!sizeof($platformList)) continue;
+            echo "<div class='category'><hr/>".replaceCharacterByOtherCharacter($platformList[0]['category'],array("_"),array(" "))."<hr/></div>";
+            echo "<table class='table-platform-list'>";
+                echo "<tr><th>SUBCATEGORY</th><th>PLATFORM</th><th>EDIT</th><th>DELETE</th></tr>";
+                renderTableRowsPlatform($platformList);
+            echo "</table>";
+        }
+    }
+
+    /**
+     * Renderiza las filas, con las plataformas pasadas por parámetro, 
+     * perteneciente a la tabla de la función renderTablePlatformList
+     * 
+     * @param Array $platformList Lista de plataformas de una categoría
+     */
+    function renderTableRowsPlatform ($platformList) {
+        $route = '';
+        for ($i = 0; $i < sizeof($platformList); $i++) {
+            $route = file_exists("../img/platform/".normalizeString($platformList[$i]['name']).".png") ? "../img/platform/".normalizeString($platformList[$i]['name']).".png" : "../img/platform/other.png";
+            echo "<tr>";
+                echo "<td>".$platformList[$i]['subcategory']."</td>";
+                echo "<td class='img-align-center'><img src='$route'>".$platformList[$i]['name']."</td>";
+                echo "<td><a href=".$_SERVER['PHP_SELF'].'?edit='.$platformList[$i]['id']."><button class='back'>Edit</button></a></td>";
+                echo "<td><a href=".$_SERVER['PHP_SELF'].'?del='.$platformList[$i]['id']."><button class='cancel'>Delete</button></a></td>";
+            echo "</tr>";
+        }
+
+    }
+
+    /**
+     * Renderiza la lista de usuarios (tabla)
      */
     function renderUserList( $userList ) {
         echo "<table>";
@@ -114,9 +171,6 @@
                             echo "<td></td>";
                             echo "<td></td>";
                         }
-                        /* echo ( ( $user['current_state'] == "ACTIVE" && $user['perfil'] == "USER" ) ? 
-                            "<td><a href=".$_SERVER['PHP_SELF']."?ban=".$user['id']."><button class='boton_sq cancelar'>Bloquear</button></a></td>" : "<td>---</td>" ); */
-                        //echo "<td><a href=".$_SERVER['PHP_SELF']."?delete=".$user['id']."><button class='boton_sq cancelar'>Bloquear</button></a></td>";
                     echo "</tr>";
                 }
             echo "</table>";

@@ -5,9 +5,9 @@
 
     include "../config/config_dev.php";
     include "../resource/functions.php";
-    /* include "../class/DBAbstractModel.php";
-    include "../class/Users.php";
+    include "../class/DBAbstractModel.php";
     include "../class/Platforms.php";
+    /* include "../class/Users.php";
     include "../class/error/UserExistException.php";
     include "../class/error/PassCheckException.php";
     include "../class/error/MailFormatException.php";
@@ -37,6 +37,8 @@
         <script src="../js/functions.js"></script>
         <script src="../js/selects/select_categories.js"></script>
         <script src="../js/selects/select_subcategories.js"></script>
+        <script src="../js/platforms/preview_logo.js"></script>
+        <script src="../js/platforms/add_edit.js"></script>
         <title>KeysBank</title>
     </head>
     <body>
@@ -65,7 +67,7 @@
                 <div class="container">
                     <div class="name-page"><h2>PLATFORMS</h2></div>
                     <?php
-                        //Controller
+                        include '../controller/platform_controller.php';
                     ?>
                 </div>
             </main>
