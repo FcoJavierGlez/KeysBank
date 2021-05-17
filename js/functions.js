@@ -77,7 +77,7 @@ const functions = (
          * Actualmente los dataRequest válidos son:
          *  [ 'categories', 'subcategories', 'platforms', 'name_account_repeat', 'info', 'pass' ] 
          * 
-         * @param {Object} FormData     Object DataForm con los datos del formulario
+         * @param {Object} dataForm     Object FormData con los datos del formulario
          * @param {String} dataRequest  El dato que pedimos al servidor puede ser: 'pass','info'
          * @param {Function} callback   La función que se va a ejecutar con los datos obtenidos tras la consulta
          * @param {Element} elementDom  Elemento del árbol DOM en el que se van a añadir o realizar cambios con los datos extraídos [opcional]
