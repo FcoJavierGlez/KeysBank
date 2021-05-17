@@ -1,5 +1,14 @@
 /**
  * @author Francisco Javier González Sabariego
+ * 
+ * Este script sirve para validar el formulario de añadir y de editar plataformas.
+ * 
+ * Para evitar errores en la consola por cargar elementos no existentes en una vista u otra (add | edit)
+ * al momento de cargar el script se evalua con una expresión regular la URL y dependiendo de si estamos en
+ * la vista de agregar una plataforma (add) o de editarla (edit) se cargarán unos elementos específicos u otros.
+ * 
+ * Si el formulario es válido se enviarán los datos al servidor, de lo contrario el formulario no enviará nada y 
+ * mostrará un mensaje de error.
  */
  {
     const init = () => {

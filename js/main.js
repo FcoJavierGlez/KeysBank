@@ -1,5 +1,12 @@
 /**
  * @author Francisco Javier González Sabariego
+ * 
+ * Este script se ejecuta en el página principal 'index.php' y sirve para controlar los inputs 
+ * del formulario de login y de registro, para evitar posibles inyecciones SQL por ejemplo:
+ * mira la función: functions.cleanInput(NICK_INPUT.value), la función la podrás encontrar en 
+ * js/functions.js
+ * 
+ * Además controla que la pantalla de login se oculte tras la animación que se produce en caso de un login correcto.
  */
 {
     const init = () => {

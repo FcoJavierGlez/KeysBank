@@ -34,6 +34,9 @@ const functions = (
          * acciones requieren de un elemento del árbol DOM sobre el que se van a aplicar los cambios para insertar 
          * la información requerida o alterar su diseño o contenido
          * 
+         * Actualmente los dataRequest válidos son:
+         *  [ 'categories', 'subcategories', 'platforms', 'name_account_repeat', 'info', 'pass' ] 
+         * 
          * @param {String} dataRequest        El tipo de dato requerido: 'pass', 'info', 'name_account_repeat'...
          * @param {Array} getInfo             Datos obtenidos tras la petición a la API
          * @param {Function} functionCallback La función que se va a ejecutar con los datos obtenidos
@@ -70,6 +73,9 @@ const functions = (
 
         /**
          * Petición a la API de la APP que recibe los datos solicitados y los procesa en una función callback pasada por parámetro.
+         * 
+         * Actualmente los dataRequest válidos son:
+         *  [ 'categories', 'subcategories', 'platforms', 'name_account_repeat', 'info', 'pass' ] 
          * 
          * @param {Object} FormData     Object DataForm con los datos del formulario
          * @param {String} dataRequest  El dato que pedimos al servidor puede ser: 'pass','info'

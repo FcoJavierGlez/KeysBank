@@ -1,5 +1,13 @@
 /**
  * @author Francisco Javier González Sabariego
+ * 
+ * Este script permite renderizar el icono seleccionado desde el propio disco duro del usuario, es decir, 
+ * permite una rederización de la imagen seleccionada antes de la subida de la misma al servidor.
+ * 
+ * Además muestra un mensaje de alerta si la imagen seleccionada sobrepasa el peso por defecto (el peso es
+ * cargado desde un input oculto en el árbol DOM y es NECESARIO para el CLIENTE y para el SERVIDOR) de 50KB.
+ * 
+ * Este script es una copia modificada de un ejemplo de MDN: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/file#examples
  */
  {
     const FILE_TYPES = [
@@ -12,15 +20,12 @@
     const validFileType = file => FILE_TYPES.includes(file.type);
 
     const  returnFileSize = number => {
-        if(number < 1024) {
+        if(number < 1024) 
             return number + 'bytes';
-        } 
-        else if(number >= 1024 && number < 1048576) {
+        else if(number >= 1024 && number < 1048576) 
             return (number/1024).toFixed(1) + 'KB';
-        } 
-        else if(number >= 1048576) {
+        else if(number >= 1048576) 
             return (number/1048576).toFixed(1) + 'MB';
-        }
       }
 
     document.addEventListener("DOMContentLoaded", () => {

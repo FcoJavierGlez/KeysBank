@@ -2,6 +2,9 @@
  * @author Francisco Javier González Sabariego
  * 
  * Formulario editar cuenta.
+ * 
+ * Este script valida el formulario de editar una cuenta, en caso de que no sea válido
+ * mostrará un mensaje de error y en qué input o select está el error.
  */
 {
     /**
