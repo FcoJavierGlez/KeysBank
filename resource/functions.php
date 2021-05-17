@@ -217,10 +217,13 @@
 
 
     /**
-     * Renderiza la lista de plataformas de una categoría seleccionando la plataforma a la que pertenece
-     * la cuenta que se está mostrando en la vista 'edit'
+     * Renderiza la lista de opciones del selector de plataformas seleccionando la plataforma a la que pertenece
+     * la cuenta que se está mostrando en la vista 'edit' de la página 'accounts'
+     * 
+     * @param Array $platformList    La lista de plataformas de una categoría
+     * @param Array $platformAccount La plataforma a la que pertenece la cuenta
      */
-    function renderPlatformList ($platformList,$platformAccount) {
+    function renderPlatformSelect ($platformList,$platformAccount) {
         $subcategory = "";
         echo "<select name='subcategories' id='subcategories'>";
         echo "<option value=''>-- Choice an option --</option>";
@@ -235,6 +238,25 @@
                 }
                 echo "</optgroup>";
             }
+        }
+        echo "</select>";
+    }
+
+    /**
+     * Renderiza la lista de opciones del selector de subcategorías seleccionando la subcategoría a la que pertenece
+     * la plataforma que se está mostrando en la vista 'edit' de la página 'platforms'
+     * 
+     * @param Array $subcategoryList     La lista de subcategorías de una categoría
+     * @param Array $subcategoryPlatform La subcategoría a la que pertenece la plataforma
+     */
+    function renderSubcategorySelect ($subcategoryList,$subcategoryPlatform) {
+        echo "<select name='subcategories' id='subcategories'>";
+        echo "<option value=''>-- Choice an option --</option>";
+        foreach ($subcategoryList as $array) {
+            /* echo $array['id']."<br>";
+            echo $array['subcategory']."<br>";
+            echo $subcategoryPlatform."<br>"; */
+            echo "<option value='".$array['id']."' ".($subcategoryPlatform == $array['subcategory'] ? 'selected' : '').">".$array['subcategory']."</option>";
         }
         echo "</select>";
     }

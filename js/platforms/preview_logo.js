@@ -26,7 +26,7 @@
     document.addEventListener("DOMContentLoaded", () => {
         if (location.href.match(/platforms\.php\?(add|edit=(\d+))$/)?.input !== undefined) {
             const INPUT         = document.querySelector('input[type=file]');
-            const MAX_SIZE      = document.querySelector('input[type=hidden]').value;
+            const MAX_SIZE      = document.querySelector('input[name=MAX_FILE_SIZE]').value;
             const IMAGE_PREVIEW = document.querySelector('.preview');
             const DIV_ERROR     = document.getElementById("error");
     

@@ -4,15 +4,24 @@
         <h3>ADD</h3>
         <div></div>
     </div>
-    <div class="<?php if ($actionSuccessfully || $existPlatform) echo $actionSuccessfully ? "win_added_acc" : "fail_added_acc"; else echo 'hidden' ?>" >
-        <div><?php echo $actionSuccessfully ? "Added platform succesfully" : "The platform already exists"; ?></div>
+    <div class="<?php if ($successfulAction || $actionFailed || $existPlatform) echo $successfulAction ? "win_added_acc" : "fail_added_acc"; else echo 'hidden' ?>" >
+        <div>
+            <?php 
+                if ($successfulAction)
+                    echo "Added platform succesfully";
+                elseif ($actionFailed)
+                    echo "Error: Action failed";
+                elseif ($existPlatform)
+                    echo "The platform already exists";
+            ?>
+        </div>
         <div>
             <a href="platforms.php">
                 <button class="accept">Accept</button>
             </a>
         </div>
     </div>
-    <div class="<?php echo $actionSuccessfully || $existPlatform ? 'hidden' : 'perfil-info' ?>">
+    <div class="<?php echo $successfulAction || $actionFailed || $existPlatform ? 'hidden' : 'perfil-info' ?>">
         <form action="<?php echo $_SERVER['PHP_SELF'].'?add'; ?>" method="POST" id="platform" enctype="multipart/form-data">
             <fieldset>
                 <legend>Required</legend>
@@ -54,12 +63,13 @@
                     </div>
                     <div id="error"></div>
                     <div>
-                        <label for="profile_pic">Choose an image to upload (PNG)(Size-Max: 50KB)</label><br>
+                        <label for="profile_pic"><u>Choose an image to upload</u>: <b>(PNG) (Size-Max: 50KB)</b></label><br>
                         <input type="hidden" name="MAX_FILE_SIZE" value="51200" />
                         <input type="file" id="logo" name="logo" accept=".png">
                     </div>
                 </fieldset>
             </fieldset>
+            <div id="message_error"></div>
             <div>
                 <input type="submit" id ="send" name="add_platform" value="Accept" class="accept">
             </div>

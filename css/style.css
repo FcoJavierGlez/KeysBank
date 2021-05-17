@@ -96,6 +96,10 @@ textarea:focus {
     height: 70vh;
 }
 
+.capitalice {
+    text-transform: capitalize;
+}
+
 header {
     align-items: center;
     background-color: black;
@@ -216,6 +220,10 @@ section {
 }
 
 /* PREVIEW_IMAGE -> ADD / EDIT Platform */
+.preview {
+    margin: 8px 0;
+    margin-left: 15px;
+}
 .preview_logo {
     display: flex;
     flex-direction: row;
@@ -224,7 +232,10 @@ section {
     column-gap: 15px;
 }
 .preview_logo img {
-    height: 100px;
+    height: 60px;
+}
+input#logo {
+    margin: 8px 0;
 }
 
 /* ACCEPT, CANCEL, BACK, EDIT BUTTONS */
@@ -722,6 +733,9 @@ button {
     .perfil-data hr {
         margin: 20px;
     }
+    .preview_logo img {
+        height: 75px;
+    }
 }
 @media only screen and (min-width: 1000px) {
     nav a {
@@ -748,6 +762,9 @@ button {
     }
     .user-list {
         width: 90%;
+    }
+    .preview_logo img {
+        height: 100px;
     }
 }
 @media only screen and (min-width: 1200px) {
