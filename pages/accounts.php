@@ -9,14 +9,6 @@
     include "../class/Users.php";
     include "../class/Platforms.php";
     include "../class/Accounts.php";
-    /* include "../class/error/UserExistException.php";
-    include "../class/error/PassCheckException.php";
-    include "../class/error/MailFormatException.php";
-    include "../class/error/MailExistException.php"; */
-    /* include "../class/Clave.php";
-    include "../class/Documento.php";
-    include "../class/error/CheckOldPassException.php";
-    include "../class/error/TimeLimitException.php";*/
 
     session_start();
 
@@ -49,18 +41,9 @@
         <noscript><h1>Esta página requiere el uso de JavaScript</h1></noscript>
         <div>
             <header>
-                <div></div>
-                <a href="../index.php"><div class="logo"></div></a>
-                <div class="close-session">
-                    <?php
-                        if ($_SESSION['user']['perfil'] !== 'INVITED') {
-                            echo "<form action='../index.php' method='post'>";
-                                echo "Welcome ".$_SESSION['user']['nick'].". ";
-                                echo "<input type='submit' name='exit' value='Logout' class=''>";
-                            echo "</form>";
-                        }
-                    ?>
-                </div>
+                <?php
+                    include '../include/header.php';
+                ?>
             </header>
             <main>
                 <nav>
