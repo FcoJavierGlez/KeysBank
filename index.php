@@ -1,6 +1,23 @@
 <?php
     /**
      * @author Francisco Javier González Sabariego
+     * 
+     * Página de inicio. Página principal de la app.
+     * 
+     * En esta página se cargan las variables de sesión y se validan
+     * los formularios de login y de registro.
+     * 
+     * En caso de login exitoso se cargan los datos del usuario en su variable de sesión $_SESSION['user'], 
+     * de lo contrario no se cargan datos y su perfil permanecerá como 'INVITED' (perfil inicial por defecto).
+     * 
+     * Si el perfil del usuario cambia de 'INVITED' a 'USER' o 'ADMIN' se ocultará el formulario de login y 
+     * se creará dinámicamente los botones de la barra de nav (en función de si el perfil es 'USER' o 'ADMIN') 
+     * y se mostrará en la vista un saludo y (en el futuro) datros de interés para la persona que haya hecho login.
+     * 
+     * Mientras el perfil sea 'INVITED' el usuario, aunque oculte el panel de login, verá una app vacía sin botones
+     * en el nav ni ningún tipo de información. Además, sobra decir, que mientras permanezca como 'INVITED' tampoco
+     * podrá acceder por URL a ninguna otra página (ni vista respectiva a la misma) de la app y que, de existir 
+     * dicha página se le redireccionará inmediatamente al index con la vista del formulario de login.
      */
 
     include "config/config_dev.php";
@@ -16,11 +33,6 @@
 
     session_start();
 
-    $loggedNow   = FALSE;
-    $errorLogin  = FALSE;
-    $userPending = FALSE;
-    $userBanned  = FALSE;
-
     if ( !isset($_SESSION['user']) ) { 
         $_SESSION['instance_users']      = Users::singleton();
         $_SESSION['instance_platforms']  = Platforms::singleton();
@@ -29,34 +41,7 @@
         $_SESSION['user']             = array( 'perfil' => "INVITED" );
     }
 
-    if ( isset($_POST['login']) ) {
-        $usuario = $_SESSION['instance_users']->getUserByNick( dataClean($_POST['nick']) );
-        if ( sizeof($usuario) && $usuario[0]['AES_DECRYPT(UNHEX(U.pass),K.password)'] == dataClean($_POST['pswd']) ) {
-            if ($usuario[0]['current_state'] == 'PENDING') {
-                $userPending = TRUE;
-                $errorLogin = TRUE;
-            }
-            elseif($usuario[0]['current_state'] == 'BANNED') {
-                $userBanned = TRUE;
-                $errorLogin = TRUE;
-            }
-            else {
-                $_SESSION['user']['id']                = $usuario[0]['id'];
-                $_SESSION['user']['nick']              = $usuario[0]['nick'];
-                $_SESSION['user']['pass']              = $usuario[0]['AES_DECRYPT(UNHEX(U.pass),K.password)'];
-                $_SESSION['user']['name']              = $usuario[0]['AES_DECRYPT(UNHEX(U.name),K.password)'];
-                $_SESSION['user']['surname']           = $usuario[0]['AES_DECRYPT(UNHEX(U.surname),K.password)'];
-                $_SESSION['user']['email']             = $usuario[0]['email'];
-                $_SESSION['user']['perfil']            = $usuario[0]['perfil'];
-                $_SESSION['user']['current_state']     = $usuario[0]['current_state'];
-                $_SESSION['user']['days_old_password'] = $usuario[0]['days_old_password'];
-                $loggedNow = TRUE;
-            }
-            
-        }
-        else
-            $errorLogin = TRUE;
-    }
+    include 'controller/login_register_controller.php';
 
     if ( isset($_POST['exit']) ) {
         closeSession();

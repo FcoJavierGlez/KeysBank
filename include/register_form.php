@@ -1,34 +1,3 @@
-<?php
-    $registered          = FALSE;
-    $userExistException  = FALSE;
-    $mailFormatException = FALSE;
-    $mailExistException  = FALSE;
-    $passCheckException  = FALSE;
-
-    if (isset($_POST['add_user'])) {
-        try {
-            $idUser   = 0;
-
-            $user_data = array(
-                'nick' => strtolower( dataClean($_POST['nick']) ),
-                'pass' => dataClean($_POST['pswd']),
-                'pass2' => dataClean($_POST['pswd2']),
-                'name' => replaceCharacterByOtherCharacter( dataClean($_POST['name']), array(" ","'",'"',"&","|","<",">"), array("\\s","\\'",'\\"',"\\&","\\|","\\<","\\>") ),
-                'surname' => replaceCharacterByOtherCharacter( dataClean($_POST['surname']), array(" ","'",'"',"&","|","<",">"), array("\\s","\\'",'\\"',"\\&","\\|","\\<","\\>") ),
-                'email' => dataClean($_POST['email']),
-            );
-
-            //Creamos usuario
-            $_SESSION['instance_users']->setUser($user_data);
-            
-            $registered = TRUE;
-        } 
-        catch (UserExistException $userExistException) {}
-        catch (MailFormatException $mailFormatException) {}
-        catch (MailExistException $mailExistException) {}
-        catch (PassCheckException $passCheckException) {}
-    }
-?>
 <div class="<?php echo $registered ? 'container-box' : 'hidden' ?>">
     <div class='registered-box'>
     <p>Succefully registered.</p>
