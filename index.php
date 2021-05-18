@@ -63,7 +63,7 @@
         <title>KeysBank</title>
     </head>
     <body>
-        <noscript><h1>Estapágina requiere el uso de JavaScript</h1></noscript>
+        <noscript><h1>Esta página requiere el uso de JavaScript</h1></noscript>
         <div id="login_screen" class="<?php echo loginScreenVisibility($loggedNow); ?>">
             <div><a href="index.php"><div class="logo"></div></a></div>
             <?php 
