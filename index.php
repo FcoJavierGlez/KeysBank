@@ -13,11 +13,6 @@
     include "class/error/PassCheckException.php";
     include "class/error/MailFormatException.php";
     include "class/error/MailExistException.php";
-    /* include "class/Clave.php";
-    include "class/Documento.php";
-    include "class/error/CheckOldPassException.php";
-    include "class/error/TimeLimitException.php";
-    require "phpmailer/class.phpmailer.php"; */
 
     session_start();
 
@@ -30,10 +25,6 @@
         $_SESSION['instance_users']      = Users::singleton();
         $_SESSION['instance_platforms']  = Platforms::singleton();
         $_SESSION['instance_accounts']   = Accounts::singleton();
-        /* $_SESSION['clave']            = Clave::singleton();
-        $_SESSION['documento']        = Documento::singleton();
-
-        $_SESSION['mailer']           = NULL; */
 
         $_SESSION['user']             = array( 'perfil' => "INVITED" );
     }
