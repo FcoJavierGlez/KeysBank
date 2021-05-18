@@ -71,10 +71,10 @@
                     if ($_SESSION['user']['perfil'] !== 'INVITED')  //Si el usuario ya no es 'INVITED' no podrá ver la vista de registro
                         header('Location:index.php');
                     else
-                        include "views/index/register_form.php"; 
+                        include "views/index/register.php"; 
                 }
                 else    //Si el usuario no accede a registro accederá a login en caso de no estar logeado
-                    include "views/index/login_form.php"; 
+                    include "views/index/login.php"; 
             ?>
         </div>
         <div>
