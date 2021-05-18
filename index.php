@@ -67,14 +67,14 @@
         <div id="login_screen" class="<?php echo loginScreenVisibility($loggedNow); ?>">
             <div><a href="index.php"><div class="logo"></div></a></div>
             <?php 
-                if ( isset($_GET['register']) ) {
-                    if ($_SESSION['user']['perfil'] !== 'INVITED')
+                if ( isset($_GET['register']) ) {   //Si la URL es index.php?register accedemos a la vista de registro
+                    if ($_SESSION['user']['perfil'] !== 'INVITED')  //Si el usuario ya no es 'INVITED' no podrá ver la vista de registro
                         header('Location:index.php');
                     else
-                        include "include/register_form.php"; 
+                        include "views/index/register_form.php"; 
                 }
-                else
-                    include "include/login_form.php"; 
+                else    //Si el usuario no accede a registro accederá a login en caso de no estar logeado
+                    include "views/index/login_form.php"; 
             ?>
         </div>
         <div>
@@ -83,7 +83,7 @@
                 <a href="index.php"><div class="logo"></div></a>
                 <div class="close-session">
                     <?php
-                        if ($_SESSION['user']['perfil'] !== 'INVITED') {
+                        if ($_SESSION['user']['perfil'] !== 'INVITED') {    //Si el usuario ya está logeado se carga el botón de logout
                             echo "<form action='index.php' method='post'>";
                                 echo "Welcome ".$_SESSION['user']['nick'].". ";
                                 echo "<input type='submit' name='exit' value='Logout' class=''>";
@@ -95,7 +95,7 @@
             <main>
                 <nav>
                     <?php
-                        include "include/nav.php";
+                        include "include/nav.php"; //Si el usuario ya está logeado se cargan los botones del nav
                     ?>
                 </nav>
                 <div class="container">
