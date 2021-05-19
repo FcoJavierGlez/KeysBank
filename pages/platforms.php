@@ -30,6 +30,7 @@
         <script src="../js/selects/select_subcategories.js"></script>
         <script src="../js/platforms/preview_logo.js"></script>
         <script src="../js/platforms/add_edit.js"></script>
+        <script src="../js/platforms/delete_platform.js"></script>
         <title>KeysBank</title>
     </head>
     <body>
