@@ -42,8 +42,8 @@
      * Elimina tildes y eñes de la cadena insertada
      */
     function normalizeString( $string ) {
-        $tildes  = array(" ","á","é","í","ó","ú","Á","É","Í","Ó","Ú","Ñ","ñ","!");
-        $letters = array("_","a","e","i","o","u","a","e","i","o","u","n","n","");
+        $tildes  = array(" ","á","é","í","ó","ú","Á","É","Í","Ó","Ú","Ñ","ñ","!","&");
+        $letters = array("_","a","e","i","o","u","a","e","i","o","u","n","n","","_and_");
         return strtolower(str_replace( $tildes, $letters, $string ));
     }
 
