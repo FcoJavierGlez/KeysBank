@@ -58,8 +58,8 @@
                     SUBCATEGORIES.innerHTML = `<option value="">-- Choice an option --</option>`;
                     return;
                 }
-                const dataForm = new FormData(FORM);
-                functions.requestApi(dataForm, 'platforms', createPlataformsOptions, SUBCATEGORIES);
+                
+                functions.requestApi(new FormData(FORM), 'platforms', createPlataformsOptions, SUBCATEGORIES);
             });
         }
     });

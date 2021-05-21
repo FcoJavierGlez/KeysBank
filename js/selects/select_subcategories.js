@@ -46,8 +46,8 @@
                     SUBCATEGORIES.innerHTML = `<option value="">-- Choice an option --</option>`;
                     return;
                 }
-                const dataForm = new FormData(FORM);
-                functions.requestApi(dataForm, 'subcategories', createSubcategoriesOptions, SUBCATEGORIES);
+                
+                functions.requestApi(new FormData(FORM), 'subcategories', createSubcategoriesOptions, SUBCATEGORIES);
             });
         }
     });

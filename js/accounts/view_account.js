@@ -117,22 +117,19 @@
             COPY_BUTTON.addEventListener("click", e => {
                 e.preventDefault();
                 if ( !validateAccountId(HIDDEN) ) return;
-                const data = new FormData(FORM);
-                functions.requestApi( data, 'pass', copyText, undefined, e );
+                functions.requestApi( new FormData(FORM), 'pass', copyText, undefined, e );
             });
 
             SHOW_PASS.addEventListener("click", function() {
                 if ( !validateAccountId(HIDDEN) ) return;
-                const data = new FormData(FORM);
                 toggleEye(this);
-                toggleShowNextSibling( data, 'pass', this, showInfo );
+                toggleShowNextSibling( new FormData(FORM), 'pass', this, showInfo );
             });
 
             SHOW_INFO.addEventListener("click", function() {
                 if ( !validateAccountId(HIDDEN) ) return;
-                const data = new FormData(FORM);
                 toggleEye(this);
-                toggleShowNextSibling( data, 'info', this, showInfo );
+                toggleShowNextSibling( new FormData(FORM), 'info', this, showInfo );
             });
         }
         

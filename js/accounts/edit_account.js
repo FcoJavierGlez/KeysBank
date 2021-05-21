@@ -218,10 +218,8 @@
                 NAME_ACCOUNT.value = functions.cleanInput(NAME_ACCOUNT.value);
                 NAME_ACCOUNT.classList = NAME_ACCOUNT.value !== "" ? "input-correct" : "required";
                 SPANS[2].innerText = "";
-                if (NAME_ACCOUNT.value.replace(/\s/g,"").length) {
-                    const data = new FormData(FORM);
-                    functions.requestApi(data, 'name_account_repeat', getAccountsNameRepeat);
-                }
+                if (NAME_ACCOUNT.value.replace(/\s/g,"").length) 
+                    functions.requestApi(new FormData(FORM), 'name_account_repeat', getAccountsNameRepeat);
                 if (NAME_ACCOUNT.value.replace(/\s/g,"").length && PASSWORD.value.length) 
                     PASSWORD.dispatchEvent(new Event("keyup"));
                 else if (!NAME_ACCOUNT.value.replace(/\s/g,"").length && PASSWORD.value.length) {
