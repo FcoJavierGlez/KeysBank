@@ -6,7 +6,7 @@
      */
     header("Access-Control-Allow-Origin: *");
         
-    include "../config/config_dev.php";
+    include "../config/db_config.php";
     include "../resource/functions.php";
     include "../class/DBAbstractModel.php";
     include "../class/Platforms.php";

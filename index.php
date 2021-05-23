@@ -20,7 +20,7 @@
      * dicha página se le redireccionará inmediatamente al index con la vista del formulario de login.
      */
 
-    include "config/config_dev.php";
+    include "config/db_config.php";
     include "resource/functions.php";
     include "class/DBAbstractModel.php";
     include "class/Users.php";
