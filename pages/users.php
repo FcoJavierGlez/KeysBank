@@ -23,7 +23,7 @@
         <link rel="stylesheet" href="../css/form.css">
         <link rel="stylesheet" href="../css/login.css">
         <link rel="stylesheet" href="../css/style.css">
-        <link rel="icon" href="../favicon.ico">
+        <link rel="icon" href="../img/favicon.ico">
         <script src="../js/users/delete_user.js"></script>
         <title>KeysBank</title>
     </head>
