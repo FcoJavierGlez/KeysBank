@@ -11,9 +11,7 @@
 
     session_start();
 
-    if ($_SESSION['user']['perfil'] !== "ADMIN") {
-        header('Location:../index.php');
-    }
+    include '../controller/routes/admin.php';   //Acceso sólo para el perfil administrador
 ?>
 <!DOCTYPE html>
 <html lang="es">

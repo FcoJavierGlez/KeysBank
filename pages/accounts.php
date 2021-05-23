@@ -12,9 +12,7 @@
 
     session_start();
 
-    if ($_SESSION['user']['perfil'] !== "USER" || $_SESSION['user']['current_state'] !== "ACTIVE") {
-        header('Location:../index.php');
-    }
+    include '../controller/routes/users.php';   //Acceso solo para usuarios activados
 ?>
 <!DOCTYPE html>
 <html lang="es">
