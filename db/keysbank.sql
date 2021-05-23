@@ -206,7 +206,7 @@ INSERT INTO `keysbank_platforms_list` (`id`, `idCategory`, `idSubcategory`, `nam
 -- Disparadores `keysbank_platforms_list`
 --
 DELIMITER $$
-CREATE TRIGGER `deletePlatformAccountsWhenDeletePlatform` BEFORE DELETE ON `keysbank_platforms_list` FOR EACH ROW BEGIN
+CREATE TRIGGER `deletePlatformAccounts` BEFORE DELETE ON `keysbank_platforms_list` FOR EACH ROW BEGIN
 DELETE FROM keysbank_accounts WHERE name_platform = OLD.name;
 END
 $$
