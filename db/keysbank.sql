@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 19-05-2021 a las 15:01:40
+-- Tiempo de generación: 26-05-2021 a las 20:43:50
 -- Versión del servidor: 10.4.11-MariaDB
 -- Versión de PHP: 7.4.1
 
@@ -32,10 +32,10 @@ CREATE TABLE `keysbank_accounts` (
   `id` int(11) NOT NULL,
   `idUser` int(11) NOT NULL,
   `idCategory` int(11) NOT NULL,
+  `idPlatform` int(11) NOT NULL,
   `name_account` varchar(255) COLLATE utf8_spanish_ci NOT NULL,
   `pass_account` varchar(255) COLLATE utf8_spanish_ci NOT NULL,
   `pass_date` date NOT NULL,
-  `name_platform` varchar(30) COLLATE utf8_spanish_ci NOT NULL,
   `url` varchar(255) COLLATE utf8_spanish_ci NOT NULL,
   `info` text COLLATE utf8_spanish_ci NOT NULL,
   `notes` text COLLATE utf8_spanish_ci NOT NULL
@@ -202,24 +202,6 @@ INSERT INTO `keysbank_platforms_list` (`id`, `idCategory`, `idSubcategory`, `nam
 (109, 5, 15, 'Kali Linux'),
 (110, 2, 8, 'BattleNet');
 
---
--- Disparadores `keysbank_platforms_list`
---
-DELIMITER $$
-CREATE TRIGGER `deletePlatformAccounts` BEFORE DELETE ON `keysbank_platforms_list` FOR EACH ROW BEGIN
-DELETE FROM keysbank_accounts WHERE name_platform = OLD.name;
-END
-$$
-DELIMITER ;
-DELIMITER $$
-CREATE TRIGGER `updateNamePlatform` BEFORE UPDATE ON `keysbank_platforms_list` FOR EACH ROW BEGIN
-IF NEW.name != OLD.name THEN
-UPDATE keysbank_accounts SET name_platform = NEW.name WHERE name_platform = OLD.name;
-END IF;
-END
-$$
-DELIMITER ;
-
 -- --------------------------------------------------------
 
 --
@@ -236,6 +218,7 @@ CREATE TABLE `keysbank_platform_categories` (
 --
 
 INSERT INTO `keysbank_platform_categories` (`id`, `category`) VALUES
+(0, 'general'),
 (1, 'social_media'),
 (2, 'digital_platforms'),
 (3, 'webs/apps'),
@@ -303,24 +286,8 @@ CREATE TABLE `keysbank_users` (
 -- Volcado de datos para la tabla `keysbank_users`
 --
 
-INSERT INTO `keysbank_users` (`id`, `nick`, `pass`, `name`, `surname`, `email`, `perfil`, `current_state`, `days_old_password`) 
-VALUES (1, 'admin', 'C66DA34A548C7AD4130B5AFA6287F7B5', NULL, NULL, '', 'ADMIN', 'ACTIVE', 90);
-
---
--- Disparadores `keysbank_users`
---
-DELIMITER $$
-CREATE TRIGGER `deleteAccountsUser` BEFORE DELETE ON `keysbank_users` FOR EACH ROW BEGIN
-DELETE FROM keysbank_accounts WHERE idUser = OLD.id;
-END
-$$
-DELIMITER ;
-DELIMITER $$
-CREATE TRIGGER `deleteKeysUser` BEFORE DELETE ON `keysbank_users` FOR EACH ROW BEGIN
-DELETE FROM keysbank_keys WHERE idUser = OLD.id;
-END
-$$
-DELIMITER ;
+INSERT INTO `keysbank_users` (`id`, `nick`, `pass`, `name`, `surname`, `email`, `perfil`, `current_state`, `days_old_password`) VALUES
+(1, 'admin', 'C66DA34A548C7AD4130B5AFA6287F7B5', NULL, NULL, '', 'ADMIN', 'ACTIVE', 90);
 
 --
 -- Índices para tablas volcadas
@@ -330,19 +297,26 @@ DELIMITER ;
 -- Indices de la tabla `keysbank_accounts`
 --
 ALTER TABLE `keysbank_accounts`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `idUser` (`idUser`),
+  ADD KEY `idCategory` (`idCategory`),
+  ADD KEY `idPlatform` (`idPlatform`);
 
 --
 -- Indices de la tabla `keysbank_keys`
 --
 ALTER TABLE `keysbank_keys`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `idUser` (`idUser`),
+  ADD KEY `idCategory` (`idCategory`);
 
 --
 -- Indices de la tabla `keysbank_platforms_list`
 --
 ALTER TABLE `keysbank_platforms_list`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `idCategory` (`idCategory`),
+  ADD KEY `idSubcategory` (`idSubcategory`);
 
 --
 -- Indices de la tabla `keysbank_platform_categories`
@@ -354,7 +328,8 @@ ALTER TABLE `keysbank_platform_categories`
 -- Indices de la tabla `keysbank_platform_subcategories`
 --
 ALTER TABLE `keysbank_platform_subcategories`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `idCategory` (`idCategory`);
 
 --
 -- Indices de la tabla `keysbank_users`
@@ -401,6 +376,38 @@ ALTER TABLE `keysbank_platform_subcategories`
 --
 ALTER TABLE `keysbank_users`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- Restricciones para tablas volcadas
+--
+
+--
+-- Filtros para la tabla `keysbank_accounts`
+--
+ALTER TABLE `keysbank_accounts`
+  ADD CONSTRAINT `keysbank_accounts_ibfk_1` FOREIGN KEY (`idUser`) REFERENCES `keysbank_users` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `keysbank_accounts_ibfk_2` FOREIGN KEY (`idCategory`) REFERENCES `keysbank_platform_categories` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `keysbank_accounts_ibfk_3` FOREIGN KEY (`idPlatform`) REFERENCES `keysbank_platforms_list` (`id`) ON DELETE CASCADE;
+
+--
+-- Filtros para la tabla `keysbank_keys`
+--
+ALTER TABLE `keysbank_keys`
+  ADD CONSTRAINT `keysbank_keys_ibfk_1` FOREIGN KEY (`idUser`) REFERENCES `keysbank_users` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `keysbank_keys_ibfk_2` FOREIGN KEY (`idCategory`) REFERENCES `keysbank_platform_categories` (`id`) ON DELETE CASCADE;
+
+--
+-- Filtros para la tabla `keysbank_platforms_list`
+--
+ALTER TABLE `keysbank_platforms_list`
+  ADD CONSTRAINT `keysbank_platforms_list_ibfk_1` FOREIGN KEY (`idSubcategory`) REFERENCES `keysbank_platform_subcategories` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `keysbank_platforms_list_ibfk_2` FOREIGN KEY (`idCategory`) REFERENCES `keysbank_platform_categories` (`id`) ON DELETE CASCADE;
+
+--
+-- Filtros para la tabla `keysbank_platform_subcategories`
+--
+ALTER TABLE `keysbank_platform_subcategories`
+  ADD CONSTRAINT `keysbank_platform_subcategories_ibfk_1` FOREIGN KEY (`idCategory`) REFERENCES `keysbank_platform_categories` (`id`) ON DELETE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
