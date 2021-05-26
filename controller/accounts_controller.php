@@ -41,9 +41,6 @@
             'info' => replaceCharacterByOtherCharacter( dataClean($_POST['info']), array(" ","'",'"',"&","|","<",">"), array("\\s","\\'",'\\"',"\\&","\\|","\\<","\\>") ),
             'notes' => replaceCharacterByOtherCharacter( dataClean($_POST['notes']), array(" ","'",'"',"&","|","<",">"), array("\\s","\\'",'\\"',"\\&","\\|","\\<","\\>") ),
         );
-        echo "<pre>";
-            print_r($dataAccount);
-        echo "</pre>";
         $failuredAcount =  !validatePlatformSelected($_SESSION['instance_platforms']->getPlatformsListByCategory($dataAccount['idCategory']),$dataAccount['idPlatform']);
         if (!$failuredAcount) {
             $_SESSION['instance_accounts']->updateAccount($dataAccount);
