@@ -130,7 +130,7 @@
      */
     const printAccountsNameRepeat = info => {
         let string = "";
-        info.forEach( e => string += `<a href="./accounts.php?view=${e.id}" class="account_used" target="_blank"><div>${Object.values(e)[1]}</div><div>${Object.values(e)[2]}</div></a>` );
+        info.forEach( e => string += `<a href="./accounts.php?view=${e.id}" class="account_used" target="_blank"><div>${Object.values(e)[2]}</div><div>${Object.values(e)[0]}</div></a>` );
         return string;
     }
 

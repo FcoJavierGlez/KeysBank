@@ -128,8 +128,7 @@
      */
     const printAccountsNameRepeat = info => {
         let string = "";
-        let {idEdit} = location.href.match(/accounts\.php\?edit=(?<idEdit>\d+)$/)?.groups
-        info.forEach( e => string += e.id == idEdit ? "" :`<a href="./accounts.php?view=${e.id}" class="account_used" target="_blank"><div>${Object.values(e)[1]}</div><div>${Object.values(e)[2]}</div></a>` );
+        info.forEach( e => string += `<a href="./accounts.php?view=${e.id}" class="account_used" target="_blank"><div>${Object.values(e)[2]}</div><div>${Object.values(e)[0]}</div></a>` );
         return string;
     }
 
@@ -166,16 +165,16 @@
              * @param {Array} info Array con el conjunto de cuentas cuyo nombre de cuenta está repetido (excepto el de la cuenta editada).
              */
             const getAccountsNameRepeat = info => {
-                if (info.length > 1) {
-                    NAME_REPEAT.classList = 'name_accounts_repeat';
-                    NAME_REPEAT.innerHTML = `
-                        <div class="alert">Account name used</div>
-                        <div class="scroll">
-                            ${
-                                printAccountsNameRepeat(info)
-                            }
-                        </div>`;
-                }
+                let {idEdit} = location.href.match(/accounts\.php\?edit=(?<idEdit>\d+)$/)?.groups;
+                if (info.length <1 || info.length == 1 && info[0].id == idEdit) return;
+                NAME_REPEAT.classList = 'name_accounts_repeat';
+                NAME_REPEAT.innerHTML = `
+                    <div class="alert">Account name used</div>
+                    <div class="scroll">
+                        ${
+                            printAccountsNameRepeat(info)
+                        }
+                    </div>`;
             }
 
             /**
