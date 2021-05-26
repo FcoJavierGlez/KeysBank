@@ -217,13 +217,14 @@
          * Devuelve una lista de cuentas propietarias del usuario que repiten el mismo nombre de cuenta
          */
         public function getAccountsUserByNameRepeat($idUser,$nameAccount) {
-            $this->query = "SELECT A.id, AES_DECRYPT(UNHEX(A.name_account),K.password), A.name_platform
-            FROM keysbank_accounts A, keysbank_keys K 
-            WHERE K.idUser = A.idUser 
-            AND K.idCategory = A.idCategory 
-            AND A.idUser = :idUser
-            AND LOWER(CONVERT(AES_DECRYPT(UNHEX(A.name_account),K.password) USING utf8)) = LOWER(:name_account)
-            ORDER BY A.name_platform";
+            $this->query = "SELECT P.name, A.id, AES_DECRYPT(UNHEX(A.name_account),K.password)
+                            FROM keysbank_accounts A, keysbank_keys K, keysbank_platforms_list P 
+                            WHERE K.idUser = A.idUser 
+                            AND K.idCategory = A.idCategory 
+                            AND A.idUser = :idUser
+                            AND P.id = A.idPlatform
+                            AND LOWER(CONVERT(AES_DECRYPT(UNHEX(A.name_account),K.password) USING utf8)) = LOWER(:name_account)
+                            ORDER BY P.name";
 
             $this->parametros['idUser']       = $idUser;
             $this->parametros['name_account'] = $nameAccount;
