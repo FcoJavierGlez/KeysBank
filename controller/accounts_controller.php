@@ -13,17 +13,17 @@
         $dataAccount = array(
             'idUser' => $_SESSION['user']['id'],
             'idCategory' => $_POST['categories'],
+            'idPlatform' => $_POST['subcategories'],
             'name_account' => dataClean($_POST['name']),
             'pass_account' => $_POST['pass'],
             'pass_date' => date('Y-m-d'),
-            'name_platform' => $_POST['subcategories'],
             'url' => replaceCharacterByOtherCharacter( dataClean($_POST['url']), array(" ","'",'"',"&","|","<",">"), array("\\s","\\'",'\\"',"\\&","\\|","\\<","\\>") ),
             'info' => replaceCharacterByOtherCharacter( dataClean($_POST['info']), array(" ","'",'"',"&","|","<",">"), array("\\s","\\'",'\\"',"\\&","\\|","\\<","\\>") ),
             'notes' => replaceCharacterByOtherCharacter( dataClean($_POST['notes']), array(" ","'",'"',"&","|","<",">"), array("\\s","\\'",'\\"',"\\&","\\|","\\<","\\>") ),
         );
         $failuredAcount = $dataAccount['idCategory'] < 1 || $dataAccount['idCategory'] > $_SESSION['instance_platforms']->getTotalPlatformCategories();
         if (!$failuredAcount)
-            $failuredAcount =  !validatePlatformSelected($_SESSION['instance_platforms']->getPlatformsListByCategory($dataAccount['idCategory']),$dataAccount['name_platform']);
+            $failuredAcount =  !validatePlatformSelected( $_SESSION['instance_platforms']->getPlatformsListByCategory($dataAccount['idCategory']), $dataAccount['idPlatform'] );
         if (!$failuredAcount) {
             $_SESSION['instance_accounts']->addAccount($dataAccount);
             $addedAcount = TRUE;
@@ -33,19 +33,19 @@
         $dataAccount = array(
             'idUser' => $_SESSION['user']['id'],
             'idAccount' => $_GET['edit'],
+            'idPlatform' => $_POST['subcategories'],
             'idCategory' => $_SESSION['instance_accounts']->getIdCategoryByAccount($_GET['edit']),
             'name_account' => $_POST['name'],
             'pass_account' => $_POST['pass'],
-            'name_platform' => $_POST['subcategories'],
             'url' => replaceCharacterByOtherCharacter( dataClean($_POST['url']), array(" ","'",'"',"&","|","<",">"), array("\\s","\\'",'\\"',"\\&","\\|","\\<","\\>") ),
             'info' => replaceCharacterByOtherCharacter( dataClean($_POST['info']), array(" ","'",'"',"&","|","<",">"), array("\\s","\\'",'\\"',"\\&","\\|","\\<","\\>") ),
             'notes' => replaceCharacterByOtherCharacter( dataClean($_POST['notes']), array(" ","'",'"',"&","|","<",">"), array("\\s","\\'",'\\"',"\\&","\\|","\\<","\\>") ),
         );
-        $failuredAcount =  !validatePlatformSelected($_SESSION['instance_platforms']->getPlatformsListByCategory($dataAccount['idCategory']),$dataAccount['name_platform']);
+        echo "<pre>";
+            print_r($dataAccount);
+        echo "</pre>";
+        $failuredAcount =  !validatePlatformSelected($_SESSION['instance_platforms']->getPlatformsListByCategory($dataAccount['idCategory']),$dataAccount['idPlatform']);
         if (!$failuredAcount) {
-            /* echo "<pre>";
-                print_r($dataAccount);
-            echo "</pre>"; */
             $_SESSION['instance_accounts']->updateAccount($dataAccount);
             $editedAcount = TRUE;
         }

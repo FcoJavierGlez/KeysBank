@@ -28,7 +28,7 @@
                         <div class="div_select">
                             <div>Platforms:</div>
                             <?php
-                                renderPlatformSelect($platformListByCategory,$dataAccount[0]['name_platform']);
+                                renderPlatformSelect($platformListByCategory,$dataAccount[0]['idPlatform']);
                             ?>
                             <div class="special_message">
                                 <span class="text-error"></span>

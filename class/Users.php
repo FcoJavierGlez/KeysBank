@@ -261,7 +261,7 @@
             
             if ($newState == 'ACTIVE' && $current_state == 'PENDING') {
                 //generamos las llaves del usuario para cada categoría
-                $userKeys = $this->_genUserKeys( $_SESSION['instance_platforms']->getTotalPlatformCategories() );
+                $userKeys = $this->_genUserKeys( $_SESSION['instance_platforms']->getTotalPlatformCategories() - 1 );//-1 porque ya existe la llave de uso general
                 //insertar nuevas llaves
                 for ($i = 0; $i < sizeof($userKeys); $i++) 
                     $this->_setUserKeys( $idUser, $i + 1, $userKeys[$i] );

@@ -44,7 +44,7 @@
          * digital_platform, social_media, etc
          */
         public function getPlatformCategories() {
-            $this->query = "SELECT * FROM keysbank_platform_categories";
+            $this->query = "SELECT * FROM keysbank_platform_categories WHERE id > 0";
 
             $this->get_results_from_query();
             $this->close_connection();
@@ -80,7 +80,7 @@
          *                  pertenecientes a la categoría pasada por parámetro
          */
         public function getPlatformsByCategory($id) {
-            $this->query = "SELECT C.category, S.subcategory, P.name 
+            $this->query = "SELECT C.category, S.subcategory, P.name, P.id 
                             FROM keysbank_platform_categories C, keysbank_platform_subcategories S, keysbank_platforms_list P
                             WHERE C.id = P.idCategory
                             AND S.idCategory = P.idCategory
@@ -97,14 +97,14 @@
         }
 
          /**
-         * Devuelve una lista con el nombre de plataformas para la categoría seleccionada por su id.
+         * Devuelve una lista con el nombre y el ID de plataformas para la categoría seleccionada por su id.
          * 
          * @param Number $id ID de la categoría
          * 
          * @return Array Lista de plataformas que pertenecen a la categoría buscada
          */
         public function getPlatformsListByCategory($id) {
-            $this->query = "SELECT P.name 
+            $this->query = "SELECT P.id,P.name 
                             FROM keysbank_platform_categories C, keysbank_platforms_list P
                             WHERE C.id = P.idCategory
                             AND C.id = :id

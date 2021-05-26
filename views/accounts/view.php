@@ -1,5 +1,5 @@
 <?php
-    $route = file_exists("../img/platform/".normalizeString($result_search[0]['name_platform']).".png") ? "../img/platform/".normalizeString($result_search[0]['name_platform']).".png" : "../img/platform/other.png";
+    $route = file_exists("../img/platform/".normalizeString($result_search[0]['name']).".png") ? "../img/platform/".normalizeString($result_search[0]['name']).".png" : "../img/platform/other.png";
 ?>
 <section>
     <div class='panel-title'>
@@ -10,8 +10,8 @@
     <div class='account scroll'>
         <article>
             <div class='platform'>
-                <img src="<?php echo $route; ?>" alt="<?php echo 'Logo '.$result_search[0]['name_platform']; ?>">
-                <h3><?php echo $result_search[0]['name_platform']; ?>:</h3>
+                <img src="<?php echo $route; ?>" alt="<?php echo 'Logo '.$result_search[0]['name']; ?>">
+                <h3><?php echo $result_search[0]['name']; ?>:</h3>
             </div>
             <div class='basic-info'>
                 <form id="form-view">

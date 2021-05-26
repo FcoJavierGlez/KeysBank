@@ -36,7 +36,7 @@
             platformsList.filter( e => e.subcategory == subcategory )
             .forEach( e => {
                 const option = document.createElement("option");
-                option.value = `${e.name}`;
+                option.value = `${e.id}`;
                 option.innerHTML = `${e.name}`;
                 optgroup.appendChild(option);
             } );

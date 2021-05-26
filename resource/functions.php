@@ -196,12 +196,12 @@
      */
     function renderAccountsList($list) {
         foreach ($list as $value) {
-            $route = file_exists("../img/platform/".normalizeString($value['name_platform']).".png") ? "../img/platform/".normalizeString($value['name_platform']).".png" : "../img/platform/other.png";
+            $route = file_exists("../img/platform/".normalizeString($value['name']).".png") ? "../img/platform/".normalizeString($value['name']).".png" : "../img/platform/other.png";
             echo "<a href='".$_SERVER['PHP_SELF']."?view=".$value['id'].""."'>";
                 echo "<article class='card'>";
                     echo "<div class='platform'>";
-                        echo "<img src='".$route."' alt='Logo ".$value['name_platform']."'>";
-                        echo "<h3>".$value['name_platform'].":</h3>";
+                        echo "<img src='".$route."' alt='Logo ".$value['name']."'>";
+                        echo "<h3>".$value['name'].":</h3>";
                     echo "</div>";
                     echo "<div class='basic-info info-card'>";
                         echo "<div><b><u>Account</u>:</b></div>";
@@ -233,7 +233,7 @@
                 echo "<optgroup label='".$subcategory."'>";
                 foreach($platformList as $platform) {
                     if ($platform['subcategory'] == $subcategory) {
-                        echo "<option value='".$platform['name']."' ".($platformAccount == $platform['name'] ? 'selected' : '').">".$platform['name']."</option>";
+                        echo "<option value='".$platform['id']."' ".($platformAccount == $platform['id'] ? 'selected' : '').">".$platform['name']."</option>";
                     }
                 }
                 echo "</optgroup>";
@@ -253,9 +253,6 @@
         echo "<select name='subcategories' id='subcategories'>";
         echo "<option value=''>-- Choice an option --</option>";
         foreach ($subcategoryList as $array) {
-            /* echo $array['id']."<br>";
-            echo $array['subcategory']."<br>";
-            echo $subcategoryPlatform."<br>"; */
             echo "<option value='".$array['id']."' ".($subcategoryPlatform == $array['subcategory'] ? 'selected' : '').">".$array['subcategory']."</option>";
         }
         echo "</select>";
@@ -264,14 +261,14 @@
     /**
      * Valida que la plataforma seleccionada al editar / agregar una cuenta es correcta.
      * 
-     * @param Array $platformNameList  Array con los nombres de las plataformas para la categoría elegida
-     * @param String $platformSelected Nombre de la plataforma elegida
+     * @param Array $platformList  Array con los IDs de las plataformas para la categoría elegida
+     * @param String $platformSelected ID de la plataforma elegida
      * 
      * @return Boolean TRUE si es correcta, FALSE si no lo es
      */
-    function validatePlatformSelected($platformNameList,$platformSelected) {
-        for ($i = 0; $i < sizeof($platformNameList); $i++) 
-            if ($platformNameList[$i]['name'] == $platformSelected) return TRUE;
+    function validatePlatformSelected($platformList,$platformSelected) {
+        for ($i = 0; $i < sizeof($platformList); $i++) 
+            if ($platformList[$i]['id'] == $platformSelected) return TRUE;
         return FALSE;
     }
     
