@@ -18,7 +18,7 @@
         $platform_data = array(
             'idCategory' => $_POST['categories'],
             'idSubcategory' => $_POST['subcategories'],
-            'name' => dataClean($_POST['name'])
+            'name' => replaceCharacterByOtherCharacter( dataClean($_POST['name']), ['&amp;'], ['&'] )
         );
 
         $existPlatform = sizeof( $_SESSION['instance_platforms']->getPlatformByName( dataClean($_POST['name']) ) );
@@ -66,7 +66,7 @@
             $platform_data = array(
                 'id' => $_POST['id'],
                 'idSubcategory' => $_POST['subcategories'],
-                'name' => dataClean($_POST['name'])
+                'name' => replaceCharacterByOtherCharacter( dataClean($_POST['name']), ['&amp;'], ['&'] )
             );
 
             if ( $search_platform[0]['name'] == dataClean($_POST['name']) ) { //Si el nombre no cambia en la actualización    
