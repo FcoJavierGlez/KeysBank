@@ -200,7 +200,22 @@ INSERT INTO `keysbank_platforms_list` (`id`, `idCategory`, `idSubcategory`, `nam
 (107, 6, 20, 'ING'),
 (108, 6, 20, 'OpenBank'),
 (109, 5, 15, 'Kali Linux'),
-(110, 2, 8, 'BattleNet');
+(110, 2, 8, 'BattleNet'),
+(111, 1, 1, 'Other'),
+(112, 1, 2, 'Other'),
+(113, 1, 3, 'Other'),
+(114, 1, 4, 'Other'),
+(115, 1, 5, 'Other'),
+(116, 1, 6, 'Other'),
+(117, 2, 7, 'Other'),
+(118, 2, 8, 'Other'),
+(119, 2, 9, 'Other'),
+(120, 2, 10, 'Other'),
+(121, 5, 15, 'Other'),
+(122, 5, 16, 'Other'),
+(123, 5, 17, 'Other'),
+(124, 6, 19, 'Other'),
+(125, 6, 20, 'Other');
 
 -- --------------------------------------------------------
 
@@ -357,7 +372,7 @@ ALTER TABLE `keysbank_keys`
 -- AUTO_INCREMENT de la tabla `keysbank_platforms_list`
 --
 ALTER TABLE `keysbank_platforms_list`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=111;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=126;
 
 --
 -- AUTO_INCREMENT de la tabla `keysbank_platform_categories`
