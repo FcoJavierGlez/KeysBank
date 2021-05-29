@@ -32,8 +32,9 @@
     document.addEventListener("DOMContentLoaded", () => {
         if (location.href.match(/(accounts|platforms)\.php\?add$/)?.input !== undefined) {
             const CATEGORIES = document.getElementById("categories");
+            const FORM = document.getElementsByTagName("form")[1];
     
-            functions.requestApi(null, 'categories', createPlataformCategoriesOptions, CATEGORIES);
+            functions.requestApi(new FormData(FORM), 'categories', createPlataformCategoriesOptions, CATEGORIES);
         }
     });
 }
