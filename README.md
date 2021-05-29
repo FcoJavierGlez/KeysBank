@@ -13,7 +13,7 @@
 ## Índice 
 1. [Descripción del proyecto](#descripción)
 2. [Información sobre despliegue](#despliegue)
-3. [Información sobre cómo usarlo](#cómo-usarlo)
+3. [Información sobre cómo usarlo](#cómo-usar-la-app)
 4. [Autores](#autores)
 5. [Licencia](#license)
 ---
@@ -97,8 +97,34 @@ En una aplicación de estas características **es fundamental la seguridad**. Po
 
 ---
 
-## Uso 
-Texto
+## Cómo usar la app
+**La aplicación trae una cuenta administrador** y para poder usar la aplicación primero deberás conectarte como tal, **nick: admin y pass: admin**, y cambiar obligatoriamente su contraseña.  **Hasta que no cambies la contraseña que trae el amdinistrador por defecto no podrás gestionar ni usar la app.**
+
+Según si tu perfil es administrador o usuario tendrás unas capacidades u otras:
+1. **Como administrador:**
+    - Podrás activar, banear o eliminar usuarios:
+
+    ![Gestión de usuarios (Administrador)](readme_img/users_list.png)  
+    _Gestión de usuarios (Administrador)_
+
+    - Podrás Añadir, editar y eliminar plataformas ordenadas por categorías y subcategorías:
+
+    ![Gestión de plataformas (Administrador)](readme_img/platforms_list.png)  
+    _Gestión de plataformas (Administrador)_
+    ![Añadir plataformas (Administrador)](readme_img/add_platform.png)  
+    _Añadir plataformas (Administrador)_
+2. **Como usuario:**
+    - Añadir/editar cuentas usando un generador de contraseñas aleatorio de entre 6-64 caracteres, que garantiza las contraseñas más robustas posibles para las características seleccionadas, nivel de fortaleza de contraseña y aviso de nick o nombre de cuenta usado en otras cuentas registradas por el usuario propietario:
+
+    ![Añadir cuenta (Usuario)](readme_img/add_account.png)  
+    _Añadir cuenta (Usuario) usando el generador de contraseñas aleatorio y con mensaje de nick usado en otra cuenta propietaria_
+
+    - Podrás buscar tus cuentas, consultar sus datos y copiar rápidamente la contraseña para un inicio de sesión rápido (sin tener que recordar la contraseña):
+
+    ![Lista de cuentas (Usuario)](readme_img/accounts_list.png)  
+    _Lista de cuentas (Usuario)_
+    ![Copia de contraseña (Usuario)](readme_img/copy_pass.png)  
+    _Copia de contraseña (Usuario)_
 
 [:arrow_up:](#key-keysbank-key)
 
