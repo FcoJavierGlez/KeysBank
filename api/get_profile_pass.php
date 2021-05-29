@@ -2,7 +2,7 @@
     /**
      * @author Francisco Javier González Sabariego
      * 
-     * Devuelve la lista con las categorías de plataformas.
+     * Devuelve la contraseña del perfil de usuario.
      */
     header("Access-Control-Allow-Origin: *");
     
