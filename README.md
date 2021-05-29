@@ -105,10 +105,10 @@ Texto
 ---
 
 ## Autores 
-### Version ~1.0.0: FcoJavierGlez
+### Version ~1.0.0: Francisco Javier González Sabariego
 - GitHub: [FcoJavierGlez](https://github.com/FcoJavierGlez)
-- LinkedIn: [FcoJavierGlez](https://www.linkedin.com/in/francisco-javier-gonz%C3%A1lez-sabariego-51052a175/)
-- Twitter: [FcoJavierGlez](https://twitter.com/Fco_Javier_Glez)
+- LinkedIn: [Francisco Javier González Sabariego](https://www.linkedin.com/in/francisco-javier-gonz%C3%A1lez-sabariego-51052a175/)
+- Twitter: [@Fco_Javier_Glez](https://twitter.com/Fco_Javier_Glez)
 
 [:arrow_up:](#key-keysbank-key)
 
