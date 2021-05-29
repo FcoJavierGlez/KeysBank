@@ -45,7 +45,7 @@ En una aplicación de estas características **es fundamental la seguridad**. Po
 
     - O si tienes instalado Git en tu equipo haciendo uso del siguiente comando:
     ~~~
-        git clone https://github.com/FcoJavierGlez/keys_bank.git .
+        git clone https://github.com/FcoJavierGlez/KeysBank.git .
     ~~~
 
 2. **Descarga e instalación de XAMPP:**
