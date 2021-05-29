@@ -16,14 +16,13 @@
                 </p>
                 <ol>
                     <li><b>Your administrator password must be at least 20 character long</b></li>
-                    <li><b>It must have uppercase, lowercase and numeric characters</b></li>
-                    <li><b>It must have at least a total of special characters equivalent to password length / 10 + 1</b></li>
+                    <li><b>Must have uppercase, lowercase and numeric characters</b></li>
+                    <li><b>Must have at least one special character</b></li>
                     <li><b>The valid special characters are: ? * . : - _ @</b></li>
                 </ol>
                 <p>
                     <a href="./pages/profile.php?edit_password">Edit administrator password now</a>
                 </p>
-                <!-- <form action="./pages/profile.php?edit_password" method="post"></form> -->
             </div>
         </div>
     </section>
