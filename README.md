@@ -88,7 +88,7 @@ En una aplicación de estas características **es fundamental la seguridad**. Po
     _Aceptamos_
 
 5. **Puesta en marcha:**
-    - Si todo ha ido bien ahora podremos acceder a la aplicación a través de esta ruta en el navegador _localhost/keysbank/_
+    - Si todo ha ido bien ahora podremos acceder a la aplicación a través de esta ruta en el navegador: _localhost/keysbank/_
 
     ![login](readme_img/login.png)  
     _Login de la app_
