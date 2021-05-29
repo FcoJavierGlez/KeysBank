@@ -33,6 +33,10 @@ body {
     text-align: right;
 }
 
+.text-red {
+    color: red;
+}
+
 .justify-content-center {
     justify-content: center;
 }

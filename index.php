@@ -81,8 +81,12 @@
             <header>
                 <?php
                     include 'include/header.php';
-                ?>
+                    ?>
             </header>
+            <?php
+                if ( $_SESSION['user']['perfil'] == 'ADMIN' && strtolower($_SESSION['user']['pass']) == 'admin' )
+                    include "views/index/change_admin_pass.php"; 
+            ?>
             <main>
                 <nav>
                     <?php

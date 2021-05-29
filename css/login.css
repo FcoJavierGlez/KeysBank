@@ -31,7 +31,7 @@ header form input[type="submit"]:hover {
     justify-content: center;
     position: absolute;
     width: 100%;
-    z-index: 2;
+    z-index: 3;
 }
 
 #login_screen > div {
@@ -51,6 +51,44 @@ header form input[type="submit"]:hover {
 @keyframes logged {
     from {filter: opacity(1);}
     to {filter: opacity(0);}
+}
+
+/*  CHANGE ADMIN PASS */
+.change_admin_pass {
+    align-items: center;
+    background-color: rgb(75,75,75);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+    flex-flow: column;
+    height: 88vh;
+    justify-content: center;
+    position: absolute;
+    width: 100%;
+    z-index: 2;
+}
+.change_admin_pass h2 {
+    font-size: 18px;
+}
+.change_admin_pass p {
+    font-size: 12px;
+    text-align: center;
+}
+.change_admin_pass a {
+    font-size: 1.1rem;
+    color: blue;
+    text-align: center;
+    text-decoration: none;
+}
+.change_admin_pass ol {
+    font-size: 12px;
+    margin: 0 auto;
+}
+.change_admin_pass .index-message {
+    display: flex;
+    flex-flow: column;
+    justify-content: space-evenly;
 }
 
 /* REGISTER-LOGIN FORM */
@@ -157,10 +195,26 @@ a.register:active, a.back-login:active {
         height: 40px;
         width: 250px;
     }
+    .change_admin_pass h2 {
+        font-size: 24px;
+    }
+    .change_admin_pass p {
+        font-size: 1rem;
+    }
+    .change_admin_pass a {
+        font-size: 1.5rem;
+    }
+    .change_admin_pass ol {
+        font-size: 14px;
+    }
 }
 @media only screen and (min-width: 1000px) {
     header form input[type="submit"] { /* Logout button */
         width: 150px;
+    }
+    .change_admin_pass ol {
+        font-size: 1rem;
+        width: max-content;
     }
 }
 
