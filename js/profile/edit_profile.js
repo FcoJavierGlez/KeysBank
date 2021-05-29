@@ -40,15 +40,25 @@
     document.addEventListener("DOMContentLoaded", () => {
         if (location.href.match(/profile\.php(\?edit)?$/)?.input !== undefined) {
             const NICK     = document.getElementById("nick");
-            const HIDDEN   = document.querySelector("input[type='hidden']");
+            //const HIDDEN   = document.querySelector("input[type='hidden']");
             const PASSWORD_STRENGTH = document.getElementById("password_strength");
+            const FORM = document.getElementsByTagName("form")[1];
+
+            //console.log(FORM);
+            const passStrength = passProfile => {
+                let strongPassword = passManager.validatePasswordStrength( passProfile, [NICK.tagName == 'DIV' ? NICK.innerHTML : NICK.value] );
+                PASSWORD_STRENGTH.innerText = `Your password is ${strongPassword}`;
+                PASSWORD_STRENGTH.classList = `${strongPassword}`;
+            }
+
+            functions.requestApi(new FormData(FORM), 'pass_profile', passStrength);
             
-            let strongPassword = passManager.validatePasswordStrength( HIDDEN.value, [NICK.tagName == 'DIV' ? NICK.innerHTML : NICK.value] );
+            //let strongPassword = passManager.validatePasswordStrength( HIDDEN.value, [NICK.tagName == 'DIV' ? NICK.innerHTML : NICK.value] );
             
-            document.getElementsByClassName("container-data")[0].removeChild(HIDDEN);
+            //document.getElementsByClassName("container-data")[0].removeChild(HIDDEN);
     
-            PASSWORD_STRENGTH.innerText = `Your password is ${strongPassword}`;
-            PASSWORD_STRENGTH.classList = `${strongPassword}`;
+            /* PASSWORD_STRENGTH.innerText = `Your password is ${strongPassword}`;
+            PASSWORD_STRENGTH.classList = `${strongPassword}`; */
     
             if (location.href.match(/profile\.php\?edit$/)?.input !== undefined) 
                 editProfile(NICK);

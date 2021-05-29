@@ -120,6 +120,30 @@
         }
 
         /**
+         * Devuelve la contraseña del perfil de usuario
+         * 
+         * @param Number $id ID del usuario cuya contraseña se va a recuperar
+         * @return Array 
+         */
+        public function getPassProfileUser ( $id = 0 ) {
+            if ( $id !== 0 ) {
+                $this->query = "SELECT 
+                AES_DECRYPT(UNHEX(U.pass),K.password)
+                FROM keysbank_users U, keysbank_keys K
+                WHERE U.id = K.idUser 
+                AND K.idCategory = 0 
+                AND U.id = :id";
+
+                $this->parametros['id'] = $id;
+
+                $this->get_results_from_query();
+                $this->close_connection();
+            }
+
+            return $this->rows;
+        }
+
+        /**
          * Inserta un nuevo usuario en el sistema
          */
         public function setUser ( $user_data = array() ) {

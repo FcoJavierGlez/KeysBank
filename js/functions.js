@@ -46,6 +46,7 @@ const functions = (
         const apiAction = (dataRequest,getInfo,functionCallback,domElement,event = undefined) => {
             const INFO_ARRAY = {
                 'pass': 'AES_DECRYPT(UNHEX(A.pass_account),K.password)',
+                'pass_profile': 'AES_DECRYPT(UNHEX(U.pass),K.password)',
                 'info': 'AES_DECRYPT(UNHEX(A.info),K.password)',
             };
             switch (dataRequest) {
@@ -61,6 +62,7 @@ const functions = (
                         functionCallback(`${replaceHtmlCharacters(getInfo[0][INFO_ARRAY[dataRequest]])}`) :
                         functionCallback(`${replaceHtmlCharacters(getInfo[0][INFO_ARRAY[dataRequest]])}`, domElement);
                 case 'pass':
+                case 'pass_profile':
                     return domElement == undefined ?
                         functionCallback(`${getInfo[0][INFO_ARRAY[dataRequest]]}`, event) :
                         functionCallback(`${getInfo[0][INFO_ARRAY[dataRequest]]}`, domElement, event);
@@ -89,6 +91,7 @@ const functions = (
             
             const INFO_ROUTES = {
                 'pass': 'get_pass',
+                'pass_profile': 'get_profile_pass',
                 'info': 'get_info',
                 'categories': 'platform_categories_list',
                 'subcategories': 'subcategories_list',

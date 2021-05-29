@@ -29,7 +29,9 @@
                         <div class="bold">Password: </div>
                         <div><?php echo replaceByCharacter($_SESSION['user']['pass'],'*'); ?></div>
                     </div>
-                    <input type="hidden" value="<?php echo $_SESSION['user']['pass']; ?>">
+                    <form method="POST">
+                        <input type="hidden" name="id" value="<?php echo $_SESSION['user']['id']; ?>">
+                    </form>
                     <div class="special_message">
                         <span id="password_strength"></span>
                     </div>

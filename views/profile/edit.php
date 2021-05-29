@@ -46,7 +46,7 @@
                         <div><a href="<?php echo $_SERVER['PHP_SELF'].'?edit_password' ?>"><div class="div-copy_button">Edit pass</div></a></div>
                         <div id="password"><?php echo replaceByCharacter($_SESSION['user']['pass'],'*'); ?></div>
                     </div>
-                    <input type="hidden" value="<?php echo $_SESSION['user']['pass']; ?>">
+                    <input type="hidden" name="id" value="<?php echo $_SESSION['user']['id']; ?>">
                     <div class="special_message">
                         <span id="password_strength"></span>
                     </div>
