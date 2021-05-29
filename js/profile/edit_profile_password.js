@@ -32,10 +32,7 @@
             const PASSWORD_STRENGTH = document.getElementById("password_strength");
             const EYES     = [...document.getElementsByTagName("div")].filter( e => e.id.match(/^sh/) );
 
-            console.log(EYES);
-
             EYES.forEach( eye => {
-                console.log(eye);
                 eye.addEventListener("click", () => {
                     toggleEye(eye);
                     eye.nextElementSibling.type = eye.nextElementSibling.type == 'text' ? 'password' : 'text';
