@@ -10,13 +10,14 @@
 </div>
 
 ---
+## Índice 
 1. [Descripción del proyecto](#descripción)
 2. [Información sobre despliegue](#despliegue)
 3. [Información sobre cómo usarlo](#cómo-usarlo)
 4. [Autores](#autores)
 5. [Licencia](#license)
 ---
-## Descripción
+## Descripción [:arrow_up:](#key-keysbank-key)
 **KeysBank es una aplicación web de gestión de contraseñas** diseñada tanto para uso privado cómo público.
 
 Los usuarios con un perfil activado podrán registrar, editar y eliminar sus cuentas cuando lo requieran, beneficiándose de las herramientas que la app pone a su disposición cómo: 
@@ -34,7 +35,7 @@ En una aplicación de estas características **es fundamental la seguridad**. Po
 4. **Navegación y enrutamiento seguro según el perfil y los datos asociados.**
 
 
-## Despliegue
+## Despliegue [:arrow_up:](#key-keysbank-key)
 1. **Descarga el proyecto:**
     - Puedes descargar el proyecto pulsando el botón de code y a continuación en download zip:
     ![Botón descargar](readme_img/code_download_button.png)
@@ -80,14 +81,14 @@ En una aplicación de estas características **es fundamental la seguridad**. Po
 
     ![login](readme_img/login.png)  _Login de la app_
 
-## Uso
+## Uso [:arrow_up:](#key-keysbank-key)
 Texto
 
-## Autores
+## Autores [:arrow_up:](#key-keysbank-key)
 ### Version ~1.0.0: FcoJavierGlez
 - GitHub: [FcoJavierGlez](https://github.com/FcoJavierGlez)
 - LinkedIn: [FcoJavierGlez](https://www.linkedin.com/in/francisco-javier-gonz%C3%A1lez-sabariego-51052a175/)
 - Twitter: [FcoJavierGlez](https://twitter.com/Fco_Javier_Glez)
 
-## License
+## License [:arrow_up:](#key-keysbank-key)
 Copyright (c) 2021 Francisco Javier González Sabariego. [Licensed under MIT license](https://github.com/FcoJavierGlez/keys_bank/blob/main/LICENSE).
