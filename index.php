@@ -34,11 +34,11 @@
     session_start();
 
     if ( !isset($_SESSION['user']) ) { 
-        $_SESSION['instance_users']      = Users::singleton();
-        $_SESSION['instance_platforms']  = Platforms::singleton();
-        $_SESSION['instance_accounts']   = Accounts::singleton();
+        $_SESSION['instance_users']     = Users::singleton();
+        $_SESSION['instance_platforms'] = Platforms::singleton();
+        $_SESSION['instance_accounts']  = Accounts::singleton();
 
-        $_SESSION['user']             = array( 'perfil' => "INVITED" );
+        $_SESSION['user'] = array( 'perfil' => "INVITED" );
     }
 
     include 'controller/login_register_controller.php';
