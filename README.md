@@ -98,7 +98,7 @@ En una aplicación de estas características **es fundamental la seguridad**. Po
 ---
 
 ## Cómo usar la app
-**La aplicación trae una cuenta administrador** y para poder usar la aplicación primero deberás conectarte como tal, **nick: admin y pass: admin**, y cambiar obligatoriamente su contraseña.  **Hasta que no cambies la contraseña que trae el amdinistrador por defecto no podrás gestionar ni usar la app.**
+**La aplicación trae una cuenta administrador** y para poder usar la aplicación primero deberás conectarte como tal, **nick: admin y pass: admin**, y cambiar obligatoriamente su contraseña.  **Hasta que no cambies la contraseña que trae el administrador por defecto no podrás gestionar ni usar la app.**
 
 Según si tu perfil es administrador o usuario tendrás unas capacidades u otras:
 1. **Como administrador:**

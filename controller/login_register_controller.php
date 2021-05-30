@@ -35,6 +35,8 @@
                 $_SESSION['user']['current_state']     = $usuario[0]['current_state'];
                 $_SESSION['user']['days_old_password'] = $usuario[0]['days_old_password'];
                 $loggedNow = TRUE;
+                if ( $_SESSION['user']['perfil'] == 'USER' ) //Si logea un usuario comprobamos si la contraseña del administrador es la contraseña por defecto
+                    $_SESSION['insecure_app'] = strtolower( $_SESSION['instance_users']->getPassProfileUser(1)[0]['AES_DECRYPT(UNHEX(U.pass),K.password)'] ) == 'admin';
             }
             
         }

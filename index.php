@@ -38,7 +38,8 @@
         $_SESSION['instance_platforms'] = Platforms::singleton();
         $_SESSION['instance_accounts']  = Accounts::singleton();
 
-        $_SESSION['user'] = array( 'perfil' => "INVITED" );
+        $_SESSION['user']         = array( 'perfil' => "INVITED" );
+        $_SESSION['insecure_app'] = FALSE;
     }
 
     include 'controller/login_register_controller.php';
