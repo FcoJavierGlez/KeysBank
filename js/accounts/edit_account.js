@@ -123,12 +123,13 @@
     /**
      * Devuelve una template string con enlaces de las cuentas con el nombre de cuenta del usuario repetidas
      * 
-     * @param {Array} info Array con el conjunto de cuentas cuyo nombre de cuenta está repetido.
-     * @returns {String}   Template string con la lista de cuentas repetidas (excepto la propia cuenta que se está editando)
+     * @param {Array} info    Array con el conjunto de cuentas cuyo nombre de cuenta está repetido.
+     * @param {Number} idEdit ID de la cuenta que se está editando.
+     * @returns {String}      Template string con la lista de cuentas repetidas (excepto la propia cuenta que se está editando)
      */
-    const printAccountsNameRepeat = info => {
+    const printAccountsNameRepeat = (info, idEdit) => {
         let string = "";
-        info.forEach( e => string += `<a href="./accounts.php?view=${e.id}" class="account_used" target="_blank"><div>${Object.values(e)[2]}</div><div>${Object.values(e)[0]}</div></a>` );
+        info.forEach( e => string += e.id == idEdit ? "" :`<a href="./accounts.php?view=${e.id}" class="account_used" target="_blank"><div>${Object.values(e)[2]}</div><div>${Object.values(e)[0]}</div></a>` );
         return string;
     }
 
@@ -172,7 +173,7 @@
                     <div class="alert">Account name used</div>
                     <div class="scroll">
                         ${
-                            printAccountsNameRepeat(info)
+                            printAccountsNameRepeat(info, idEdit)
                         }
                     </div>`;
             }
