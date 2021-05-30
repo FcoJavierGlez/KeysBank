@@ -4,15 +4,15 @@
      * 
      * Devuelve la lista con las plataformas correspondientes a la categoría elegida.
      */
-    header("Access-Control-Allow-Origin: *");
         
     include "../config/db_config.php";
     include "../resource/functions.php";
     include "../class/DBAbstractModel.php";
     include "../class/Platforms.php";
 
+    session_start();
+
     if (!isset($_POST['categories'])) {
-        //header('Location:../index.php');
         echo "<h1 style='margin: 21.44px 0'>¡Objeto no localizado!</h1>";
         echo "<p style='margin: 16px 0 16px 48px'>No se ha localizado la URL solicitada en este servidor. 
             Si usted ha introducido la URL manualmente, por favor revise su ortografía e inténtelo de nuevo.</p>";
@@ -24,12 +24,6 @@
                 <span style='font-size: smaller'>Apache/2.4.41 (Win64) OpenSSL/1.1.1c PHP/7.4.1</span>
             </address>";
 
-    } else {
-        $platforms = Platforms::singleton();
-        $platformsList = $platforms->getPlatformsByCategory($_POST['categories']);
-
-        print_r(json_encode($platformsList));
-    }
-
-    
+    } else 
+        print_r( json_encode( $_SESSION['instance_platforms']->getPlatformsByCategory($_POST['categories']) ) );
 ?>

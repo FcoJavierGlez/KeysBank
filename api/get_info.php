@@ -4,7 +4,6 @@
      * 
      * Devuelve la lista con las plataformas correspondientes a la categoría elegida.
      */
-    header("Access-Control-Allow-Origin: *");
         
     include "../config/db_config.php";
     include "../resource/functions.php";
@@ -14,7 +13,6 @@
     session_start();
 
     if (!isset($_POST['search'])) {
-        //header('Location:../index.php');
         echo "<h1 style='margin: 21.44px 0'>¡Objeto no localizado!</h1>";
         echo "<p style='margin: 16px 0 16px 48px'>No se ha localizado la URL solicitada en este servidor. 
             Si usted ha introducido la URL manualmente, por favor revise su ortografía e inténtelo de nuevo.</p>";
@@ -27,15 +25,7 @@
             </address>";
 
     } else {
-        $account = Accounts::singleton();
-
-        $result = array( ['AES_DECRYPT(UNHEX(A.info),K.password)' => replaceCharacterByOtherCharacter( $account->getInfoAccountById($_SESSION['user']['id'], $_POST['search'])[0]['AES_DECRYPT(UNHEX(A.info),K.password)'], array("\\s","\\'",'\\"',"\\&","\\|","\\<","\\>"), array(" ","'",'"',"&","|","<",">") )] );
-        
+        $result = array( ['AES_DECRYPT(UNHEX(A.info),K.password)' => replaceCharacterByOtherCharacter( $_SESSION['instance_accounts']->getInfoAccountById($_SESSION['user']['id'], $_POST['search'])[0]['AES_DECRYPT(UNHEX(A.info),K.password)'], array("\\s","\\'",'\\"',"\\&","\\|","\\<","\\>"), array(" ","'",'"',"&","|","<",">") )] );
         print_r( json_encode( $result ) );
     }
-
-    
-
-
-    
 ?>

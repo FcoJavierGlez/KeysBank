@@ -4,7 +4,6 @@
      * 
      * Devuelve la contraseña del perfil de usuario.
      */
-    header("Access-Control-Allow-Origin: *");
     
     include "../config/db_config.php";
     include "../resource/functions.php";
@@ -26,9 +25,7 @@
             </address>";
     } else {
         if ( isset( $_SESSION['user']['id'] ) ) {
-            $users = Users::singleton();
-            print_r( json_encode( $users->getPassProfileUser( $_SESSION['user']['id'] ) ) );
+            print_r( json_encode( $_SESSION['instance_users']->getPassProfileUser( $_SESSION['user']['id'] ) ) );
         }
     }
-
 ?>

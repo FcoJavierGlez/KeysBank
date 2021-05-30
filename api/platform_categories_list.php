@@ -4,12 +4,13 @@
      * 
      * Devuelve la lista con las categorías de plataformas.
      */
-    header("Access-Control-Allow-Origin: *");
     
     include "../config/db_config.php";
     include "../resource/functions.php";
     include "../class/DBAbstractModel.php";
     include "../class/Platforms.php";
+
+    session_start();
 
     if (!isset($_POST['name'])) {
         echo "<h1 style='margin: 21.44px 0'>¡Objeto no localizado!</h1>";
@@ -22,11 +23,6 @@
                 <a href='/'>localhost</a><br>
                 <span style='font-size: smaller'>Apache/2.4.41 (Win64) OpenSSL/1.1.1c PHP/7.4.1</span>
             </address>";
-    } else {
-        $platforms = Platforms::singleton();
-        $categoriesList = $platforms->getPlatformCategories();
-    
-        print_r(json_encode($categoriesList));
-    }
-
+    } else 
+        print_r( json_encode( $_SESSION['instance_platforms']->getPlatformCategories() ) );
 ?>

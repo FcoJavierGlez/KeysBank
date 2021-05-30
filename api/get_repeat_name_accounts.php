@@ -4,7 +4,6 @@
      * 
      * Devuelve la lista con las plataformas correspondientes a la categoría elegida.
      */
-    header("Access-Control-Allow-Origin: *");
         
     include "../config/db_config.php";
     include "../resource/functions.php";
@@ -28,6 +27,4 @@
         $search = $_SESSION['instance_accounts']->getAccountsUserByNameRepeat($_SESSION['user']['id'],$_POST['name']);
         echo json_encode($search);
     }
-
-
 ?>
