@@ -52,6 +52,10 @@
         if(!sizeof($dataAccount)) header('Location:./accounts.php');
         $platformListByCategory = $_SESSION['instance_platforms']->getPlatformsByCategory($dataAccount[0]['idCategory']);
     }
+    elseif (isset($_GET['del'])) {
+        $result_search = $_SESSION['instance_accounts']->getAccountById($_SESSION['user']['id'],$_GET['del']);
+        if(!sizeof($result_search)) header('Location:./accounts.php');
+    }
     elseif (isset($_POST['delete_account'])) {
         $_SESSION['instance_accounts']->deleteAccount($_SESSION['user']['id'],$_POST['id_account']);
     }
